@@ -129,3 +129,57 @@ contract ReferralRewards is AccessControl {
     }
     function setReferrerPointsPerWeiBpsForCollection(address collection, uint96 bps) external onlyRole(MANAGER_ROLE) {
         refPointsPerWeiBpsByCollection[collection] = bps; emit RefPointsRateForCollectionSet(collection, bps);
+    }
+
+    // =======================
+    // Hook from Marketplace
+    // =======================
+
+    /**
+     * @notice Handle a purchase. Send ETH referral split and mint optional points.
+     * @param buyer      purchaser address
+     * @param collection NFT collection (for per-collection overrides)
+     * @param grossWei   full purchase price in wei (used to compute points)
+     *
+     * @dev msg.value must be the referral pool to split (e.g., take from protocol fee).
+     */
+    function onPurchase(address buyer, address collection, uint256 grossWei) external payable {
+        address ref = referrerOf[buyer];
+        uint256 pool = msg.value;
+
+        // ETH split
+        uint96 shareBps = collectionRefShareBps[collection];
+        if (shareBps == 0) shareBps = defaultRefShareBps;
+        uint256 toRef = (pool * shareBps) / 10_000;
+        uint256 toPayout = pool - toRef;
+
+        if (toRef > 0 && ref != address(0)) {
+            (bool ok1, ) = payable(ref).call{value: toRef}(""); require(ok1, "ref xfer");
+        } else {
+            toPayout = pool; // all to payout if no referrer or zero bps
+            toRef = 0;
+        }
+        if (toPayout > 0) {
+            (bool ok2, ) = payout.call{value: toPayout}(""); require(ok2, "payout xfer");
+        }
+
+        // Optional: bonus points
+        uint256 buyerPts = 0; uint256 refPts = 0;
+        if (address(rewards) != address(0) && grossWei > 0) {
+            uint96 bBps = buyerPointsPerWeiBpsByCollection[collection]; if (bBps == 0) bBps = buyerPointsPerWeiBps;
+            uint96 rBps = refPointsPerWeiBpsByCollection[collection];  if (rBps == 0) rBps = referrerPointsPerWeiBps;
+            if (bBps > 0) {
+                buyerPts = (grossWei * bBps) / 10_000;
+                rewards.award(buyer, buyerPts, "referral:buyer");
+            }
+            if (rBps > 0 && ref != address(0)) {
+                refPts = (grossWei * rBps) / 10_000;
+                rewards.award(ref, refPts, "referral:referrer");
+            }
+        }
+
+        emit PurchaseProcessed(buyer, ref, collection, grossWei, pool, toRef, toPayout, buyerPts, refPts);
+    }
+
+    receive() external payable {}
+}
