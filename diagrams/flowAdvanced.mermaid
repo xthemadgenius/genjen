@@ -1,0 +1,179 @@
+flowchart LR
+  %% =====================
+  %% GROUPS
+  %% =====================
+  subgraph GOV[Governance]
+    G[DAOGovernor]
+    TL[DAO TimeLock]
+    G --- TL
+  end
+
+  subgraph CORE[Core Infra]
+    PA["ProxyAdmin (Transparent)"]
+    UUPS[UUPSUpgradeManager]
+    ACR[AccessControlRegistry]
+    PM["PauseManager (Guardian)"]
+  end
+
+  subgraph ID[Identity & Compliance]
+    DID[DIDRegistry]
+    SBT["SBTIssuer (ERC721Votes)"]
+    MEM[DAOMembershipNFT]
+    BADGE[BadgeRegistry]
+    KYC[KycGatekeeper]
+    ALR[AccessListRegistry]
+    ATT[AttestationHub]
+  end
+
+  subgraph CREATOR[Creator / Content]
+    FACT[CollectionFactory]
+    CC["CreatorCollection1155 (many)"]
+    META[MetadataRenderer]
+    LIC[LicenseNFT]
+    UTIL["UtilityNFT (Subs/Certs)"]
+    SUBM[SubscriptionManager]
+  end
+
+  subgraph MARKET[Marketplace Layer]
+    MKT[CreatorMarketplace]
+    AU[AuctionHouse]
+    OFF[OffersEscrow]
+    LZ[LazyMintVoucherVerifier]
+    PAY[PaymentRouter]
+    FEE[FeeController]
+    PSS[PrimarySaleSplitter]
+    REV[RevenueVault]
+  end
+
+  subgraph REW[Rewards & Engagement]
+    RP["RewardsProgram (points SBT-ERC20)"]
+    REF[ReferralRewards]
+    STAKE[StakeLockerRewards]
+    AIR[MerkleDistributor]
+  end
+
+  subgraph TREAS[Treasury & Finance]
+    T[DAOTreasury]
+    STR[StreamVesting]
+  end
+
+  subgraph XCHAIN[Cross-chain & UX]
+    FWD["MinimalForwarder (ERC2771)"]
+    BR[BridgeAdapter]
+  end
+
+  %% =====================
+  %% GOVERNANCE CONTROL
+  %% =====================
+  TL -- manages roles/params --> SBT
+  TL -- manages roles/params --> MEM
+  TL -- manages roles/params --> BADGE
+  TL -- manages roles/params --> FACT
+  TL -- manages roles/params --> LIC
+  TL -- manages fees/pauses --> MKT
+  TL -- manages modules --> AU
+  TL -- manages modules --> OFF
+  TL -- manages modules --> LZ
+  TL -- manages modules --> PAY
+  TL -- manages modules --> FEE
+  TL -- manages routes --> REV
+  TL -- manages rates/catalog --> RP
+  TL -- manages config --> REF
+  TL -- manages config --> STAKE
+  TL -- manages rounds --> AIR
+  TL -- executor --> T
+  TL -- funder/cancel --> STR
+  TL -- guardian set --> PM
+  TL -- batch roles --> ACR
+
+  %% =====================
+  %% IDENTITY LINKS
+  %% =====================
+  DID <--> SBT
+  BADGE -. verifies .- SBT
+  KYC -. reads .- BADGE
+  ALR -. gating .- MKT
+  ATT -. attest/query .- KYC
+  MEM --> G
+  SBT --> G
+
+  %% =====================
+  %% CREATOR FLOWS
+  %% =====================
+  FACT --> CC
+  CC -. uses .-> META
+  SUBM -- mints/renews --> UTIL
+  SUBM -- issues license --> LIC
+
+  %% =====================
+  %% LICENSE NFT FLOWS
+  %% =====================
+  LIC -- attached rights metadata --> CC
+  LIC -- sold in --> MKT
+  LIC -- revenue --> REV
+
+  %% =====================
+  %% MARKETPLACE FLOWS
+  %% =====================
+  MKT <-- lists/approvals --> CC
+  MKT <-- lists/licenses --> LIC
+  AU  <-- sells via auction --> CC
+  AU  <-- sells via auction --> LIC
+  OFF <-- offers/bids --> CC
+  OFF <-- offers/bids --> LIC
+  LZ  -- mints on purchase --> CC
+  PAY -. FX & token payments .- MKT
+  FEE -. fee bps .- MKT
+  PSS -. primary split .- LZ
+  MKT -- protocol fees/royalties --> REV
+  AU  -- fees/royalties --> REV
+  OFF -- fees/royalties --> REV
+
+  %% =====================
+  %% REWARDS FLOWS
+  %% =====================
+  MKT -- awardOnPurchase(...) --> RP
+  MKT -- referral pool (ETH) --> REF
+  REF -- bonus points --> RP
+  STAKE -- award harvest --> RP
+  AIR  -- ERC20 claims --> Users
+
+  %% =====================
+  %% REWARDS <-> CONTENT
+  %% =====================
+  RP -- redeem: ERC1155 --> CC
+  RP -- redeem: Subs/Certs --> UTIL
+  RP -- redeem: LicenseNFT --> LIC
+  SUBM -- paid subs --> REV
+
+  %% =====================
+  %% TREASURY FLOWS
+  %% =====================
+  REV -- routes ETH/ERC20 --> T
+  T -- executes via TL --> GOV
+  STR -- streams payouts --> Creators/Contributors
+
+  %% =====================
+  %% CROSS-CHAIN & UX
+  %% =====================
+  BR -- outbound/inbound msgs --> MKT
+  BR -- outbound/inbound msgs --> RP
+  FWD -. meta-tx .- MKT
+  FWD -. meta-tx .- RP
+  FWD -. meta-tx .- SUBM
+
+  %% =====================
+  %% UPGRADE/ADMIN EXAMPLES
+  %% =====================
+  PA -. upgrades .- MKT
+  PA -. upgrades .- REV
+  UUPS -. upgrades .- RP
+  UUPS -. upgrades .- ATT
+  ACR -. batch grant/revoke .- MKT
+  ACR -. batch grant/revoke .- RP
+  PM  -. pause/unpause .- MKT
+  PM  -. pause/unpause .- AU
+  PM  -. pause/unpause .- OFF
+  PM  -. pause/unpause .- RP
+  PM  -. pause/unpause .- PAY
+  PM  -. pause/unpause .- REV

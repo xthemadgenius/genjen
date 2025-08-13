@@ -1,0 +1,50 @@
+sequenceDiagram
+  autonumber
+  participant Buyer
+  participant MKT as Marketplace
+  participant FEE as FeeController
+  participant PAY as PaymentRouter
+  participant CC as CreatorCollection1155
+  participant REV as RevenueVault
+  participant REF as ReferralRewards
+  participant RP as RewardsProgram
+  participant PSS as PrimarySaleSplitter
+  participant T as DAOTreasury
+  participant SBT as SBTIssuer
+  participant KYC as KycGatekeeper
+
+  Note over Buyer,MKT: Pre-checks
+  MKT->>KYC: enforceKyc(Buyer)
+  MKT->>SBT: (optional) verify identity/eligibility
+
+  Note over Buyer,MKT: Purchase
+  Buyer->>MKT: buy(listing) + payment
+  MKT->>FEE: feeBps(collection, seller)?
+  FEE-->>MKT: bps
+
+  par Payouts
+    MKT->>CC: transfer NFT(s) from seller to buyer
+    MKT->>REV: depositETH(collection, PROTOCOL_FEE)  %% protocol fee
+    MKT->>REV: depositETH(collection, ROYALTY)       %% royalty pass-through (or PSS for primary)
+  and (optional primary)
+    MKT->>PSS: send primary sale amount
+    PSS-->>Creators: split ETH/ERC20
+  end
+
+  Note over MKT,REF: Referral pool & bonus
+  MKT->>REF: onPurchase{value: pool}(Buyer, collection, price)
+  REF-->>Buyer: (optional) bonus points via RP
+  REF-->>Referrer: (optional) bonus points via RP
+  REF-->>Referrer: send ETH split
+  REF-->>T: send remainder to Treasury
+
+  Note over MKT,RP: Rewards on purchase
+  MKT->>RP: awardOnPurchase(Buyer, price, collection, id, qty)
+  RP-->>Buyer: mint points (SBT-ERC20)
+
+  Note over REV,T: Routing
+  REV->>T: route ETH/ERC20 per routes (global/collection/tag)
+
+  Note over Buyer,RP: Later
+  Buyer->>RP: redeemETH(points) / redeemERC1155(rewardId)
+  RP-->>Buyer: rebate or reward NFT
