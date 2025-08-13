@@ -1,0 +1,66 @@
+flowchart LR
+  %% =========================
+  %% MODULES (Phase 1 only)
+  %% =========================
+
+  %% UX & Off-chain Services
+  subgraph UX[UX & Off‑chain Services]
+    FE[PWA Frontend]
+    REL[Relayer Service]
+    CRM[CRM + Webhooks]
+    ORA[USD Price Oracle]
+  end
+
+  %% Core Chain Infra
+  subgraph INFRA[Core Chain Infra]
+    FWD["MinimalForwarder (ERC‑2771)"]
+  end
+
+  %% Identity Module
+  subgraph ID[Identity]
+    DID[DIDRegistry]
+    SBT["SBTIssuer\n(Profile SBT • hidden)"]
+  end
+
+  %% Membership Module
+  subgraph MEMB[Memberships]
+    MEM["DAOMembershipNFT (Tiered memberships)"]
+  end
+
+  %% Payments Module
+  subgraph PAYM[Payments]
+    PAY["PaymentRouter (ETH now • ERC20 later)"]
+  end
+
+  %% Compliance Module (Optional in Phase 1)
+  subgraph COMP["Compliance"]
+    ACL["AccessListRegistry (allow/block list)"]
+  end
+
+
+  %% =========================
+  %% INTER-MODULE LINKS
+  %% =========================
+
+  %% UX <-> Infra
+  FE -- submit/meta‑tx --> REL
+  REL -- forward meta‑tx --> FWD
+
+  %% Infra -> Identity & Membership (writes)
+  FWD -- setDID(uri) --> DID
+  FWD -- mint/update Profile SBT --> SBT
+  FWD -- mintTier(to,tierId) --> MEM
+
+  %% Payments
+  FE -- price quote --> ORA
+  REL -- pay(ETH, usdPrice, payout) --> PAY
+  PAY -- Paid(...) event --> REL
+
+  %% Gating (optional)
+  FE -- gate routes by ownership --> MEM
+  FE -- allow/block check --> ACL
+
+  %% Webhooks / Data sync
+  DID -- DIDSet event --> CRM
+  SBT -- Issued/Updated event --> CRM
+  MEM -- Minted event --> CRM
