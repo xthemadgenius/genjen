@@ -1,0 +1,65 @@
+flowchart LR
+  %% High-level architecture
+
+  subgraph GOV[Governance]
+    G[DAOGovernor]
+    TL[DAO TimeLock]
+    G --- TL
+  end
+
+  subgraph ID[Identity]
+    DID[DIDRegistry]
+    SBT["SBTIssuer (ERC721Votes)"]
+    BADGE[BadgeRegistry]
+    MEM[DAOMembershipNFT]
+    DID <---> SBT
+    BADGE -. verifies .- SBT
+  end
+
+  subgraph CONTENT[Content & Collections]
+    FACT[CollectionFactory]
+    CC1["CreatorCollection1155 (many)"]
+  end
+
+  subgraph COMMERCE[Commerce]
+    MKT[CreatorMarketplace]
+  end
+
+  subgraph REW[Rewards]
+    RP["RewardsProgram (points SBT-ERC20)"]
+    UTIL["UtilityNFT (subs/certs)"]
+  end
+
+  subgraph TREAS[Treasury]
+    T[DAOTreasury]
+  end
+
+  %% Governance control lines
+  TL -- manages roles/params --> SBT
+  TL -- manages roles/params --> MEM
+  TL -- manages roles/params --> BADGE
+  TL -- manages roles/params --> FACT
+  TL -- manages fees/pauses --> MKT
+  TL -- manages rates/catalog --> RP
+  TL -- executor --> T
+
+  %% Content factory -> collections
+  FACT --> CC1
+
+  %% Marketplace interactions
+  CC1 <-. creator mints .-> FACT
+  MKT <-- lists/approvals --> CC1
+  MKT -- awardOnPurchase(...) --> RP
+
+  %% Rewards redemption paths
+  RP -- redeem: ERC1155 --> UTIL
+  RP -- redeem: ETH --> RP
+
+  %% Votes flow (SBT to Governor)
+  SBT -- IVotes checkpoints --> G
+
+  %% Treasury funding/execution (via TL)
+  TL -. schedules/execut es .-> T
+
+  %% Optional: Rewards inventory source
+  CC1 -. deposits rewards .-> RP

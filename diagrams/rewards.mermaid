@@ -1,0 +1,36 @@
+sequenceDiagram
+  autonumber
+  participant Buyer
+  participant MKT as Marketplace
+  participant Coll as CreatorCollection1155
+  participant RP as RewardsProgram
+  participant Royalty as RoyaltyRecipient
+  participant Fees as FeeRecipient
+  participant Seller
+
+  Note over Buyer,MKT: Purchase (fixed-price)
+  Buyer->>MKT: buy(listing) + ETH
+  MKT->>Coll: (checks ownership & approvals)
+  MKT->>Coll: royaltyInfo(tokenId, price)?
+  Coll-->>MKT: (recipient, royaltyAmount)
+
+  par Payouts
+    MKT->>Royalty: send royaltyAmount (ETH)
+    MKT->>Fees: send protocol fee (ETH)
+    MKT->>Seller: send seller proceeds (ETH)
+  end
+
+  MKT->>Buyer: transfer NFT(s) from Seller
+
+  Note over MKT,RP: Rewards on purchase
+  MKT->>RP: awardOnPurchase(buyer, msg.value, collection, id, qty)
+  RP-->>Buyer: mint points (SBT-ERC20)
+  RP-->>MKT: AwardedOnPurchase event
+
+  alt Later: ETH rebate redemption
+    Buyer->>RP: redeemETH(points)
+    RP->>Buyer: send ETH (rebate)
+  else Later: NFT reward redemption
+    Buyer->>RP: redeemERC1155(rewardId, amount)
+    RP->>Buyer: transfer ERC1155 reward
+  end
