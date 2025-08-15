@@ -105,8 +105,8 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder={formType === 'sayHi' 
-                      ? "Tell us about your interest in connecting generations through wisdom..." 
-                      : "Describe how you'd like to be part of the JenGen community..."
+                      ? "Share your vision for bridging generational wisdom with technology..." 
+                      : "Tell us how you'd like to contribute to the JenGen AI movement..."
                     }
                     className={styles.textarea}
                     rows={5}
@@ -116,7 +116,7 @@ const ContactSection = () => {
 
                 {/* Submit Button */}
                 <button type="submit" className={styles.submitButton}>
-                  {formType === 'sayHi' ? 'Send Message' : 'Join Community'}
+                  {formType === 'sayHi' ? 'Share Your Vision' : 'Join the Movement'}
                 </button>
               </form>
             </div>
