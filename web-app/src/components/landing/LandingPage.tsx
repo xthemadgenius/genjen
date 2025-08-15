@@ -5,6 +5,7 @@ import ProcessSection from './ProcessSection';
 import FeaturesSection from './FeaturesSection';
 import InsightsSection from './InsightsSection';
 import CollectionSection from './CollectionSection';
+import PartnersSection from './PartnersSection';
 import ContactSection from './ContactSection';
 import Footer from './Footer';
 
@@ -17,6 +18,7 @@ const LandingPage = () => {
       <FeaturesSection />
       <InsightsSection />
       <CollectionSection />
+      <PartnersSection />
       <ContactSection />
       <Footer />
     </main>
