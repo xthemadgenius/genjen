@@ -679,22 +679,28 @@
   
   .visualArea {
     height: auto;
-    min-height: 50rem;
+    min-height: 40rem; /* Increased to accommodate larger cards */
     padding: 2rem 1rem;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.15rem; /* Increased gap by 15% too */
+    align-items: start;
+    justify-items: center;
   }
   
   .featureBubble {
-    width: 12rem;
-    padding: 1rem;
+    width: 100%;
+    max-width: 10.35rem; /* 9rem * 1.15 = 10.35rem */
+    padding: 0.86rem; /* 0.75rem * 1.15 = 0.86rem */
     position: static !important;
-    margin: 1.5rem auto;
+    margin: 0;
     transform: none !important;
     display: block;
+  }
+  
+  .featureBubble:hover {
+    transform: translateY(-5px) scale(1.03) !important; /* Slightly enhanced hover for larger cards */
   }
   
   /* Reset specific positioning for mobile */
@@ -711,12 +717,14 @@
   }
   
   .imageContainer {
-    height: 6rem;
+    height: 5.18rem; /* 4.5rem * 1.15 = 5.18rem */
+    margin-bottom: 1.15rem; /* 1rem * 1.15 = 1.15rem */
   }
   
   .caption {
-    font-size: 0.8rem;
-    padding: 0.75rem;
+    font-size: 0.81rem; /* 0.7rem * 1.15 = 0.81rem */
+    padding: 0.58rem; /* 0.5rem * 1.15 = 0.58rem */
+    line-height: 1.3;
   }
   
   .decorativeSphere1,
@@ -727,10 +735,7 @@
     height: 3rem;
   }
   
-  /* Stack bubbles vertically with spacing */
-  .visualArea > * {
-    margin-bottom: 2rem;
-  }
+  /* Grid layout handles spacing through gap property */
 }
 
 @media (max-width: 480px) {
@@ -743,23 +748,27 @@
   }
   
   .visualArea {
-    min-height: 45rem;
-    padding: 1rem 0.5rem;
+    min-height: 34.5rem; /* 30rem * 1.15 = 34.5rem */
+    padding: 1.5rem 0.5rem;
+    gap: 0.86rem; /* 0.75rem * 1.15 = 0.86rem */
+    grid-template-columns: 1fr 1fr;
   }
   
   .featureBubble {
     width: 100%;
-    max-width: 14rem;
-    padding: 1.25rem;
-    margin: 1.5rem auto;
+    max-width: 9.2rem; /* 8rem * 1.15 = 9.2rem */
+    padding: 0.69rem; /* 0.6rem * 1.15 = 0.69rem */
+    margin: 0;
   }
   
   .imageContainer {
-    height: 7rem;
+    height: 4.6rem; /* 4rem * 1.15 = 4.6rem */
+    margin-bottom: 0.86rem; /* 0.75rem * 1.15 = 0.86rem */
   }
   
   .caption {
-    font-size: 0.85rem;
-    padding: 1rem;
+    font-size: 0.75rem; /* 0.65rem * 1.15 = 0.75rem */
+    padding: 0.46rem; /* 0.4rem * 1.15 = 0.46rem */
+    line-height: 1.2;
   }
 }
