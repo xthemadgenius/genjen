@@ -39,68 +39,91 @@ const ContactSection = () => {
             </div>
 
             {/* Radio Toggle */}
-            <div className={styles.radioToggle}>
+            <fieldset className={styles.radioToggle}>
+              <legend className="sr-only">Choose your message type</legend>
               <label className={`${styles.radioOption} ${formType === 'sayHi' ? styles.active : ''}`}>
                 <input
                   type="radio"
+                  name="contact-type"
                   value="sayHi"
                   checked={formType === 'sayHi'}
                   onChange={(e) => setFormType(e.target.value)}
+                  aria-describedby="vision-description"
                 />
-                <span className={styles.radioCircle}></span>
+                <span className={styles.radioCircle} aria-hidden="true"></span>
                 Share Your Vision
+                <span id="vision-description" className="sr-only">
+                  Select this to share your ideas about bridging generational wisdom with technology
+                </span>
               </label>
               
               <label className={`${styles.radioOption} ${formType === 'getQuote' ? styles.active : ''}`}>
                 <input
                   type="radio"
+                  name="contact-type"
                   value="getQuote"
                   checked={formType === 'getQuote'}
                   onChange={(e) => setFormType(e.target.value)}
+                  aria-describedby="movement-description"
                 />
-                <span className={styles.radioCircle}></span>
+                <span className={styles.radioCircle} aria-hidden="true"></span>
                 Join the Movement
+                <span id="movement-description" className="sr-only">
+                  Select this to learn about joining the JenGen AI community
+                </span>
               </label>
-            </div>
+            </fieldset>
 
             {/* Form Container */}
             <div className={styles.formContainer}>
               <form onSubmit={handleSubmit} className={styles.form}>
                 {/* Name Field */}
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>Name</label>
+                  <label htmlFor="contact-name" className={styles.label}>Name</label>
                   <input
                     type="text"
+                    id="contact-name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Your name"
                     className={styles.input}
+                    aria-describedby="name-description"
                   />
+                  <span id="name-description" className="sr-only">
+                    Optional: Enter your full name for personalized communication
+                  </span>
                 </div>
 
                 {/* Email Field */}
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    Email<span className={styles.required}>*</span>
+                  <label htmlFor="contact-email" className={styles.label}>
+                    Email<span className={styles.required} aria-label="required">*</span>
                   </label>
                   <input
                     type="email"
+                    id="contact-email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="your.email@example.com"
                     className={styles.input}
                     required
+                    aria-describedby="email-description"
+                    aria-invalid={formData.email && !formData.email.includes('@') ? 'true' : 'false'}
                   />
+                  <span id="email-description" className="sr-only">
+                    Required: Enter a valid email address so we can respond to your message
+                  </span>
                 </div>
 
                 {/* Message Field */}
                 <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    Message<span className={styles.required}>*</span>
+                  <label htmlFor="contact-message" className={styles.label}>
+                    Message<span className={styles.required} aria-label="required">*</span>
                   </label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
@@ -111,7 +134,13 @@ const ContactSection = () => {
                     className={styles.textarea}
                     rows={5}
                     required
+                    aria-describedby="message-description"
+                    minLength={10}
+                    maxLength={1000}
                   />
+                  <span id="message-description" className="sr-only">
+                    Required: Share your thoughts, questions, or ideas about JenGen AI (10-1000 characters)
+                  </span>
                 </div>
 
                 {/* Submit Button */}
