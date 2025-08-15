@@ -3,26 +3,26 @@ import styles from './css/FeaturesSection.module.css';
 
 const FeaturesSection = () => {
   return (
-    <section className={styles.featuresSection}>
+    <section className={styles.featuresSection} aria-labelledby="features-heading">
       {/* Left Content */}
       <div className={styles.leftContent}>
-        <div className={styles.featuresLabel}>FEATURES</div>
+        <div className={styles.featuresLabel} aria-hidden="true">FEATURES</div>
         <div className={styles.titleContainer}>
-          <div className={styles.accentLine}></div>
-          <h2 className={styles.sectionTitle}>
+          <div className={styles.accentLine} aria-hidden="true"></div>
+          <h2 id="features-heading" className={styles.sectionTitle}>
             We are platform for<br />
             everyone
           </h2>
         </div>
-        <button className={styles.ctaButton}>
+        <button className={styles.ctaButton} aria-label="Start minting your purpose on our platform">
           Mint purpose
         </button>
       </div>
 
       {/* Main Visual Area */}
-      <div className={styles.visualArea}>
+      <div className={styles.visualArea} role="img" aria-label="Interactive feature showcase with NFT examples and platform capabilities">
         {/* Radial Grid Background */}
-        <div className={styles.radialGrid}>
+        <div className={styles.radialGrid} aria-hidden="true">
           <div className={`${styles.gridCircle} ${styles.circle1}`}></div>
           <div className={`${styles.gridCircle} ${styles.circle2}`}></div>
           <div className={`${styles.gridCircle} ${styles.circle3}`}></div>
@@ -34,78 +34,78 @@ const FeaturesSection = () => {
         </div>
 
         {/* Decorative 3D Spheres */}
-        <div className={styles.decorativeSphere1}></div>
-        <div className={styles.decorativeSphere2}></div>
-        <div className={styles.decorativeSphere3}></div>
-        <div className={styles.decorativeSphere4}></div>
+        <div className={styles.decorativeSphere1} aria-hidden="true"></div>
+        <div className={styles.decorativeSphere2} aria-hidden="true"></div>
+        <div className={styles.decorativeSphere3} aria-hidden="true"></div>
+        <div className={styles.decorativeSphere4} aria-hidden="true"></div>
 
         {/* Feature Bubbles */}
         {/* Top Right - Lounge */}
-        <div className={`${styles.featureBubble} ${styles.bubbleTopRight}`}>
+        <article className={`${styles.featureBubble} ${styles.bubbleTopRight}`} aria-labelledby="lounge-feature">
           <div className={styles.imageContainer}>
-            <div className={styles.imageLounge}>
-              <div className={styles.loungeBackground}></div>
-              <div className={styles.loungeElements}>
-                <div className={styles.loungeSeating}></div>
-                <div className={styles.loungeAccent}></div>
-                <div className={styles.loungeWindow}></div>
+            <div className={styles.imageLounge} role="img" aria-label="Modern lounge interior with comfortable seating">
+              <div className={styles.loungeBackground} aria-hidden="true"></div>
+              <div className={styles.loungeElements} aria-hidden="true">
+                <div className={styles.loungeSeating} aria-hidden="true"></div>
+                <div className={styles.loungeAccent} aria-hidden="true"></div>
+                <div className={styles.loungeWindow} aria-hidden="true"></div>
               </div>
             </div>
           </div>
-          <div className={styles.caption}>
+          <p id="lounge-feature" className={styles.caption}>
             You don&apos;t have to be a computer geek to buy NFTs.
-          </div>
-        </div>
+          </p>
+        </article>
 
         {/* Top Center - 3D Object */}
-        <div className={`${styles.featureBubble} ${styles.bubbleTopCenter}`}>
+        <article className={`${styles.featureBubble} ${styles.bubbleTopCenter}`} aria-labelledby="keycard-feature">
           <div className={styles.imageContainer}>
-            <div className={styles.image3DObject}>
-              <div className={`${styles.disc} ${styles.disc1}`}></div>
-              <div className={`${styles.disc} ${styles.disc2}`}></div>
-              <div className={`${styles.disc} ${styles.disc3}`}></div>
-              <div className={styles.discGlow}></div>
+            <div className={styles.image3DObject} role="img" aria-label="Animated 3D rotating discs representing digital membership card">
+              <div className={`${styles.disc} ${styles.disc1}`} aria-hidden="true"></div>
+              <div className={`${styles.disc} ${styles.disc2}`} aria-hidden="true"></div>
+              <div className={`${styles.disc} ${styles.disc3}`} aria-hidden="true"></div>
+              <div className={styles.discGlow} aria-hidden="true"></div>
             </div>
           </div>
-          <div className={styles.caption}>
+          <p id="keycard-feature" className={styles.caption}>
             Your exclusive member keycard.
-          </div>
-        </div>
+          </p>
+        </article>
 
         {/* Bottom Right - NFT Illustration */}
-        <div className={`${styles.featureBubble} ${styles.bubbleBottomRight}`}>
+        <article className={`${styles.featureBubble} ${styles.bubbleBottomRight}`} aria-labelledby="nft-feature">
           <div className={styles.imageContainer}>
-            <div className={styles.imageNFT}>
-              <div className={styles.nftBackground}></div>
-              <div className={styles.nftShape1}></div>
-              <div className={styles.nftShape2}></div>
-              <div className={styles.nftShape3}></div>
-              <div className={styles.nftGlow}></div>
+            <div className={styles.imageNFT} role="img" aria-label="Abstract NFT artwork with floating geometric shapes">
+              <div className={styles.nftBackground} aria-hidden="true"></div>
+              <div className={styles.nftShape1} aria-hidden="true"></div>
+              <div className={styles.nftShape2} aria-hidden="true"></div>
+              <div className={styles.nftShape3} aria-hidden="true"></div>
+              <div className={styles.nftGlow} aria-hidden="true"></div>
             </div>
           </div>
-          <div className={styles.caption}>
+          <p id="nft-feature" className={styles.caption}>
             The exactly Token Economics is TBA.
-          </div>
-        </div>
+          </p>
+        </article>
 
         {/* Bottom Left - Tunnel */}
-        <div className={`${styles.featureBubble} ${styles.bubbleBottomLeft}`}>
+        <article className={`${styles.featureBubble} ${styles.bubbleBottomLeft}`} aria-labelledby="discount-feature">
           <div className={styles.imageContainer}>
-            <div className={styles.imageTunnel}>
-              <div className={styles.tunnelRings}>
-                <div className={`${styles.tunnelRing} ${styles.ring1}`}></div>
-                <div className={`${styles.tunnelRing} ${styles.ring2}`}></div>
-                <div className={`${styles.tunnelRing} ${styles.ring3}`}></div>
-                <div className={`${styles.tunnelRing} ${styles.ring4}`}></div>
+            <div className={styles.imageTunnel} role="img" aria-label="Futuristic tunnel with pulsing rings and particle effects">
+              <div className={styles.tunnelRings} aria-hidden="true">
+                <div className={`${styles.tunnelRing} ${styles.ring1}`} aria-hidden="true"></div>
+                <div className={`${styles.tunnelRing} ${styles.ring2}`} aria-hidden="true"></div>
+                <div className={`${styles.tunnelRing} ${styles.ring3}`} aria-hidden="true"></div>
+                <div className={`${styles.tunnelRing} ${styles.ring4}`} aria-hidden="true"></div>
               </div>
-              <div className={styles.tunnelGlow}></div>
-              <div className={styles.tunnelParticles}></div>
+              <div className={styles.tunnelGlow} aria-hidden="true"></div>
+              <div className={styles.tunnelParticles} aria-hidden="true"></div>
             </div>
           </div>
-          <div className={styles.caption}>
+          <p id="discount-feature" className={styles.caption}>
             50% Discount on trading fees for keycard holders.
-          </div>
-        </div>
+          </p>
+        </article>
       </div>
     </section>
   );

@@ -3,18 +3,18 @@ import styles from './css/CollectionSection.module.css';
 
 const CollectionSection = () => {
   return (
-    <section className={styles.collectionSection}>
+    <section className={styles.collectionSection} aria-labelledby="collection-heading">
       <div className={styles.container}>
         {/* Header Content */}
-        <div className={styles.headerContent}>
-          <h2 className={styles.sectionTitle}>
+        <header className={styles.headerContent}>
+          <h2 id="collection-heading" className={styles.sectionTitle}>
             About Your Unique <span className={styles.titleAccent}>Wisdom Collection</span>
           </h2>
           <p className={styles.subtitle}>
             Each token is uniquely generated from 100+ rare attributes representing different aspects 
             of generational wisdom, making every piece truly one of a kind.
           </p>
-        </div>
+        </header>
 
         {/* Collection Info Banner */}
         <div className={styles.infoBanner}>

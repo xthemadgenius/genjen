@@ -10,7 +10,7 @@ import Footer from './Footer';
 
 const LandingPage = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100" role="main">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       <Hero />
       <MovingStrip />
       <ProcessSection />

@@ -3,14 +3,13 @@ import styles from './css/ProcessSection.module.css';
 
 const ProcessSection = () => {
   return (
-    <section className={styles.processSection}>
+    <section className={styles.processSection} aria-labelledby="process-heading">
       {/* Header Section */}
-      <div className={styles.header}>
-        <h2 className={styles.headerTitle}>
-          There’s&apos;s Genius <span className={styles.headerTitleArt}>Elders Haven’t Tapped</span><br />
-          
+      <header className={styles.header}>
+        <h2 id="process-heading" className={styles.headerTitle}>
+          There's Genius <span className={styles.headerTitleArt}>Elders Haven't Tapped</span>
         </h2>
-      </div>
+      </header>
 
       {/* Container */}
       <div className={styles.container}>

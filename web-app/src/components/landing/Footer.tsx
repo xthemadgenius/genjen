@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
           
           {/* Center - Link Columns */}
-          <div className={styles.linkColumns}>
+          <nav className={styles.linkColumns} aria-label="Footer navigation">
             {/* Column 1 - Platform */}
             <div className={styles.linkColumn}>
               <h4 className={styles.columnHeader}>Platform</h4>
@@ -71,7 +71,7 @@ const Footer = () => {
               <a href="#" className={styles.footerLink}>About JenGen AI</a>
               <a href="#" className={styles.footerLink}>Generational Impact</a>
             </div>
-          </div>
+          </nav>
         </div>
         
         {/* Bottom Copyright */}
