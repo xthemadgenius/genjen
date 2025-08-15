@@ -16,9 +16,9 @@ const Hero = () => {
           <div className={styles.navLinks}>
             <a href="#" className={styles.navLink}>About</a>
             <a href="#" className={styles.navLink}>Projects</a>
-            <a href="#" className={styles.navLink}>Marketplace</a>
-            <a href="#" className={styles.navLink}>Governance</a>
-            <a href="#" className={styles.navLink}>Discord</a>
+            <a href="#" className={styles.navLink}>Courses</a>
+            <a href="#" className={styles.navLink}>Mentors</a>
+            <a href="#" className={styles.navLink}>Community</a>
           </div>
         </div>
         

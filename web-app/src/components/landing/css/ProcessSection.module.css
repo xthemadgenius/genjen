@@ -1,357 +1,310 @@
 .processSection {
   min-height: 100vh;
-  background: #f8fafc;
-  background-image: radial-gradient(circle at 20% 20%, rgba(120, 119, 198, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
-  padding: 5rem 0;
+  background: linear-gradient(135deg, #faf5ff 0%, #f8fafc 25%, #ecfdf5 50%, #fef7cd 75%, #fdf2f8 100%);
+  padding: 8rem 0;
   position: relative;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.processSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* World map dot pattern */
+.processSection::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, rgba(139, 92, 246, 0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 5rem;
-  padding: 0 2rem;
-}
-
-.decorativeHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.decorativeElements {
-  display: flex;
-  gap: 1rem;
-}
-
-.orangeCircle {
-  width: 3rem;
-  height: 3rem;
-  background: linear-gradient(135deg, #fb923c, #f472b6);
-  border-radius: 50%;
-}
-
-.purpleCircle {
-  width: 2rem;
-  height: 2rem;
-  background: #c084fc;
-  border-radius: 50%;
-  align-self: flex-end;
-}
-
-.sparkle {
-  margin-left: 3rem;
-  font-size: 2.5rem;
+  margin-bottom: 6rem;
+  padding: 0 3rem;
+  position: relative;
+  z-index: 10;
 }
 
 .headerTitle {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 700;
-  color: #111827;
-  line-height: 1.2;
-  margin-bottom: 2rem;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
 }
 
 .headerTitleArt {
-  color: #f97316;
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #10b981 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .container {
   position: relative;
-  max-width: 112rem;
+  max-width: 80rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 
-.donationCardTopLeft {
+/* Floating testimonial badges */
+.testimonialLeft {
   position: absolute;
-  top: -2rem;
-  left: 2rem;
-  background: white;
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  width: 14rem;
+  top: -3rem;
+  left: -4rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  z-index: 15;
+  width: 16rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.donationCardTopRight {
+.testimonialRight {
   position: absolute;
   top: 2rem;
-  right: 2rem;
-  background: white;
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  width: 14rem;
+  right: -4rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  z-index: 15;
+  width: 16rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.donationCard {
+.testimonialCard {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
-.donationAvatar {
-  width: 3rem;
-  height: 3rem;
+.testimonialAvatar {
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
-.avatarRed {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIxOCIgcj0iOCIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4yIi8+CjxwYXRoIGQ9Ik04IDQwQzggMzIgMTYgMjggMjQgMjhDMzIgMjggNDAgMzIgNDAgNDBIOFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K');
-  background-size: cover;
-  background-position: center;
+.avatarAnna {
+  background: linear-gradient(135deg, #f87171, #dc2626);
 }
 
-.avatarBlue {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIxOCIgcj0iOCIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4yIi8+CjxwYXRoIGQ9Ik04IDQwQzggMzIgMTYgMjggMjQgMjhDMzIgMjggNDAgMzIgNDAgNDBIOFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4K');
-  background-size: cover;
-  background-position: center;
+.avatarJane {
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
 }
 
-.donationInfo h3 {
-  font-weight: 600;
-  color: #111827;
+.testimonialInfo h3 {
+  font-weight: 700;
+  color: #1f2937;
   margin: 0;
+  font-size: 1rem;
 }
 
-.donationInfo p {
-  font-size: 0.875rem;
+.testimonialInfo p {
+  font-size: 0.85rem;
   color: #6b7280;
   margin: 0;
+  font-weight: 500;
 }
 
+/* Process cards grid */
 .processGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 8rem;
+  gap: 3rem;
   position: relative;
+  margin-top: 4rem;
 }
 
+/* Connection lines between cards */
+.connectionLines {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 5;
+  display: none;
+}
+
+.dashedLine {
+  position: absolute;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c084fc, transparent);
+  border-top: 2px dashed #a855f7;
+  opacity: 0.6;
+}
+
+.dashedLine:first-child {
+  left: 33%;
+  width: 17%;
+}
+
+.dashedLine:last-child {
+  right: 33%;
+  width: 17%;
+}
+
+/* Process cards */
 .processCard {
-  background: white;
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 2rem;
+  padding: 3rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.processCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.12);
+}
+
+/* Gradient spheres decorative accents */
+.gradientSphere1 {
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.4));
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+.gradientSphere2 {
+  position: absolute;
+  bottom: -3rem;
+  right: -3rem;
+  width: 8rem;
+  height: 8rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(139, 92, 246, 0.3));
+  border-radius: 50%;
+  filter: blur(25px);
+  z-index: -1;
+}
+
+.gradientSphere3 {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  width: 5rem;
+  height: 5rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.6), rgba(5, 150, 105, 0.4));
+  border-radius: 50%;
+  filter: blur(15px);
+  z-index: -1;
+}
+
+/* Card icons */
+.cardIcon {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(139, 92, 246, 0.05));
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border: 2px solid rgba(168, 85, 247, 0.1);
   backdrop-filter: blur(10px);
 }
 
-.createCard {
-  position: relative;
-}
-
-.createDecoOrange {
-  position: absolute;
-  top: -1.5rem;
-  left: -1.5rem;
-  width: 4rem;
-  height: 4rem;
-  background: linear-gradient(135deg, #fb923c, #ef4444);
-  border-radius: 50%;
-  box-shadow: 0 8px 16px rgba(251, 146, 60, 0.3);
-}
-
-.createDecoPurple {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 3rem;
-  height: 3rem;
-  background: rgba(221, 214, 254, 0.8);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-
-.createDecoPurpleInner {
+.cardIcon svg {
   width: 2rem;
   height: 2rem;
-  background: #a855f7;
-  border-radius: 0.5rem;
+  color: #8b5cf6;
 }
 
-.paymentCard {
-  position: relative;
-}
-
-.paymentConnectionLeft {
-  position: absolute;
-  left: -2rem;
-  top: 50%;
-  width: 4rem;
-  height: 2px;
-  background: transparent;
-  border-top: 2px dashed #c084fc;
-  transform: translateY(-50%);
-  z-index: 5;
-}
-
-.paymentConnectionRight {
-  position: absolute;
-  right: -2rem;
-  top: 50%;
-  width: 4rem;
-  height: 2px;
-  background: transparent;
-  border-top: 2px dashed #c084fc;
-  transform: translateY(-50%);
-  z-index: 5;
-}
-
-.paymentCenterIcon {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-.paymentIconContainer {
-  width: 4rem;
-  height: 4rem;
-  background: rgba(168, 85, 247, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(168, 85, 247, 0.2);
-}
-
-.paymentIcon {
-  width: 2rem;
-  height: 2rem;
-  background: #a855f7;
-  border-radius: 50%;
-}
-
-.paymentDotOrange {
-  position: absolute;
-  left: 2rem;
-  top: 2rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  background: #fb923c;
-  border-radius: 50%;
-}
-
-.paymentDotBlue {
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  background: #60a5fa;
-  border-radius: 50%;
-}
-
-.paymentDotPurple {
-  position: absolute;
-  left: 4rem;
-  bottom: 8rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  background: #a855f7;
-  border-radius: 50%;
-}
-
-.walletCard {
-  position: relative;
-}
-
-.walletDecoLarge {
-  position: absolute;
-  top: -1.5rem;
-  right: -1.5rem;
-  width: 5rem;
-  height: 5rem;
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
-  border-radius: 50%;
-  box-shadow: 0 8px 16px rgba(168, 85, 247, 0.3);
-}
-
-.walletDecoPink {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  width: 3rem;
-  height: 3rem;
-  background: #fce7f3;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.walletDecoPinkInner {
-  width: 2rem;
-  height: 2rem;
-  background: #f472b6;
-  border-radius: 0.5rem;
-}
-
-.cardContent {
-  margin-top: 2rem;
-}
-
+/* Card content */
 .cardTitle {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #111827;
+  color: #1f2937;
   margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
 }
 
 .cardDescription {
   color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 2rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .cardButton {
   background: linear-gradient(135deg, #8b5cf6, #7c3aed);
   color: white;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
+  padding: 1rem 2.5rem;
+  border-radius: 1.5rem;
   font-weight: 600;
+  font-size: 1rem;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+  letter-spacing: -0.01em;
 }
 
 .cardButton:hover {
   background: linear-gradient(135deg, #7c3aed, #6d28d9);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 35px rgba(139, 92, 246, 0.4);
 }
 
-.paymentCardContent {
-  text-align: center;
-}
-
-.paymentButton {
-  width: auto;
-  padding: 0.75rem 2rem;
-}
-
+/* Responsive design */
 @media (min-width: 768px) {
   .processGrid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
   
-  .cardButton {
-    width: 100%;
+  .connectionLines {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .processGrid {
+    gap: 3rem;
   }
   
-  .paymentButton {
-    width: auto;
+  .testimonialLeft {
+    left: -6rem;
+  }
+  
+  .testimonialRight {
+    right: -6rem;
   }
 }

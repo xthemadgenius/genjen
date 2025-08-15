@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from './Hero';
 import MovingStrip from './MovingStrip';
 import ProcessSection from './ProcessSection';
+import FeaturesSection from './FeaturesSection';
 
 const LandingPage = () => {
   return (
@@ -9,6 +10,7 @@ const LandingPage = () => {
       <Hero />
       <MovingStrip />
       <ProcessSection />
+      <FeaturesSection />
     </main>
   );
 };
