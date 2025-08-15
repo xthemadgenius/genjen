@@ -4,6 +4,7 @@ import MovingStrip from './MovingStrip';
 import ProcessSection from './ProcessSection';
 import FeaturesSection from './FeaturesSection';
 import InsightsSection from './InsightsSection';
+import CollectionSection from './CollectionSection';
 
 const LandingPage = () => {
   return (
@@ -13,6 +14,7 @@ const LandingPage = () => {
       <ProcessSection />
       <FeaturesSection />
       <InsightsSection />
+      <CollectionSection />
     </main>
   );
 };
