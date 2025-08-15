@@ -1,8 +1,8 @@
 import React from 'react';
 
 const MovingStrip = () => {
-  const text = "Collect your eco NTSs";
-  const repeatedText = Array(8).fill(text).join(" + ");
+  const text = "JEN GEN AI - Weaving Generations - Unifying Wisdom - Creating the Future";
+  const repeatedText = Array(8).fill(text).join(" - ");
 
   return (
     <div className="bg-purple-600 py-8 overflow-hidden">
