@@ -6,6 +6,7 @@ import FeaturesSection from './FeaturesSection';
 import InsightsSection from './InsightsSection';
 import CollectionSection from './CollectionSection';
 import ContactSection from './ContactSection';
+import Footer from './Footer';
 
 const LandingPage = () => {
   return (
@@ -17,6 +18,7 @@ const LandingPage = () => {
       <InsightsSection />
       <CollectionSection />
       <ContactSection />
+      <Footer />
     </main>
   );
 };

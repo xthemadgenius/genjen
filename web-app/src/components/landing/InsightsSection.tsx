@@ -37,9 +37,9 @@ const InsightsSection = () => {
             <div className={styles.blogCard}>
               <div className={`${styles.tagDot} ${styles.blueDot}`}></div>
               <div className={styles.cardContent}>
-                <div className={styles.readTime}>3 min read</div>
+                <div className={styles.readTime}>700 Seats</div>
                 <h3 className={styles.cardTitle}>
-                  How Elder Wisdom Transforms Modern Technology
+                  Wisdom Transformers
                 </h3>
                 <p className={styles.cardDescription}>
                   Discover how decades of experience and traditional knowledge 
@@ -58,9 +58,9 @@ const InsightsSection = () => {
             <div className={styles.blogCard}>
               <div className={`${styles.tagDot} ${styles.orangeDot}`}></div>
               <div className={styles.cardContent}>
-                <div className={styles.readTime}>4 min read</div>
+                <div className={styles.readTime}>300 Seats</div>
                 <h3 className={styles.cardTitle}>
-                  Building Bridges: The Future of Intergenerational AI
+                  Leaders of the Future
                 </h3>
                 <p className={styles.cardDescription}>
                   Explore innovative approaches to connecting different generations 
@@ -79,9 +79,9 @@ const InsightsSection = () => {
             <div className={styles.blogCard}>
               <div className={`${styles.tagDot} ${styles.purpleDot}`}></div>
               <div className={styles.cardContent}>
-                <div className={styles.readTime}>6 min read</div>
+                <div className={styles.readTime}>100 Seats</div>
                 <h3 className={styles.cardTitle}>
-                  Unlocking Hidden Potential: Stories from JenGen Community
+                  JenGen Mentors
                 </h3>
                 <p className={styles.cardDescription}>
                   Real stories of how our platform has enabled meaningful 
