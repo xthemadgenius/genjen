@@ -32,9 +32,9 @@ const ContactSection = () => {
           <div className={styles.leftContent}>
             {/* Header */}
             <div className={styles.header}>
-              <div className={styles.contactLabel}>Contact Us</div>
+              <div className={styles.contactLabel}>Get In Touch</div>
               <h2 className={styles.subtitle}>
-                Connect with Us: Let&apos;s Bridge <span className={styles.accent}>Generational Wisdom</span>
+                Ready to Bridge Generations? Let&apos;s <span className={styles.accent}>Connect & Create</span> Together
               </h2>
             </div>
 
@@ -48,7 +48,7 @@ const ContactSection = () => {
                   onChange={(e) => setFormType(e.target.value)}
                 />
                 <span className={styles.radioCircle}></span>
-                Say Hi
+                Share Your Vision
               </label>
               
               <label className={`${styles.radioOption} ${formType === 'getQuote' ? styles.active : ''}`}>
@@ -59,7 +59,7 @@ const ContactSection = () => {
                   onChange={(e) => setFormType(e.target.value)}
                 />
                 <span className={styles.radioCircle}></span>
-                Join the Community
+                Join the Movement
               </label>
             </div>
 
