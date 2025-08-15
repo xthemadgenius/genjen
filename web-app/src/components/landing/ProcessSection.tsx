@@ -7,7 +7,7 @@ const ProcessSection = () => {
       {/* Header Section */}
       <header className={styles.header}>
         <h2 id="process-heading" className={styles.headerTitle}>
-          There's Genius <span className={styles.headerTitleArt}>Elders Haven't Tapped</span>
+          There&apos;s Genius <span className={styles.headerTitleArt}>Elders Haven&apos;t Tapped</span>
         </h2>
       </header>
 
