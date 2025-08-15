@@ -100,7 +100,6 @@
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
 }
 
@@ -110,9 +109,14 @@
   box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
 }
 
+.buttonWithBadge {
+  position: relative;
+  display: inline-block;
+}
+
 .badge {
   position: absolute;
-  top: -8px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #fbbf24, #f59e0b);
@@ -123,6 +127,8 @@
   border-radius: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }
 
 .bannerButtonSecondary {
@@ -393,6 +399,10 @@
   .bannerButtonSecondary {
     width: 12rem;
   }
+  
+  .buttonWithBadge {
+    margin-top: 3rem; /* Add space above for the badge */
+  }
 }
 
 @media (max-width: 768px) {
@@ -434,6 +444,12 @@
   .secondaryCTA {
     width: 100%;
     max-width: 18rem;
+  }
+  
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+    top: -25px;
   }
 }
 

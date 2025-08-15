@@ -22,10 +22,12 @@ const CollectionSection = () => {
             A collection of unique generative 10,000 collectible wisdom tokens with randomly generated set of attributes.
           </h3>
           <div className={styles.bannerButtons}>
-            <button className={styles.bannerButton}>
+            <div className={styles.buttonWithBadge}>
               <span className={styles.badge}>Most Popular</span>
-              Get from JenGenAI
-            </button>
+              <button className={styles.bannerButton}>
+                Get from JenGenAI
+              </button>
+            </div>
             <button className={styles.bannerButtonSecondary}>
               Get from JenGenAI
             </button>
