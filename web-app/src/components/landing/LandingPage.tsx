@@ -5,6 +5,7 @@ import ProcessSection from './ProcessSection';
 import FeaturesSection from './FeaturesSection';
 import InsightsSection from './InsightsSection';
 import CollectionSection from './CollectionSection';
+import ContactSection from './ContactSection';
 
 const LandingPage = () => {
   return (
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <FeaturesSection />
       <InsightsSection />
       <CollectionSection />
+      <ContactSection />
     </main>
   );
 };

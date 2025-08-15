@@ -1,0 +1,440 @@
+.contactSection {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #f8fafc 50%, #f1f5f9 75%, #f8fafc 100%);
+  padding: 8rem 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* Left Content - Form */
+.leftContent {
+  max-width: 35rem;
+}
+
+/* Header */
+.header {
+  margin-bottom: 3rem;
+}
+
+.contactLabel {
+  background: linear-gradient(135deg, #84cc16, #65a30d);
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 2rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 25px rgba(132, 204, 22, 0.3);
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.accent {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #10b981 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Radio Toggle */
+.radioToggle {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #6b7280;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.radioOption.active {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.radioOption input {
+  display: none;
+}
+
+.radioCircle {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.radioOption.active .radioCircle {
+  border-color: #84cc16;
+  background: #84cc16;
+}
+
+.radioOption.active .radioCircle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Form Container */
+.formContainer {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.required {
+  color: #ef4444;
+  margin-left: 0.25rem;
+}
+
+.input,
+.textarea {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: #1f2937;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  backdrop-filter: blur(10px);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #84cc16;
+  box-shadow: 0 0 0 3px rgba(132, 204, 22, 0.1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #9ca3af;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 8rem;
+  line-height: 1.5;
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #1f2937, #111827);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.25rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 10px 25px rgba(31, 41, 55, 0.3);
+  letter-spacing: -0.01em;
+}
+
+.submitButton:hover {
+  background: linear-gradient(135deg, #111827, #000000);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(31, 41, 55, 0.4);
+}
+
+.submitButton:active {
+  transform: translateY(0px);
+}
+
+/* Right Content - Decorative Graphics */
+.rightContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 40rem;
+}
+
+.decorativeElements {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 25rem;
+}
+
+/* Main Starburst */
+.starburst {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 12rem;
+  height: 12rem;
+  animation: starburstRotate 20s linear infinite;
+}
+
+.starburstSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.starburstCore {
+  fill: #1f2937;
+  filter: drop-shadow(0 4px 8px rgba(31, 41, 55, 0.2));
+}
+
+.starburstLine {
+  stroke: #374151;
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.7;
+  animation: lineGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes starburstRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes lineGlow {
+  0% { opacity: 0.5; }
+  100% { opacity: 0.9; }
+}
+
+/* Accent Star */
+.accentStar {
+  position: absolute;
+  bottom: 25%;
+  left: 15%;
+  width: 4rem;
+  height: 4rem;
+  animation: accentFloat 4s ease-in-out infinite;
+}
+
+.accentStarSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.accentStarShape {
+  fill: linear-gradient(135deg, #84cc16, #65a30d);
+  fill: #84cc16;
+  filter: drop-shadow(0 4px 12px rgba(132, 204, 22, 0.3));
+}
+
+@keyframes accentFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+/* Floating Dots */
+.floatingDot1,
+.floatingDot2,
+.floatingDot3 {
+  position: absolute;
+  border-radius: 50%;
+  animation: dotFloat 6s ease-in-out infinite;
+}
+
+.floatingDot1 {
+  width: 0.75rem;
+  height: 0.75rem;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  top: 15%;
+  left: 25%;
+  animation-delay: 0s;
+}
+
+.floatingDot2 {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  top: 60%;
+  right: 25%;
+  animation-delay: 2s;
+}
+
+.floatingDot3 {
+  width: 0.6rem;
+  height: 0.6rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  bottom: 40%;
+  left: 35%;
+  animation-delay: 4s;
+}
+
+@keyframes dotFloat {
+  0%, 100% { transform: translateY(0px); opacity: 0.6; }
+  50% { transform: translateY(-20px); opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contentWrapper {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  .leftContent {
+    max-width: none;
+    order: 1;
+  }
+  
+  .rightContent {
+    order: 2;
+    height: 20rem;
+  }
+  
+  .starburst {
+    width: 8rem;
+    height: 8rem;
+    top: 10%;
+    right: 20%;
+  }
+  
+  .accentStar {
+    width: 3rem;
+    height: 3rem;
+    bottom: 15%;
+    left: 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+  
+  .contactSection {
+    padding: 6rem 0;
+  }
+  
+  .contentWrapper {
+    gap: 3rem;
+  }
+  
+  .radioToggle {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .formContainer {
+    padding: 2rem;
+  }
+  
+  .rightContent {
+    height: 15rem;
+  }
+  
+  .decorativeElements {
+    max-width: 20rem;
+  }
+  
+  .starburst {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .accentStar {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 1.5rem;
+  }
+  
+  .input,
+  .textarea {
+    padding: 0.875rem 1rem;
+  }
+  
+  .submitButton {
+    padding: 1rem 1.5rem;
+  }
+  
+  .rightContent {
+    height: 12rem;
+  }
+  
+  .floatingDot1,
+  .floatingDot2,
+  .floatingDot3 {
+    display: none;
+  }
+}
