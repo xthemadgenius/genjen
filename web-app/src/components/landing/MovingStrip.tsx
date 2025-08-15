@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './css/MovingStrip.module.css';
 
 const MovingStrip = () => {
-  const text = "JEN GEN AI - Weaving Generations - Unifying Wisdom - Creating the Future";
+  const text = "JENGEN.AI - Bridging Generations - Connecting Wisdom - Empowering Learning";
   const repeatedText = Array(8).fill(text).join(" - ");
 
   return (
@@ -13,7 +13,7 @@ const MovingStrip = () => {
         </span>
       </div>
       <div className="sr-only">
-        JenGen AI - Weaving Generations - Unifying Wisdom - Creating the Future
+        JenGen.ai - Bridging Generations - Connecting Wisdom - Empowering Learning
       </div>
     </div>
   );

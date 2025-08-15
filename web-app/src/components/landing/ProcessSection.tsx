@@ -55,13 +55,13 @@ const ProcessSection = () => {
               </svg>
             </div>
             
-            <h3 className={styles.cardTitle}>Create</h3>
+            <h3 className={styles.cardTitle}>Create Profile</h3>
             <p className={styles.cardDescription}>
-              Click My Collections and set up your collection. Add a description, 
-              profile & banner images, and set a secondary sales fee.
+              Set up your personal profile to share your story, experiences, and 
+              interests with our intergenerational community.
             </p>
             <button className={styles.cardButton}>
-              Create
+              Get Started
             </button>
           </div>
 
@@ -78,12 +78,13 @@ const ProcessSection = () => {
               </svg>
             </div>
             
-            <h3 className={styles.cardTitle}>Instant payment</h3>
+            <h3 className={styles.cardTitle}>Smart Matching</h3>
             <p className={styles.cardDescription}>
-              Put NFTs on sale or on auction. Get paid for your digital collectables
+              Our AI instantly connects you with compatible mentors or mentees 
+              based on shared interests and learning goals.
             </p>
             <button className={styles.cardButton}>
-              Sale now
+              Find Matches
             </button>
           </div>
 
@@ -100,13 +101,13 @@ const ProcessSection = () => {
               </svg>
             </div>
             
-            <h3 className={styles.cardTitle}>Set up your wallet</h3>
+            <h3 className={styles.cardTitle}>Join Community</h3>
             <p className={styles.cardDescription}>
-              Once you&apos;ve set up your wallet of choice, connect it by clicking 
-              the wallet icon in the top right corner.
+              Access our private network of wisdom seekers and share knowledge 
+              through meaningful conversations and connections.
             </p>
             <button className={styles.cardButton}>
-              Connect
+              Join Now
             </button>
           </div>
         </div>

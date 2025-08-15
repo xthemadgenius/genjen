@@ -8,39 +8,39 @@ const CollectionSection = () => {
         {/* Header Content */}
         <header className={styles.headerContent}>
           <h2 id="collection-heading" className={styles.sectionTitle}>
-            About Your Unique <span className={styles.titleAccent}>Wisdom Collection</span>
+            Your <span className={styles.titleAccent}>JenGen.ai Membership</span> Benefits
           </h2>
           <p className={styles.subtitle}>
-            Each token is uniquely generated from 100+ rare attributes representing different aspects 
-            of generational wisdom, making every piece truly one of a kind.
+            Each membership provides access to AI-powered storytelling, smart matching, custom learning journeys, 
+            and our exclusive private network connecting generations.
           </p>
         </header>
 
         {/* Collection Info Banner */}
         <div className={styles.infoBanner}>
           <h3 className={styles.bannerTitle}>
-            A collection of unique generative 10,000 collectible wisdom tokens with randomly generated set of attributes.
+            Choose your membership tier and unlock personalized intergenerational experiences designed to bridge wisdom across generations.
           </h3>
           <div className={styles.bannerButtons}>
             <div className={styles.buttonWithBadge}>
               <span className={styles.badge}>Most Popular</span>
               <button className={styles.bannerButton}>
-                Get from JenGenAI
+                Join Premium
               </button>
             </div>
             <button className={styles.bannerButtonSecondary}>
-              Get from JenGenAI
+              Join Standard
             </button>
             <button className={styles.bannerButtonSecondary}>
-              Get from JenGenAI
+              Join Basic
             </button>
             <button className={styles.bannerButtonSecondary}>
-              Get from JenGenAI
+              Learn More
             </button>
           </div>
         </div>
 
-        {/* Featured NFT Cards Display */}
+        {/* Featured Membership Benefits Display */}
         <div className={styles.nftShowcase}>
           <div className={styles.nftCard}>
             <div className={styles.cardImage}>
@@ -50,8 +50,8 @@ const CollectionSection = () => {
               </div>
             </div>
             <div className={styles.cardInfo}>
-              <h3 className={styles.nftName}>Wisdom Token</h3>
-              <p className={styles.collectionName}>Collection name</p>
+              <h3 className={styles.nftName}>AI-Powered Storytelling</h3>
+              <p className={styles.collectionName}>Premium Feature</p>
             </div>
           </div>
 
@@ -63,8 +63,8 @@ const CollectionSection = () => {
               </div>
             </div>
             <div className={styles.cardInfo}>
-              <h3 className={styles.nftName}>Wisdom Token</h3>
-              <p className={styles.collectionName}>Collection name</p>
+              <h3 className={styles.nftName}>Smart Matching</h3>
+              <p className={styles.collectionName}>All Memberships</p>
             </div>
           </div>
 
@@ -76,8 +76,8 @@ const CollectionSection = () => {
               </div>
             </div>
             <div className={styles.cardInfo}>
-              <h3 className={styles.nftName}>Wisdom Token</h3>
-              <p className={styles.collectionName}>Collection name</p>
+              <h3 className={styles.nftName}>Private Network</h3>
+              <p className={styles.collectionName}>Premium & Standard</p>
             </div>
           </div>
         </div>
@@ -85,10 +85,10 @@ const CollectionSection = () => {
         {/* Call-to-Action */}
         <div className={styles.ctaContainer}>
           <button className={styles.primaryCTA}>
-            View All Traits
+            View All Benefits
           </button>
           <button className={styles.secondaryCTA}>
-            See Full Collection
+            Compare Memberships
           </button>
         </div>
       </div>

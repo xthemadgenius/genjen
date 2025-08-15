@@ -37,13 +37,13 @@ const InsightsSection = () => {
             <article className={styles.blogCard} role="listitem">
               <div className={`${styles.tagDot} ${styles.blueDot}`} aria-hidden="true"></div>
               <div className={styles.cardContent}>
-                <div className={styles.readTime}>700 Seats</div>
+                <div className={styles.readTime}>Premium Membership</div>
                 <h3 className={styles.cardTitle}>
-                  Wisdom Transformers
+                  AI-Powered Storytelling
                 </h3>
                 <p className={styles.cardDescription}>
-                  Discover how decades of experience and traditional knowledge 
-                  can enhance AI development and create more meaningful...
+                  Transform personal experiences into compelling narratives with AI assistance. 
+                  Create lasting legacies through personalized story creation tools...
                 </p>
                 <button className={styles.cardButton} aria-label="Read full article: Wisdom Transformers">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -58,13 +58,13 @@ const InsightsSection = () => {
             <div className={styles.blogCard}>
               <div className={`${styles.tagDot} ${styles.orangeDot}`}></div>
               <div className={styles.cardContent}>
-                <div className={styles.readTime}>300 Seats</div>
+                <div className={styles.readTime}>Standard Membership</div>
                 <h3 className={styles.cardTitle}>
-                  Leaders of the Future
+                  Smart Matching & Learning
                 </h3>
                 <p className={styles.cardDescription}>
-                  Explore innovative approaches to connecting different generations 
-                  through technology while preserving cultural heritage and...
+                  Connect with mentors and mentees through intelligent matching algorithms. 
+                  Access custom learning journeys tailored to your goals and interests...
                 </p>
                 <button className={styles.cardButton}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -79,13 +79,13 @@ const InsightsSection = () => {
             <div className={styles.blogCard}>
               <div className={`${styles.tagDot} ${styles.purpleDot}`}></div>
               <div className={styles.cardContent}>
-                <div className={styles.readTime}>100 Seats</div>
+                <div className={styles.readTime}>Basic Membership</div>
                 <h3 className={styles.cardTitle}>
-                  JenGen Mentors
+                  Community Access
                 </h3>
                 <p className={styles.cardDescription}>
-                  Real stories of how our platform has enabled meaningful 
-                  connections and knowledge transfer between generations...
+                  Join our growing community of intergenerational learners. 
+                  Participate in discussions and connect with wisdom seekers worldwide...
                 </p>
                 <button className={styles.cardButton}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

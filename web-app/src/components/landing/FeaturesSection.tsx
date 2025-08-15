@@ -14,13 +14,13 @@ const FeaturesSection = () => {
             everyone
           </h2>
         </div>
-        <button className={styles.ctaButton} aria-label="Start minting your purpose on our platform">
-          Mint purpose
+        <button className={styles.ctaButton} aria-label="Start your journey with our intergenerational platform">
+          Start Your Journey
         </button>
       </div>
 
       {/* Main Visual Area */}
-      <div className={styles.visualArea} role="img" aria-label="Interactive feature showcase with NFT examples and platform capabilities">
+      <div className={styles.visualArea} role="img" aria-label="Interactive feature showcase highlighting platform capabilities and membership benefits">
         {/* Radial Grid Background */}
         <div className={styles.radialGrid} aria-hidden="true">
           <div className={`${styles.gridCircle} ${styles.circle1}`}></div>
@@ -53,7 +53,7 @@ const FeaturesSection = () => {
             </div>
           </div>
           <p id="lounge-feature" className={styles.caption}>
-            You don&apos;t have to be a computer geek to buy NFTs.
+            Easy-to-use platform designed for everyone, regardless of tech experience.
           </p>
         </article>
 
@@ -68,14 +68,14 @@ const FeaturesSection = () => {
             </div>
           </div>
           <p id="keycard-feature" className={styles.caption}>
-            Your exclusive member keycard.
+            Your exclusive JenGen.ai membership access.
           </p>
         </article>
 
-        {/* Bottom Right - NFT Illustration */}
-        <article className={`${styles.featureBubble} ${styles.bubbleBottomRight}`} aria-labelledby="nft-feature">
+        {/* Bottom Right - AI Illustration */}
+        <article className={`${styles.featureBubble} ${styles.bubbleBottomRight}`} aria-labelledby="ai-feature">
           <div className={styles.imageContainer}>
-            <div className={styles.imageNFT} role="img" aria-label="Abstract NFT artwork with floating geometric shapes">
+            <div className={styles.imageNFT} role="img" aria-label="Abstract AI-powered learning visualization">
               <div className={styles.nftBackground} aria-hidden="true"></div>
               <div className={styles.nftShape1} aria-hidden="true"></div>
               <div className={styles.nftShape2} aria-hidden="true"></div>
@@ -83,15 +83,15 @@ const FeaturesSection = () => {
               <div className={styles.nftGlow} aria-hidden="true"></div>
             </div>
           </div>
-          <p id="nft-feature" className={styles.caption}>
-            The exactly Token Economics is TBA.
+          <p id="ai-feature" className={styles.caption}>
+            AI-powered learning journeys personalized for you.
           </p>
         </article>
 
-        {/* Bottom Left - Tunnel */}
-        <article className={`${styles.featureBubble} ${styles.bubbleBottomLeft}`} aria-labelledby="discount-feature">
+        {/* Bottom Left - Network */}
+        <article className={`${styles.featureBubble} ${styles.bubbleBottomLeft}`} aria-labelledby="network-feature">
           <div className={styles.imageContainer}>
-            <div className={styles.imageTunnel} role="img" aria-label="Futuristic tunnel with pulsing rings and particle effects">
+            <div className={styles.imageTunnel} role="img" aria-label="Network connections visualization with pulsing elements">
               <div className={styles.tunnelRings} aria-hidden="true">
                 <div className={`${styles.tunnelRing} ${styles.ring1}`} aria-hidden="true"></div>
                 <div className={`${styles.tunnelRing} ${styles.ring2}`} aria-hidden="true"></div>
@@ -102,8 +102,8 @@ const FeaturesSection = () => {
               <div className={styles.tunnelParticles} aria-hidden="true"></div>
             </div>
           </div>
-          <p id="discount-feature" className={styles.caption}>
-            50% Discount on trading fees for keycard holders.
+          <p id="network-feature" className={styles.caption}>
+            Exclusive access to our private mentorship network.
           </p>
         </article>
       </div>
