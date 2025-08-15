@@ -3,6 +3,7 @@ import Hero from './Hero';
 import MovingStrip from './MovingStrip';
 import ProcessSection from './ProcessSection';
 import FeaturesSection from './FeaturesSection';
+import InsightsSection from './InsightsSection';
 
 const LandingPage = () => {
   return (
@@ -11,6 +12,7 @@ const LandingPage = () => {
       <MovingStrip />
       <ProcessSection />
       <FeaturesSection />
+      <InsightsSection />
     </main>
   );
 };
