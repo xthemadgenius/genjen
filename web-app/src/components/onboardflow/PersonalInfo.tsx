@@ -66,8 +66,8 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
       {/* Sidebar */}
       <div className={styles.sidebar}>
         <div className={styles.logo}>
-          <div className={styles.logoIcon}>∶∶∶</div>
-          <span className={styles.logoText}>brix templates</span>
+          <div className={styles.logoIcon}>JG</div>
+          <span className={styles.logoText}>JenGen.ai</span>
         </div>
         
         <div className={styles.stepsList}>
