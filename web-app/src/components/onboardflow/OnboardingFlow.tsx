@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import PersonalInfo from './PersonalInfo';
 import ServiceSelection from './ServiceSelection';
 import PlanSelection from './PlanSelection';
+import SuccessStep from './SuccessStep';
 import styles from './css/OnboardingFlow.module.css';
 
 export interface OnboardingData {
@@ -33,6 +35,7 @@ const OnboardingFlow = () => {
   });
   
   const containerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const updatePersonalInfo = (info: OnboardingData['personalInfo']) => {
     setFormData(prev => ({ ...prev, personalInfo: info }));
@@ -47,7 +50,7 @@ const OnboardingFlow = () => {
   };
 
   const nextStep = () => {
-    setCurrentStep(prev => Math.min(prev + 1, 3));
+    setCurrentStep(prev => Math.min(prev + 1, 4));
   };
 
   const prevStep = () => {
@@ -56,7 +59,9 @@ const OnboardingFlow = () => {
 
   const handleSubmit = () => {
     console.log('Onboarding completed:', formData);
-    // Handle final submission here
+    // Handle final submission here - submit data to API
+    // Then move to success step
+    setCurrentStep(4);
   };
 
   // Handle keyboard navigation and focus management
@@ -151,6 +156,12 @@ const OnboardingFlow = () => {
             onUpdate={updatePlan}
             onBack={prevStep}
             onSubmit={handleSubmit}
+          />
+        )}
+        
+        {currentStep === 4 && (
+          <SuccessStep
+            formData={formData}
           />
         )}
       </div>
