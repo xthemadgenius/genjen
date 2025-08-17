@@ -1,14 +1,15 @@
 .container {
   min-height: 100vh;
+  max-height: 100vh;
   background: linear-gradient(135deg, #faf5ff 0%, #f3f4f6 25%, #ecfccb 50%, #fef3c7 75%, #fae8ff 100%);
-  padding: 1rem;
+  padding: 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .container::before {
@@ -28,10 +29,20 @@
 .content {
   width: 100%;
   max-width: 75rem;
-  margin: 1rem auto;
+  max-height: calc(100vh - 4rem);
+  margin: 0 auto;
   position: relative;
   z-index: 10;
-  padding: 0;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* Progress Steps */
@@ -41,6 +52,7 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+  flex-shrink: 0;
 }
 
 .progressStep {
@@ -110,6 +122,7 @@
 .header {
   margin-bottom: 2rem;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .title {
@@ -134,13 +147,15 @@
 .plansGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.25rem;
   margin-bottom: 2rem;
   max-width: 100%;
+  flex: 1;
+  align-content: start;
 }
 
 .planCard {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(248, 250, 252, 0.5);
   border: 2px solid #e5e7eb;
   border-radius: 1.25rem;
   padding: 1.5rem;
@@ -148,24 +163,24 @@
   transition: all 0.3s ease;
   position: relative;
   text-align: left;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  min-height: 320px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  min-height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .planCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
   border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.02);
 }
 
 .planCard.selected {
   border-color: #8b5cf6;
-  background: rgba(139, 92, 246, 0.02);
-  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.1);
+  background: rgba(139, 92, 246, 0.05);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
 }
 
 .planCard.popular {
@@ -296,8 +311,9 @@
 .stepInfo {
   font-size: 0.875rem;
   color: #6b7280;
-  margin-bottom: 2rem;
+  margin: 1rem 0;
   text-align: center;
+  flex-shrink: 0;
 }
 
 /* Actions */
@@ -306,6 +322,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .backButton {
@@ -361,35 +380,36 @@
 /* Desktop and Large Screens */
 @media (min-width: 1024px) {
   .container {
-    padding: 1.5rem;
-    align-items: flex-start;
+    padding: 2rem;
+    align-items: center;
   }
   
   .content {
-    margin: 2rem auto;
+    padding: 2.5rem;
+    max-height: calc(100vh - 4rem);
   }
   
   .plansGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    margin-bottom: 2.5rem;
   }
   
   .planCard {
     padding: 1.75rem;
-    min-height: 350px;
+    min-height: 300px;
   }
 }
 
 /* Tablet */
 @media (max-width: 1023px) and (min-width: 769px) {
   .container {
-    padding: 1rem;
-    align-items: flex-start;
+    padding: 1.5rem;
+    align-items: center;
   }
   
   .content {
-    margin: 1rem auto;
+    padding: 2rem;
+    max-height: calc(100vh - 3rem);
   }
   
   .plansGrid {
@@ -399,20 +419,22 @@
   
   .planCard {
     padding: 1.5rem;
-    min-height: 300px;
+    min-height: 280px;
   }
 }
 
 /* Mobile and Tablet */
 @media (max-width: 768px) {
   .container {
-    padding: 0.75rem;
+    padding: 1rem;
     min-height: 100vh;
-    align-items: flex-start;
+    max-height: 100vh;
+    align-items: center;
   }
   
   .content {
-    margin: 0.5rem auto;
+    padding: 1.5rem;
+    max-height: calc(100vh - 2rem);
     max-width: 100%;
   }
   
@@ -515,12 +537,14 @@
 /* Small Mobile Phones */
 @media (max-width: 480px) {
   .container {
-    padding: 0.5rem;
-    align-items: flex-start;
+    padding: 0.75rem;
+    align-items: center;
   }
   
   .content {
-    margin: 0.25rem auto;
+    padding: 1rem;
+    max-height: calc(100vh - 1.5rem);
+    border-radius: 1.5rem;
   }
   
   .progressSteps {
