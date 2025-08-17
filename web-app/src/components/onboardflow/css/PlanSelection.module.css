@@ -1,0 +1,462 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3f4f6 25%, #ecfccb 50%, #fef3c7 75%, #fae8ff 100%);
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.content {
+  max-width: 75rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Progress Steps */
+.progressSteps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.progressStep {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.progressStep:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -1.25rem;
+  width: 0.5rem;
+  height: 2px;
+  background: #d1d5db;
+}
+
+.progressStep.completed::after,
+.progressStep.active::after {
+  background: #8b5cf6;
+}
+
+.stepCircle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  background: #e5e7eb;
+  color: #6b7280;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progressStep.completed .stepCircle {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.progressStep.active .stepCircle {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.stepLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.progressStep.completed .stepLabel,
+.progressStep.active .stepLabel {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Main Content */
+.mainContent {
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin: 0;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Plans Grid */
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.planCard {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #e5e7eb;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.planCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-color: #8b5cf6;
+}
+
+.planCard.selected {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.02);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+.planCard.popular {
+  border-color: #8b5cf6;
+  position: relative;
+}
+
+.popularBadge {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  z-index: 20;
+}
+
+.planHeader {
+  margin-bottom: 1.5rem;
+}
+
+.planName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.planDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.planDetails {
+  margin-bottom: 1.5rem;
+}
+
+.planMeta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.userLimit,
+.billing {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.features {
+  margin-bottom: 1.5rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.checkIcon {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.radioButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.radioInput {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radioInput:checked {
+  border-color: #8b5cf6;
+  background: #8b5cf6;
+}
+
+.radioInput:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.375rem;
+  height: 0.375rem;
+  background: white;
+  border-radius: 50%;
+}
+
+.radioLabel {
+  cursor: pointer;
+}
+
+/* Step Info */
+.stepInfo {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  padding: 1rem 2.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.nextButton {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border: none;
+  border-radius: 1.5rem;
+  padding: 1rem 2.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+  letter-spacing: -0.01em;
+}
+
+.nextButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+}
+
+.nextButton:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.nextButton:focus,
+.backButton:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .plansGrid {
+    grid-template-columns: 1fr;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .progressSteps {
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .progressStep:not(:last-child)::after {
+    display: none;
+  }
+  
+  .stepLabel {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  
+  .stepCircle {
+    margin-bottom: 0.25rem;
+  }
+  
+  .progressStep {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 4rem;
+  }
+  
+  .title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .plansGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 100%;
+  }
+  
+  .planCard {
+    padding: 1.5rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .backButton,
+  .nextButton {
+    width: 100%;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .planCard {
+    padding: 1.25rem;
+  }
+  
+  .planName {
+    font-size: 1.125rem;
+  }
+  
+  .price {
+    font-size: 1.25rem;
+  }
+  
+  .planMeta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .stepLabel {
+    font-size: 0.7rem;
+  }
+  
+  .stepCircle {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .popularBadge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.75rem;
+  }
+}
