@@ -1,13 +1,19 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './css/Hero.module.css';
 
 const Hero = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLoginClick = () => {
+    router.push('/login');
   };
 
   return (
@@ -45,7 +51,11 @@ const Hero = () => {
           </div>
           
           {/* Login Button */}
-          <button className={styles.loginButton} aria-label="Log in to your account">
+          <button 
+            className={styles.loginButton} 
+            onClick={handleLoginClick}
+            aria-label="Log in to your account"
+          >
             Log in
           </button>
         </div>
