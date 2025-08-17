@@ -48,6 +48,18 @@ const Hero = () => {
             <a href="#courses" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Courses</a>
             <a href="#mentors" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Mentors</a>
             <a href="#community" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Community</a>
+            
+            {/* Mobile Login Button */}
+            <button 
+              className={styles.mobileLoginButton} 
+              onClick={() => {
+                handleLoginClick();
+                setIsMobileMenuOpen(false);
+              }}
+              aria-label="Log in to your account"
+            >
+              Log in
+            </button>
           </div>
           
           {/* Login Button */}
