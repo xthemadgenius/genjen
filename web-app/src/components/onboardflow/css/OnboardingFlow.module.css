@@ -2,10 +2,11 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  outline: none;
 }
 
 .contentWrapper {
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  position: relative;
 }

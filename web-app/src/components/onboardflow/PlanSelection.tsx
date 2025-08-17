@@ -68,7 +68,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      <div className={styles.content} role="main" aria-labelledby="plan-selection-title">
         {/* Progress Steps */}
         <div className={styles.progressSteps}>
           <div className={`${styles.progressStep} ${styles.completed}`}>
@@ -96,7 +96,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
         {/* Main Content */}
         <div className={styles.mainContent}>
           <div className={styles.header}>
-            <h1 className={styles.title}>Available plans</h1>
+            <h1 id="plan-selection-title" className={styles.title}>Available plans</h1>
             <p className={styles.subtitle}>Select the plan that best fits your needs and budget.</p>
           </div>
 

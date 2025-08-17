@@ -66,8 +66,8 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
       {/* Sidebar */}
       <div className={styles.sidebar}>
         <div className={styles.logo}>
-          <div className={styles.logoIcon}>JG</div>
-          <span className={styles.logoText}>JenGen.ai</span>
+          <div className={styles.logoIcon}>∶∶∶</div>
+          <span className={styles.logoText}>brix templates</span>
         </div>
         
         <div className={styles.stepsList}>
@@ -82,16 +82,24 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
           <div className={styles.step}>
             <div className={styles.stepNumber}>2</div>
             <div className={styles.stepContent}>
-              <h3 className={styles.stepTitle}>Membership plan</h3>
-              <p className={styles.stepDescription}>Choose the membership plan that fits your needs.</p>
+              <h3 className={styles.stepTitle}>Subscription plan</h3>
+              <p className={styles.stepDescription}>Choose the product plan that fits your needs.</p>
             </div>
           </div>
           
           <div className={styles.step}>
             <div className={styles.stepNumber}>3</div>
             <div className={styles.stepContent}>
-              <h3 className={styles.stepTitle}>Payment</h3>
-              <p className={styles.stepDescription}>Complete your membership registration.</p>
+              <h3 className={styles.stepTitle}>Identity verification</h3>
+              <p className={styles.stepDescription}>Verify your identity for security purposes.</p>
+            </div>
+          </div>
+          
+          <div className={styles.step}>
+            <div className={styles.stepNumber}>4</div>
+            <div className={styles.stepContent}>
+              <h3 className={styles.stepTitle}>Activate account</h3>
+              <p className={styles.stepDescription}>Final step! Let&apos;s activate your account.</p>
             </div>
           </div>
         </div>

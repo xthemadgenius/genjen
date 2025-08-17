@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PersonalInfo from './PersonalInfo';
 import ServiceSelection from './ServiceSelection';
 import PlanSelection from './PlanSelection';
@@ -31,6 +31,8 @@ const OnboardingFlow = () => {
     selectedServices: [],
     selectedPlan: '',
   });
+  
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const updatePersonalInfo = (info: OnboardingData['personalInfo']) => {
     setFormData(prev => ({ ...prev, personalInfo: info }));
@@ -57,8 +59,74 @@ const OnboardingFlow = () => {
     // Handle final submission here
   };
 
+  // Handle keyboard navigation and focus management
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        // Handle escape key (could go back or show confirmation)
+        if (currentStep > 1) {
+          prevStep();
+        }
+      }
+      
+      // Focus trapping
+      if (event.key === 'Tab' && containerRef.current) {
+        const focusableElements = containerRef.current.querySelectorAll(
+          'button, input, select, textarea, [tabindex]:not([tabindex="-1"]), [href]'
+        );
+        const focusableArray = Array.from(focusableElements) as HTMLElement[];
+        
+        if (focusableArray.length === 0) return;
+        
+        const firstElement = focusableArray[0];
+        const lastElement = focusableArray[focusableArray.length - 1];
+        
+        if (event.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentStep]);
+  
+  // Auto-focus first element when step changes
+  useEffect(() => {
+    if (containerRef.current) {
+      const firstFocusable = containerRef.current.querySelector(
+        'input, button, select, textarea, [tabindex]:not([tabindex="-1"]), [href]'
+      ) as HTMLElement;
+      
+      if (firstFocusable) {
+        // Small delay to ensure the DOM has updated
+        setTimeout(() => {
+          firstFocusable.focus();
+        }, 100);
+      }
+    }
+  }, [currentStep]);
+
   return (
-    <div className={styles.onboardingContainer}>
+    <div 
+      className={styles.onboardingContainer}
+      ref={containerRef}
+      role="dialog"
+      aria-labelledby="onboarding-title"
+      aria-describedby="onboarding-description"
+    >
       <div className={styles.contentWrapper}>
         {currentStep === 1 && (
           <PersonalInfo

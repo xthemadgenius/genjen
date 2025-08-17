@@ -1,10 +1,9 @@
 .container {
-  display: flex;
   min-height: 100vh;
+  display: flex;
   background: linear-gradient(135deg, #faf5ff 0%, #f3f4f6 25%, #ecfccb 50%, #fef3c7 75%, #fae8ff 100%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   position: relative;
-  overflow: hidden;
 }
 
 .container::before {
@@ -28,12 +27,12 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  border-radius: 0 1.5rem 1.5rem 0;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -129,7 +128,7 @@
 /* Main Content Styles */
 .mainContent {
   flex: 1;
-  padding: 4rem;
+  padding: 2rem 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,12 +240,12 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .sidebar {
-    width: 20rem;
+    width: 22rem;
     padding: 1.5rem;
   }
   
   .mainContent {
-    padding: 3rem 2rem;
+    padding: 2rem;
   }
   
   .title {
@@ -257,20 +256,18 @@
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    height: auto;
-    min-height: 100vh;
+    padding: 0;
   }
   
   .sidebar {
     width: 100%;
-    border-radius: 0;
     padding: 1.5rem;
-    order: 2;
+    border-radius: 0;
   }
   
   .mainContent {
-    order: 1;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
+    align-items: flex-start;
   }
   
   .step {
@@ -316,7 +313,7 @@
   }
   
   .mainContent {
-    padding: 1.5rem 1rem;
+    padding: 1rem;
   }
   
   .logo {

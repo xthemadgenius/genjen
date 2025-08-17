@@ -72,7 +72,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      <div className={styles.content} role="main" aria-labelledby="service-selection-title">
         {/* Progress Steps */}
         <div className={styles.progressSteps}>
           <div className={`${styles.progressStep} ${styles.completed}`}>
@@ -100,7 +100,7 @@ const ServiceSelection: React.FC<ServiceSelectionProps> = ({
         {/* Main Content */}
         <div className={styles.mainContent}>
           <div className={styles.header}>
-            <h1 className={styles.title}>What interests you most?</h1>
+            <h1 id="service-selection-title" className={styles.title}>What interests you most?</h1>
             <p className={styles.stepCounter}>Step 2/3</p>
           </div>
 
