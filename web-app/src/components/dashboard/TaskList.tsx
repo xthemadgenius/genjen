@@ -25,7 +25,7 @@ const defaultTasks: TaskItem[] = [
     id: '1',
     instructorName: 'Lee Richter',
     instructorDate: '25/2/2023',
-    courseType: 'Global Leader',
+    courseType: 'Mindset',
     courseTitle: 'Understanding Concept Of React',
     instructor: {
       name: 'Aby Richter',
