@@ -63,7 +63,7 @@ const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
           <div className={styles.messageContent}>
             <h1 className={styles.title}>Welcome to JenGen AI, {formData.personalInfo.fullName.split(' ')[0]}!</h1>
             <p className={styles.subtitle}>
-              Your account has been successfully created and you're all set to begin your journey with us.
+              Your account has been successfully created and you&apos;re all set to begin your journey with us.
             </p>
             
             {/* Success Details */}

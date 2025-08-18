@@ -10,11 +10,6 @@ interface SidebarProps {
   isCollapsed: boolean;
   onClose: () => void;
   onToggleCollapse: () => void;
-  user: {
-    fullName: string;
-    email: string;
-    avatar?: string;
-  };
 }
 
 const navigationItems: NavItemData[] = [
@@ -81,8 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   isOpen, 
   isCollapsed, 
   onClose, 
-  onToggleCollapse, 
-  user 
+  onToggleCollapse
 }) => {
   const deviceType = useDeviceType();
   const shouldAutoCollapse = deviceType === 'tablet';

@@ -40,7 +40,6 @@ export const useIsMobile = (): boolean => useMediaQuery('(max-width: 600px)');
 export const useDeviceType = (): 'desktop' | 'tablet' | 'mobile' => {
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
-  const isMobile = useIsMobile();
 
   if (isDesktop) return 'desktop';
   if (isTablet) return 'tablet';

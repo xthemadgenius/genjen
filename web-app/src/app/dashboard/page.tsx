@@ -18,7 +18,7 @@ const DashboardPage = () => {
   };
 
   return (
-    <DashboardLayout user={user}>
+    <DashboardLayout>
       <div className={styles.dashboardContent}>
         {/* Main Content Grid */}
         <div className={styles.mainGrid}>

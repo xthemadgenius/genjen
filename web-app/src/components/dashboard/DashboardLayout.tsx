@@ -9,14 +9,9 @@ import styles from './css/DashboardLayout.module.css';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  user: {
-    fullName: string;
-    email: string;
-    avatar?: string;
-  };
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, user }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   
@@ -53,7 +48,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, user }) => 
           isCollapsed={isSidebarCollapsed}
           onClose={closeSidebar}
           onToggleCollapse={toggleSidebarCollapse}
-          user={user}
         />
       )}
       

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import PersonalInfo from './PersonalInfo';
 import ServiceSelection from './ServiceSelection';
 import PlanSelection from './PlanSelection';
@@ -35,7 +34,6 @@ const OnboardingFlow = () => {
   });
   
   const containerRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const updatePersonalInfo = (info: OnboardingData['personalInfo']) => {
     setFormData(prev => ({ ...prev, personalInfo: info }));
