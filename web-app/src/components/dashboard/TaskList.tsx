@@ -23,12 +23,12 @@ interface TaskListProps {
 const defaultTasks: TaskItem[] = [
   {
     id: '1',
-    instructorName: 'Prashant Kumar Singh',
+    instructorName: 'Lee Richter',
     instructorDate: '25/2/2023',
-    courseType: 'FRONTEND',
+    courseType: 'Global Leader',
     courseTitle: 'Understanding Concept Of React',
     instructor: {
-      name: 'Prashant Kumar Singh',
+      name: 'Aby Richter',
       avatar: undefined
     }
   },

@@ -67,9 +67,9 @@ const navigationItems: NavItemData[] = [
 ];
 
 const friends = [
-  { name: 'Prashant', role: 'Software Developer' },
-  { name: 'Prashant', role: 'Software Developer' },
-  { name: 'Prashant', role: 'Software Developer' }
+  { name: 'Lee', role: 'Global Leader' },
+  { name: 'Kirstine', role: 'Mind Master' },
+  { name: 'Chris', role: 'Professor' }
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ 

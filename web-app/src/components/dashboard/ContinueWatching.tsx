@@ -22,8 +22,8 @@ const defaultCourses = [
   {
     id: '1',
     title: "Beginner's Guide To Becoming A Professional Frontend Developer",
-    instructor: 'Prashant Kumar Singh',
-    instructorRole: 'Software Developer',
+    instructor: 'Lee Richter',
+    instructorRole: 'Global leader',
     thumbnail: '/course-thumbnails/frontend.jpg',
     progress: 25,
     totalLessons: 8,
@@ -33,8 +33,8 @@ const defaultCourses = [
   {
     id: '2',
     title: "How To Create Your Online Course Step 3",
-    instructor: 'Prashant Kumar Singh',
-    instructorRole: 'Software Developer',
+    instructor: 'Peter Cobate',
+    instructorRole: 'AI Expert',
     thumbnail: '/course-thumbnails/design.jpg',
     progress: 60,
     totalLessons: 5,
@@ -44,8 +44,8 @@ const defaultCourses = [
   {
     id: '3',
     title: "Learn Software Development With Us!",
-    instructor: 'Prashant Kumar Singh',
-    instructorRole: 'Software Developer',
+    instructor: 'BJ Fogg',
+    instructorRole: 'Mind Master',
     thumbnail: '/course-thumbnails/development.jpg',
     progress: 80,
     totalLessons: 10,

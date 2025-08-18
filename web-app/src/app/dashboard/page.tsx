@@ -12,8 +12,8 @@ import styles from './dashboard.module.css';
 const DashboardPage = () => {
   // Mock user data - in real app this would come from authentication/context
   const user = {
-    fullName: 'Prashant Kumar Singh',
-    email: 'prashant@example.com',
+    fullName: 'Lee Richter',
+    email: 'lee@goasklee.com',
     avatar: undefined // This would typically be a URL to user's profile image
   };
 

@@ -21,8 +21,8 @@ interface MentorListProps {
 const defaultMentors: Mentor[] = [
   {
     id: '1',
-    name: 'Prashant Kumar Singh',
-    role: 'Software Developer',
+    name: 'Lee Richter',
+    role: 'Global Leader',
     specialization: 'Frontend Development',
     isFollowing: true,
     followers: 1247,
@@ -30,8 +30,8 @@ const defaultMentors: Mentor[] = [
   },
   {
     id: '2',
-    name: 'Prashant Kumar Singh',
-    role: 'Software Developer',
+    name: 'Tony Robbins',
+    role: 'Mind Coach',
     specialization: 'Frontend Development',
     isFollowing: true,
     followers: 892,
@@ -39,8 +39,8 @@ const defaultMentors: Mentor[] = [
   },
   {
     id: '3',
-    name: 'Prashant Kumar Singh',
-    role: 'Software Developer',
+    name: 'Chris Cobate',
+    role: 'AI Expert',
     specialization: 'Frontend Development',
     isFollowing: false,
     followers: 1534,
@@ -48,8 +48,8 @@ const defaultMentors: Mentor[] = [
   },
   {
     id: '4',
-    name: 'Prashant Kumar Singh',
-    role: 'Software Developer',
+    name: 'Gary Vee',
+    role: 'Marketing Mentor',
     specialization: 'Frontend Development',
     isFollowing: false,
     followers: 967,
@@ -57,8 +57,8 @@ const defaultMentors: Mentor[] = [
   },
   {
     id: '5',
-    name: 'Prashant Kumar Singh',
-    role: 'Software Developer',
+    name: 'Alex Hermozi',
+    role: 'Marketing Genius',
     specialization: 'Frontend Development',
     isFollowing: true,
     followers: 823,
