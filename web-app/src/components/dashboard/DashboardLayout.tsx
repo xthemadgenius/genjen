@@ -61,7 +61,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, user }) => 
       <div className={styles.mainContent}>
         {/* Dashboard Header */}
         <DashboardHeader 
-          user={user}
           onToggleSidebar={toggleSidebar}
         />
         

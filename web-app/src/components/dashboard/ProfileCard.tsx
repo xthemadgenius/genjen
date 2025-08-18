@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import ProgressChart from './ProgressChart';
+import MentorList from './MentorList';
 import styles from './css/ProfileCard.module.css';
 
 interface ProfileCardProps {
@@ -51,8 +53,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
     }
   ];
 
+
   return (
     <aside className={styles.profileCard} role="complementary" aria-label="User Profile Information">
+      {/* Profile Header */}
       <div className={styles.profileHeader}>
         <div className={styles.profileInfo}>
           <div className={styles.greeting}>
@@ -72,6 +76,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
         </div>
       </div>
 
+      {/* Quick Actions */}
       <div className={styles.quickActions}>
         {quickActions.map((action) => (
           <button
@@ -84,6 +89,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
           </button>
         ))}
       </div>
+
+      {/* Weekly Activity Chart */}
+      <ProgressChart />
+
+      {/* Your Mentor List */}
+      <MentorList />
     </aside>
   );
 };

@@ -6,8 +6,6 @@ import HeroBanner from '@/components/dashboard/HeroBanner';
 import CourseProgress from '@/components/dashboard/CourseProgress';
 import ContinueWatching from '@/components/dashboard/ContinueWatching';
 import ProfileCard from '@/components/dashboard/ProfileCard';
-import ProgressChart from '@/components/dashboard/ProgressChart';
-import MentorList from '@/components/dashboard/MentorList';
 import TaskList from '@/components/dashboard/TaskList';
 import styles from './dashboard.module.css';
 
@@ -38,8 +36,6 @@ const DashboardPage = () => {
           {/* Right Column - Profile & Progress */}
           <div className={styles.rightColumn}>
             <ProfileCard user={user} />
-            <ProgressChart />
-            <MentorList />
           </div>
         </div>
       </div>
