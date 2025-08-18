@@ -184,16 +184,149 @@
   margin-top: auto;
 }
 
+/* Additional Sidebar Styles */
+.sidebarCollapsed {
+  width: 80px;
+}
+
+.sidebarCollapsed .logoText,
+.sidebarCollapsed .sectionTitle,
+.sidebarCollapsed .friendsSection {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.logoSection {
+  padding: 2rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.collapseToggle {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.collapseToggle:hover {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+  color: white;
+  transform: scale(1.05);
+}
+
+.collapseToggle:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+.sectionTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.logoutButton:hover {
+  background: #fef2f2;
+  color: #ef4444;
+  transform: translateX(2px);
+}
+
+.logoutButton.collapsed {
+  padding: 0.875rem;
+  justify-content: center;
+  gap: 0;
+}
+
+.logoutButton.collapsed .logoutLabel {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.logoutIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.logoutLabel {
+  font-size: 0.875rem;
+  transition: opacity 0.3s ease;
+}
+
 /* Desktop - Always show sidebar */
 @media (min-width: 1025px) {
   .sidebar {
     transform: translateX(0);
     position: fixed;
   }
+  
+  .sidebarCollapsed {
+    width: 80px;
+  }
+  
+  .sidebarCollapsed .logoSection {
+    padding: 2rem 1rem 1rem 1rem;
+  }
+  
+  .sidebarCollapsed .navigationSection,
+  .sidebarCollapsed .settingsSection {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .collapseToggle {
+    opacity: 1;
+  }
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 1024px) {
+/* Tablet Responsiveness */
+@media (min-width: 601px) and (max-width: 1024px) {
   .sidebar {
     transform: translateX(-100%);
   }
@@ -201,12 +334,26 @@
   .sidebarOpen {
     transform: translateX(0);
   }
+  
+  .collapseToggle {
+    display: none;
+  }
 }
 
-@media (max-width: 768px) {
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
   .sidebar {
     width: 100%;
     max-width: 320px;
+    transform: translateX(-100%);
+  }
+  
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+  
+  .collapseToggle {
+    display: none;
   }
   
   .logoSection {
@@ -247,7 +394,7 @@
     padding: 0.5rem 1rem 1.25rem 1rem;
   }
   
-  .navItem {
+  .logoutButton {
     padding: 0.75rem 0.875rem;
   }
   
@@ -259,5 +406,53 @@
     width: 32px;
     height: 32px;
     font-size: 0.8125rem;
+  }
+}
+
+/* Animations and Transitions */
+@keyframes sidebarSlideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sidebarOpen {
+  animation: sidebarSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .sidebar {
+    background: #ffffff;
+    border-right: 2px solid #000000;
+  }
+  
+  .collapseToggle:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .logoText,
+  .sectionTitle,
+  .collapseToggle,
+  .logoutButton,
+  .logoutLabel {
+    transition: none;
+  }
+  
+  .sidebarOpen {
+    animation: none;
+  }
+  
+  .collapseToggle:hover,
+  .logoutButton:hover {
+    transform: none;
   }
 }

@@ -2,6 +2,7 @@
   display: flex;
   min-height: 100vh;
   background: #f8fafc;
+  position: relative;
 }
 
 .mainContent {
@@ -10,13 +11,19 @@
   flex-direction: column;
   margin-left: 280px;
   min-height: 100vh;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
 .dashboardContent {
   flex: 1;
   padding: 0;
   background: #f8fafc;
+  transition: padding-bottom 0.3s ease;
+}
+
+.dashboardContent.withTabbar {
+  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
 }
 
 .mobileOverlay {
@@ -27,21 +34,67 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 998;
-  display: none;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: overlayFadeIn 0.3s ease-out;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 1024px) {
+/* Layout Variants */
+.collapsedLayout .mainContent {
+  margin-left: 80px;
+}
+
+.mobileLayout {
+  flex-direction: column;
+}
+
+.mobileLayout .mainContent {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* Animations */
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Desktop Responsiveness */
+@media (min-width: 1025px) {
+  .dashboardLayout {
+    /* Sidebar always visible on desktop */
+  }
+  
+  .mainContent {
+    margin-left: 280px;
+  }
+  
+  .collapsedLayout .mainContent {
+    margin-left: 80px;
+  }
+  
+  .mobileOverlay {
+    display: none;
+  }
+}
+
+/* Tablet Responsiveness */
+@media (min-width: 601px) and (max-width: 1024px) {
   .mainContent {
     margin-left: 0;
   }
   
-  .mobileOverlay {
-    display: block;
+  .collapsedLayout .mainContent {
+    margin-left: 0;
   }
 }
 
-@media (max-width: 768px) {
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
   .dashboardLayout {
     flex-direction: column;
   }
@@ -49,5 +102,31 @@
   .mainContent {
     margin-left: 0;
     width: 100%;
+  }
+  
+  .dashboardContent {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mobileOverlay {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mainContent,
+  .dashboardContent,
+  .mobileOverlay {
+    transition: none;
+  }
+  
+  .mobileOverlay {
+    animation: none;
   }
 }
