@@ -3,7 +3,7 @@
   border-radius: clamp(12px, 2vw, 16px);
   padding: clamp(1.25rem, 3vw, 1.75rem);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  margin: 0 0 clamp(1rem, 2.5vw, 1.5rem) 0;
   border: 1px solid #f1f5f9;
   width: 100%;
   max-width: 100%;

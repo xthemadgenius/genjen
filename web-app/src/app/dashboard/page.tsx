@@ -20,15 +20,14 @@ const DashboardPage = () => {
   return (
     <DashboardLayout user={user}>
       <div className={styles.dashboardContent}>
-        {/* Course Progress Chips */}
-        <CourseProgress />
-        
         {/* Main Content Grid */}
         <div className={styles.mainGrid}>
           {/* Left Column - Primary Content */}
           <div className={styles.leftColumn}>
             {/* Hero Banner */}
             <HeroBanner />
+            {/* Course Progress Chips */}
+            <CourseProgress />
             <ContinueWatching />
             <TaskList />
           </div>
