@@ -1,0 +1,278 @@
+.courseProgress {
+  margin-bottom: clamp(1rem, 2.5vw, 2rem);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.progressGrid {
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.5rem;
+}
+
+.progressGrid::-webkit-scrollbar {
+  display: none;
+}
+
+.progressGrid > * {
+  flex: 0 0 auto;
+}
+
+.progressChip {
+  background: white;
+  border-radius: 12px;
+  padding: clamp(0.75rem, 2vw, 1rem);
+  min-width: clamp(180px, 40vw, 220px);
+  width: clamp(180px, 40vw, 220px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.progressChip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.progressChip:focus {
+  outline: 2px solid #6C4FF2;
+  outline-offset: 2px;
+}
+
+.chipContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.progressInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.progressCount {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  display: inline-block;
+  width: fit-content;
+  backdrop-filter: blur(10px);
+}
+
+.courseTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.progressIcon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6C4FF2;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transition: width 0.8s ease-in-out;
+}
+
+/* Color Variants */
+.progressChip.purple {
+  background: linear-gradient(135deg, #6C4FF2 0%, #8B5CF6 100%);
+  border-color: #6C4FF2;
+}
+
+.progressChip.purple:hover {
+  box-shadow: 0 8px 25px rgba(108, 79, 242, 0.3);
+}
+
+.progressChip.purple .progressCount {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progressChip.blue {
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  border-color: #3B82F6;
+}
+
+.progressChip.blue:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.progressChip.blue .progressCount {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progressChip.blue .progressIcon {
+  color: #3B82F6;
+}
+
+.progressChip.green {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  border-color: #10B981;
+}
+
+.progressChip.green:hover {
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.progressChip.green .progressCount {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progressChip.green .progressIcon {
+  color: #10B981;
+}
+
+.progressChip.orange {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  border-color: #F59E0B;
+}
+
+.progressChip.orange:hover {
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+}
+
+.progressChip.orange .progressCount {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progressChip.orange .progressIcon {
+  color: #F59E0B;
+}
+
+/* Mobile First Responsive Design */
+@media (max-width: 600px) {
+  .progressGrid {
+    gap: 0.75rem;
+    padding-right: 1rem;
+  }
+  
+  .progressChip {
+    min-width: clamp(160px, 35vw, 200px);
+    width: clamp(160px, 35vw, 200px);
+  }
+  
+  .chipContent {
+    margin-bottom: 0.625rem;
+  }
+  
+  .progressIcon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .progressCount {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.375rem;
+  }
+  
+  .courseTitle {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .progressChip {
+    min-width: clamp(140px, 32vw, 180px);
+    width: clamp(140px, 32vw, 180px);
+    padding: 0.75rem;
+  }
+  
+  .progressIcon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .progressCount {
+    font-size: 0.625rem;
+  }
+  
+  .courseTitle {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .progressGrid {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  
+  .progressChip {
+    flex: 0 1 auto;
+    min-width: 200px;
+    width: auto;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .progressChip {
+    border: 2px solid #000;
+  }
+  
+  .progressChip.purple {
+    background: #6C4FF2;
+  }
+  
+  .progressChip.blue {
+    background: #3B82F6;
+  }
+  
+  .progressChip.green {
+    background: #10B981;
+  }
+  
+  .progressChip.orange {
+    background: #F59E0B;
+  }
+  
+  .progressIcon {
+    background: #fff;
+    border: 1px solid #000;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .progressChip,
+  .progressFill {
+    transition: none;
+  }
+  
+  .progressChip:hover {
+    transform: none;
+  }
+}
