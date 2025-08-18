@@ -39,7 +39,7 @@ const defaultMentors: Mentor[] = [
   },
   {
     id: '3',
-    name: 'Chris Cobate',
+    name: 'Peter Cobabe',
     role: 'AI Expert',
     specialization: 'Frontend Development',
     isFollowing: false,
