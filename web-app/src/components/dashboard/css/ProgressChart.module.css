@@ -1,0 +1,306 @@
+.progressChart {
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.streak {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.streak svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.chartContainer {
+  margin-bottom: 2rem;
+}
+
+.weeklyChart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 200px;
+  padding: 1rem 0;
+}
+
+.dayColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.dayLabel {
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.dateLabel {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  max-width: 40px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.progressTrack {
+  width: 8px;
+  height: 100px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.progressFill {
+  width: 100%;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border-radius: 4px;
+  transition: height 0.8s ease-in-out;
+  min-height: 4px;
+}
+
+.progressFill.today {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.progressIndicator {
+  position: absolute;
+  top: -8px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #10b981;
+}
+
+.emptyIndicator {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  background: #f8fafc;
+}
+
+.dayStats {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.completed {
+  color: #10b981;
+}
+
+.separator {
+  color: #d1d5db;
+  margin: 0 0.25rem;
+}
+
+.total {
+  color: #6b7280;
+}
+
+.monthlyProgress {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.monthlyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.monthlyTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.monthlyStats {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.monthlyProgressBar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.monthlyProgressFill {
+  height: 100%;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border-radius: 4px;
+  transition: width 0.8s ease-in-out;
+}
+
+.monthlyMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.monthlyPercentage {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.monthlyRemaining {
+  color: #6b7280;
+}
+
+.achievements {
+  display: flex;
+  gap: 1rem;
+}
+
+.achievementBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .progressChart {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sectionHeader {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .weeklyChart {
+    gap: 0.5rem;
+    height: 180px;
+  }
+  
+  .progressBar {
+    max-width: 35px;
+    height: 100px;
+  }
+  
+  .progressTrack {
+    width: 6px;
+    height: 80px;
+  }
+  
+  .monthlyProgress {
+    padding: 1.25rem;
+  }
+  
+  .monthlyHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .achievements {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .achievementBadge {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .progressChart {
+    padding: 1rem;
+  }
+  
+  .weeklyChart {
+    gap: 0.25rem;
+    height: 160px;
+  }
+  
+  .progressBar {
+    max-width: 30px;
+    height: 90px;
+  }
+  
+  .progressTrack {
+    width: 5px;
+    height: 70px;
+  }
+  
+  .dayLabel, .dateLabel {
+    font-size: 0.75rem;
+  }
+  
+  .dayStats {
+    font-size: 0.75rem;
+  }
+}
