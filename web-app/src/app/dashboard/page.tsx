@@ -22,9 +22,6 @@ const DashboardPage = () => {
   return (
     <DashboardLayout user={user}>
       <div className={styles.dashboardContent}>
-        {/* Hero Banner */}
-        <HeroBanner />
-        
         {/* Course Progress Chips */}
         <CourseProgress />
         
@@ -32,6 +29,8 @@ const DashboardPage = () => {
         <div className={styles.mainGrid}>
           {/* Left Column - Primary Content */}
           <div className={styles.leftColumn}>
+            {/* Hero Banner */}
+            <HeroBanner />
             <ContinueWatching />
             <TaskList />
           </div>

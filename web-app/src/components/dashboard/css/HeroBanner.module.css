@@ -1,7 +1,7 @@
 .heroBanner {
   background: linear-gradient(135deg, #6C4FF2 0%, #8B5CF6 50%, #A855F7 100%);
   border-radius: clamp(12px, 2vw, 16px);
-  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem);
   margin-bottom: clamp(1rem, 2.5vw, 2rem);
   position: relative;
   overflow: hidden;
@@ -9,6 +9,7 @@
   box-shadow: 0 8px 32px rgba(108, 79, 242, 0.3);
   width: 100%;
   max-width: 100%;
+  min-width: 0;
 }
 
 .content {
