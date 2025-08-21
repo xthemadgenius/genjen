@@ -33,8 +33,28 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           alt={course.title}
           className={styles.courseImage}
           onError={(e) => {
-            // Fallback to a placeholder if image fails to load
-            (e.target as HTMLImageElement).src = '/imgs/course-placeholder.jpg';
+            // Fallback to existing images or create a CSS-based placeholder
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+            const container = target.parentElement;
+            if (container && !container.querySelector('.placeholder')) {
+              const placeholder = document.createElement('div');
+              placeholder.className = 'placeholder';
+              placeholder.style.cssText = `
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 600;
+                text-align: center;
+              `;
+              placeholder.textContent = course.title.charAt(0);
+              container.appendChild(placeholder);
+            }
           }}
         />
         <div className={`${styles.levelBadge} ${getLevelColor(course.level)}`}>

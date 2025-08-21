@@ -170,8 +170,75 @@
   }
 }
 
-/* Alternative mobile view - stacked cards */
-@media (max-width: 600px) {
+/* Mobile Cards - Default hidden, shown on mobile */
+.mobileCards {
+  display: none;
+}
+
+.mobileCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.mobileCard:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.mobileCard:last-child {
+  margin-bottom: 0;
+}
+
+.mobileCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.mobileCardTitle {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.mobileCardContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.mobileCardItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobileCardLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.mobileCardValue {
+  color: #374151;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Mobile responsive behavior */
+@media (max-width: 768px) {
   .mobileCards {
     display: block;
   }
@@ -179,57 +246,21 @@
   .tableWrapper {
     display: none;
   }
-  
+}
+
+@media (max-width: 480px) {
   .mobileCard {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mobileCard:last-child {
-    margin-bottom: 0;
-  }
-  
-  .mobileCardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-  
-  .mobileCardTitle {
-    font-weight: 600;
-    color: #1a1a1a;
-    font-size: 0.9rem;
+    padding: 0.875rem;
+    margin-bottom: 0.625rem;
   }
   
   .mobileCardContent {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0.5rem;
-    font-size: 0.8125rem;
   }
   
-  .mobileCardItem {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .mobileCardLabel {
-    font-size: 0.75rem;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-  }
-  
-  .mobileCardValue {
-    color: #374151;
-    font-weight: 500;
+  .mobileCardTitle {
+    font-size: 0.875rem;
   }
 }
 

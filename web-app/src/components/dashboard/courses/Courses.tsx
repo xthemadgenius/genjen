@@ -40,7 +40,7 @@ const mockCourses: Course[] = [
     title: 'UI Styleguide With Figma',
     author: 'Jonathan Due',
     level: 'Intermediate',
-    image: '/imgs/course-ui.jpg',
+    image: '/imgs/gal.png', // Using existing image
     videos: 24,
     assignments: 9,
     students: 30,
@@ -54,7 +54,7 @@ const mockCourses: Course[] = [
     title: 'Interection design With Figma',
     author: 'Kilian James',
     level: 'Beginner',
-    image: '/imgs/course-interaction.jpg',
+    image: '/imgs/glc.png', // Using existing image
     videos: 24,
     assignments: 9,
     students: 30,
@@ -68,7 +68,7 @@ const mockCourses: Course[] = [
     title: '3D illustration Design With Figma',
     author: 'Jonathan Due',
     level: 'Intermediate',
-    image: '/imgs/course-3d.jpg',
+    image: '/imgs/ifgf.png', // Using existing image
     videos: 24,
     assignments: 9,
     students: 30,
@@ -82,7 +82,7 @@ const mockCourses: Course[] = [
     title: 'Web App Design With Figma',
     author: 'Jonathan Due',
     level: 'Master',
-    image: '/imgs/course-webapp.jpg',
+    image: '/imgs/lee.png', // Using existing image
     videos: 24,
     assignments: 9,
     students: 30,
