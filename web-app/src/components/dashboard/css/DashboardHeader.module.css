@@ -119,11 +119,25 @@
   font-weight: 600;
 }
 
-.profileLabel {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #374151;
-  margin: 0;
+.profileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.profileImage:hover {
+  border-color: #8b5cf6;
+  transform: scale(1.05);
 }
 
 .moreOptionsBtn {
@@ -183,8 +197,9 @@
     padding: 0.625rem;
   }
   
-  .profileLabel {
-    font-size: 0.875rem;
+  .profileImage {
+    width: 36px;
+    height: 36px;
   }
   
   .moreOptionsBtn {
@@ -221,8 +236,9 @@
     border-width: 1px;
   }
   
-  .profileLabel {
-    font-size: 0.8125rem;
+  .profileImage {
+    width: 32px;
+    height: 32px;
   }
   
   .moreOptionsBtn {

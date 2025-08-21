@@ -21,8 +21,8 @@ const PartnersSection = () => {
           <div className={styles.partnerCard} role="listitem">
             <div className={styles.partnerLogo}>
               <Image
-                src="/imgs/gal.png"
-                alt="GAL Partnership - Supporting intergenerational learning initiatives"
+                src="/imgs/lee.png"
+                alt="Go Ask Lee Partnership - Supporting intergenerational learning initiatives"
                 width={200}
                 height={100}
                 className={styles.logoImage}

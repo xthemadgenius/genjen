@@ -57,8 +57,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar }) =>
           <span className={styles.notificationBadge}>3</span>
         </button>
 
-        {/* Your Profile Text */}
-        <span className={styles.profileLabel}>Your Profile</span>
+        {/* Profile Image */}
+        <div className={styles.profileContainer}>
+          <img 
+            src="/imgs/lee.png" 
+            alt="Your Profile" 
+            className={styles.profileImage}
+          />
+        </div>
 
         {/* More Options */}
         <button className={styles.moreOptionsBtn} aria-label="More options">
