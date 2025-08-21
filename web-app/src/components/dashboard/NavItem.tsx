@@ -9,7 +9,7 @@ export interface NavItemData {
   label: string;
   path: string;
   icon: React.ReactNode;
-  badge?: number;
+  badge?: number | React.ReactNode;
 }
 
 interface NavItemProps {
@@ -28,7 +28,9 @@ const NavItem: React.FC<NavItemProps> = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const isActive = pathname === item.path;
+  // Don't highlight sand-timer badge items (inbox, tasks, groups) even when on dashboard
+  const sandTimerItems = ['inbox', 'tasks', 'groups'];
+  const isActive = pathname === item.path && !sandTimerItems.includes(item.id);
 
   const handleClick = () => {
     router.push(item.path);
@@ -54,10 +56,16 @@ const NavItem: React.FC<NavItemProps> = ({
     >
       <span className={styles.iconContainer}>
         {item.icon}
-        {item.badge && item.badge > 0 && (
-          <span className={styles.badge} aria-label={`${item.badge} notifications`}>
-            {item.badge > 99 ? '99+' : item.badge}
-          </span>
+        {item.badge && (
+          typeof item.badge === 'number' ? (
+            item.badge > 0 && (
+              <span className={styles.badge} aria-label={`${item.badge} notifications`}>
+                {item.badge > 99 ? '99+' : item.badge}
+              </span>
+            )
+          ) : (
+            item.badge
+          )
         )}
       </span>
       
