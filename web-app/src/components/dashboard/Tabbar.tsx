@@ -13,7 +13,7 @@ interface TabbarProps {
 const mobileNavItems: NavItemData[] = [
   navigationItems[0], // Dashboard
   navigationItems[1], // Inbox  
-  navigationItems[2], // Lessons
+  navigationItems[2], // Courses
   navigationItems[3], // Tasks
   {
     id: 'profile',

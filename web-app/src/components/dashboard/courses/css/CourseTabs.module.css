@@ -1,0 +1,97 @@
+.tabsContainer {
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabsList {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabsList::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  min-width: auto;
+}
+
+.tab:hover {
+  color: #374151;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.tab:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  border-radius: 4px;
+}
+
+.tabActive {
+  color: #1a1a1a;
+  font-weight: 600;
+  border-bottom-color: #1a1a1a;
+}
+
+.tabActive:hover {
+  color: #1a1a1a;
+  background: transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .tab {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 320px) {
+  .tab {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .tabsContainer {
+    border-bottom-color: #000;
+  }
+  
+  .tab {
+    color: #000;
+  }
+  
+  .tab:hover {
+    background: #f0f0f0;
+  }
+  
+  .tabActive {
+    border-bottom-color: #000;
+    background: #f9f9f9;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tab {
+    transition: none;
+  }
+}
