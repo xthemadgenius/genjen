@@ -1,0 +1,39 @@
+.profileContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 2rem);
+  overflow-x: hidden;
+}
+
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: calc(100vh - 200px);
+}
+
+/* Mobile optimized layout */
+@media (max-width: 600px) {
+  .profileContent {
+    padding: 1rem 0.75rem;
+  }
+  
+  .profileContainer {
+    min-height: calc(100vh - 160px);
+  }
+}
+
+@media (max-width: 320px) {
+  .profileContent {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+/* Ensure profile card takes appropriate width on mobile */
+@media (max-width: 768px) {
+  .profileContainer {
+    width: 100%;
+  }
+}

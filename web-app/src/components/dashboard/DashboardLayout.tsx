@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import Sidebar from './Sidebar';
 import Tabbar from './Tabbar';
 import DashboardHeader from './DashboardHeader';
@@ -19,7 +20,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   
   const deviceType = useDeviceType();
   const isMobile = useIsMobile();
+  const pathname = usePathname();
   const profilePanelRef = useRef<HTMLDivElement>(null);
+  
+  // Check if we're on the profile page
+  const isProfilePage = pathname === '/dashboard/profile';
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -62,6 +67,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const shouldShowSidebar = !isMobile;
   const shouldShowTabbar = isMobile;
   const shouldShowMobileOverlay = (deviceType === 'tablet' || deviceType === 'mobile') && isSidebarOpen;
+  const shouldShowProfilePanel = !isMobile || !isProfilePage;
 
   return (
     <div className={`
@@ -86,6 +92,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <DashboardHeader 
           onToggleSidebar={toggleSidebar}
           onToggleProfileCard={toggleProfileCard}
+          showProfileButton={shouldShowProfilePanel}
         />
         
         {/* Dashboard Content */}
@@ -97,19 +104,21 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         </main>
       </div>
       
-      {/* Profile Card Panel */}
-      <div 
-        ref={profilePanelRef}
-        className={`${styles.profilePanel} ${isProfileCardOpen ? styles.profilePanelOpen : ''}`}
-      >
-        <ProfileCard 
-          user={{
-            fullName: "Lee Johnson",
-            email: "lee@example.com",
-            avatar: "/imgs/lee.png"
-          }} 
-        />
-      </div>
+      {/* Profile Card Panel - Hidden on mobile when on profile page */}
+      {shouldShowProfilePanel && (
+        <div 
+          ref={profilePanelRef}
+          className={`${styles.profilePanel} ${isProfileCardOpen ? styles.profilePanelOpen : ''}`}
+        >
+          <ProfileCard 
+            user={{
+              fullName: "Lee Johnson",
+              email: "lee@example.com",
+              avatar: "/imgs/lee.png"
+            }} 
+          />
+        </div>
+      )}
 
       {/* Mobile Bottom Tabbar */}
       {shouldShowTabbar && (

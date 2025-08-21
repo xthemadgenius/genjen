@@ -6,9 +6,10 @@ import styles from './css/DashboardHeader.module.css';
 interface DashboardHeaderProps {
   onToggleSidebar: () => void;
   onToggleProfileCard: () => void;
+  showProfileButton?: boolean;
 }
 
-const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar, onToggleProfileCard }) => {
+const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar, onToggleProfileCard, showProfileButton = true }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -59,20 +60,22 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar, onTo
           <span className={styles.notificationBadge}>3</span>
         </button>
 
-        {/* Profile Image */}
-        <div className={styles.profileContainer}>
-          <button 
-            onClick={onToggleProfileCard}
-            className={styles.profileButton}
-            aria-label="Toggle profile card"
-          >
-            <img 
-              src="/imgs/lee.png" 
-              alt="Your Profile" 
-              className={styles.profileImage}
-            />
-          </button>
-        </div>
+        {/* Profile Image - Hidden on mobile when on profile page */}
+        {showProfileButton && (
+          <div className={styles.profileContainer}>
+            <button 
+              onClick={onToggleProfileCard}
+              className={styles.profileButton}
+              aria-label="Toggle profile card"
+            >
+              <img 
+                src="/imgs/lee.png" 
+                alt="Your Profile" 
+                className={styles.profileImage}
+              />
+            </button>
+          </div>
+        )}
 
         {/* More Options */}
         <button className={styles.moreOptionsBtn} aria-label="More options">
