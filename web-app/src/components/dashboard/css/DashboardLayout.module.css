@@ -3,6 +3,7 @@
   min-height: 100vh;
   background: #f8fafc;
   position: relative;
+  overflow-x: hidden;
 }
 
 .mainContent {
@@ -11,7 +12,7 @@
   flex-direction: column;
   margin-left: 280px;
   min-height: 100vh;
-  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
@@ -24,6 +25,35 @@
 
 .dashboardContent.withTabbar {
   padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Profile Panel Styles */
+.profilePanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: #f8fafc;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.profilePanel.profilePanelOpen {
+  transform: translateX(0);
+}
+
+.profileCardOpen .mainContent {
+  margin-right: 400px;
+}
+
+.profileCardOpen.collapsedLayout .mainContent {
+  margin-left: 80px;
+  margin-right: 400px;
 }
 
 .mobileOverlay {
@@ -77,6 +107,15 @@
     margin-left: 80px;
   }
   
+  .profileCardOpen .mainContent {
+    margin-right: 400px;
+  }
+  
+  .profileCardOpen.collapsedLayout .mainContent {
+    margin-left: 80px;
+    margin-right: 400px;
+  }
+  
   .mobileOverlay {
     display: none;
   }
@@ -90,6 +129,19 @@
   
   .collapsedLayout .mainContent {
     margin-left: 0;
+  }
+  
+  .profilePanel {
+    width: 350px;
+  }
+  
+  .profileCardOpen .mainContent {
+    margin-right: 350px;
+  }
+  
+  .profileCardOpen.collapsedLayout .mainContent {
+    margin-left: 0;
+    margin-right: 350px;
   }
 }
 
@@ -106,6 +158,16 @@
   
   .dashboardContent {
     padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+  
+  .profilePanel {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .profileCardOpen .mainContent {
+    margin-right: 0;
+    transform: translateX(-100%);
   }
 }
 

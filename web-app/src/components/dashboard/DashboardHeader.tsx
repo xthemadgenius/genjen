@@ -5,9 +5,10 @@ import styles from './css/DashboardHeader.module.css';
 
 interface DashboardHeaderProps {
   onToggleSidebar: () => void;
+  onToggleProfileCard: () => void;
 }
 
-const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar }) => {
+const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar, onToggleProfileCard }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -15,6 +16,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar }) =>
     console.log('Searching for:', searchQuery);
     // Implement search functionality
   };
+
 
 
   return (
@@ -59,11 +61,17 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({ onToggleSidebar }) =>
 
         {/* Profile Image */}
         <div className={styles.profileContainer}>
-          <img 
-            src="/imgs/lee.png" 
-            alt="Your Profile" 
-            className={styles.profileImage}
-          />
+          <button 
+            onClick={onToggleProfileCard}
+            className={styles.profileButton}
+            aria-label="Toggle profile card"
+          >
+            <img 
+              src="/imgs/lee.png" 
+              alt="Your Profile" 
+              className={styles.profileImage}
+            />
+          </button>
         </div>
 
         {/* More Options */}

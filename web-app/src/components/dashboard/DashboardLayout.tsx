@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from './Sidebar';
 import Tabbar from './Tabbar';
 import DashboardHeader from './DashboardHeader';
+import ProfileCard from './ProfileCard';
 import { useDeviceType, useIsMobile } from './hooks/useMediaQuery';
 import styles from './css/DashboardLayout.module.css';
 
@@ -14,9 +15,11 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isProfileCardOpen, setIsProfileCardOpen] = useState(false);
   
   const deviceType = useDeviceType();
   const isMobile = useIsMobile();
+  const profilePanelRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -30,6 +33,31 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     setIsSidebarOpen(false);
   };
 
+  const toggleProfileCard = () => {
+    setIsProfileCardOpen(!isProfileCardOpen);
+  };
+
+  const closeProfileCard = () => {
+    setIsProfileCardOpen(false);
+  };
+
+  // Handle outside clicks for profile card
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isProfileCardOpen && profilePanelRef.current && !profilePanelRef.current.contains(event.target as Node)) {
+        closeProfileCard();
+      }
+    };
+
+    if (isProfileCardOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isProfileCardOpen]);
+
   // Determine layout based on device type
   const shouldShowSidebar = !isMobile;
   const shouldShowTabbar = isMobile;
@@ -40,6 +68,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       ${styles.dashboardLayout} 
       ${isMobile ? styles.mobileLayout : ''}
       ${isSidebarCollapsed && !isMobile ? styles.collapsedLayout : ''}
+      ${isProfileCardOpen ? styles.profileCardOpen : ''}
     `}>
       {/* Sidebar - Hidden on Mobile */}
       {shouldShowSidebar && (
@@ -56,6 +85,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         {/* Dashboard Header */}
         <DashboardHeader 
           onToggleSidebar={toggleSidebar}
+          onToggleProfileCard={toggleProfileCard}
         />
         
         {/* Dashboard Content */}
@@ -67,6 +97,20 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         </main>
       </div>
       
+      {/* Profile Card Panel */}
+      <div 
+        ref={profilePanelRef}
+        className={`${styles.profilePanel} ${isProfileCardOpen ? styles.profilePanelOpen : ''}`}
+      >
+        <ProfileCard 
+          user={{
+            fullName: "Lee Johnson",
+            email: "lee@example.com",
+            avatar: "/imgs/lee.png"
+          }} 
+        />
+      </div>
+
       {/* Mobile Bottom Tabbar */}
       {shouldShowTabbar && (
         <Tabbar />

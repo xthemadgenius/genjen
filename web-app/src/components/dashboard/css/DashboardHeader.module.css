@@ -123,6 +123,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.profileButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.profileButton:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
 }
 
 .profileImage {
@@ -132,13 +147,14 @@
   object-fit: cover;
   border: 2px solid #e2e8f0;
   transition: all 0.2s ease;
-  cursor: pointer;
+  display: block;
 }
 
-.profileImage:hover {
+.profileButton:hover .profileImage {
   border-color: #8b5cf6;
   transform: scale(1.05);
 }
+
 
 .moreOptionsBtn {
   background: transparent;

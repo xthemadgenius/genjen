@@ -6,29 +6,11 @@
   overflow-x: hidden;
 }
 
-.mainGrid {
-  display: grid;
-  grid-template-columns: 1fr minmax(300px, 400px);
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: flex-start;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.leftColumn {
+.mainContent {
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 2.5vw, 2rem);
-  min-width: 0;
-  overflow-x: hidden;
-}
-
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1rem, 2.5vw, 1.5rem);
-  position: sticky;
-  top: 100px;
+  width: 100%;
   min-width: 0;
   overflow-x: hidden;
 }
@@ -39,41 +21,20 @@
     padding: 0.5rem;
   }
   
-  .mainGrid {
+  .mainContent {
     gap: 0.75rem;
   }
 }
 
 @media (max-width: 600px) {
-  .mainGrid {
-    grid-template-columns: 1fr;
+  .mainContent {
     gap: clamp(0.75rem, 2vw, 1.5rem);
-  }
-  
-  .rightColumn {
-    position: static;
-    order: -1;
-  }
-  
-  .leftColumn {
-    order: 1;
   }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
-  .mainGrid {
-    grid-template-columns: 1fr;
+  .mainContent {
     gap: clamp(1rem, 2.5vw, 1.5rem);
-  }
-  
-  .rightColumn {
-    position: static;
-  }
-}
-
-@media (min-width: 1025px) and (max-width: 1200px) {
-  .mainGrid {
-    grid-template-columns: 1fr minmax(300px, 350px);
   }
 }
 
@@ -82,7 +43,7 @@
     padding: 2.5rem;
   }
   
-  .mainGrid {
+  .mainContent {
     gap: 2.5rem;
   }
 }
