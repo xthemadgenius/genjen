@@ -28,7 +28,6 @@ const CourseTable: React.FC<CourseTableProps> = ({ courses }) => {
 
   return (
     <div className={styles.tableContainer}>
-      {/* Desktop Table View */}
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
           <thead className={styles.tableHeader}>
@@ -73,43 +72,6 @@ const CourseTable: React.FC<CourseTableProps> = ({ courses }) => {
             ))}
           </tbody>
         </table>
-      </div>
-
-      {/* Mobile Card View */}
-      <div className={styles.mobileCards}>
-        {courses.map((course) => (
-          <div key={course.id} className={styles.mobileCard}>
-            <div className={styles.mobileCardHeader}>
-              <span className={styles.mobileCardTitle}>{course.name}</span>
-              <span className={`${styles.levelBadge} ${getLevelBadgeClass(course.level)}`}>
-                <svg className={styles.levelIcon} viewBox="0 0 24 24" width="12" height="12">
-                  <path fill="currentColor" d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"/>
-                </svg>
-                {course.level}
-              </span>
-            </div>
-            <div className={styles.mobileCardContent}>
-              <div className={styles.mobileCardItem}>
-                <span className={styles.mobileCardLabel}>Category</span>
-                <span className={styles.mobileCardValue}>{course.category}</span>
-              </div>
-              <div className={styles.mobileCardItem}>
-                <span className={styles.mobileCardLabel}>Tools</span>
-                <span className={styles.mobileCardValue}>{course.tools}</span>
-              </div>
-              <div className={styles.mobileCardItem}>
-                <span className={styles.mobileCardLabel}>Lessons</span>
-                <span className={styles.mobileCardValue}>{course.lessons}</span>
-              </div>
-              <div className={styles.mobileCardItem}>
-                <span className={styles.mobileCardLabel}>Points</span>
-                <span className={`${styles.mobileCardValue} ${styles.points} ${getPointsClass(course.pointsColor)}`}>
-                  {course.points} points
-                </span>
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );
