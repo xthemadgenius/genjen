@@ -24,7 +24,7 @@ const defaultTasks: TaskItem[] = [
   {
     id: '1',
     instructorName: 'Lee Richter',
-    instructorDate: '25/2/2023',
+    instructorDate: '25/2/2025',
     courseType: 'Mindset',
     courseTitle: 'Understanding Concept Of React',
     instructor: {
@@ -34,12 +34,12 @@ const defaultTasks: TaskItem[] = [
   },
   {
     id: '2',
-    instructorName: 'Ravi Kumar',
-    instructorDate: '25/2/2023',
+    instructorName: 'Diane Hendricks',
+    instructorDate: '25/2/2025',
     courseType: 'FRONTEND',
     courseTitle: 'Understanding Concept Of React',
     instructor: {
-      name: 'Ravi Kumar',
+      name: 'Diane Hendricks',
       avatar: undefined
     }
   }

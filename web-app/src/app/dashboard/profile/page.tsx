@@ -2,7 +2,7 @@
 
 import React from 'react';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import ProfileCard from '@/components/dashboard/ProfileCard';
+import ProfileCard from '@/components/dashboard/profile/ProfileCard';
 import styles from './profile.module.css';
 
 const ProfilePage = () => {

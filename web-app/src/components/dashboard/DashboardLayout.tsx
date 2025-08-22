@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Sidebar from './Sidebar';
 import Tabbar from './Tabbar';
 import DashboardHeader from './DashboardHeader';
-import ProfileCard from './ProfileCard';
+import ProfileCard from './profile/ProfileCard';
 import { useDeviceType, useIsMobile } from './hooks/useMediaQuery';
 import styles from './css/DashboardLayout.module.css';
 
