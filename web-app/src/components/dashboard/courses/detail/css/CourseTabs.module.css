@@ -1,0 +1,93 @@
+/* Course Tabs Styles */
+.courseTabs {
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.tabsList {
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-bottom: 3px solid transparent;
+}
+
+.tabButton:hover {
+  color: #4a5568;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.tabButton.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.tabButton.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+/* Tab Indicator Animation */
+.tabIndicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tabsList {
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .tabsList::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .tabButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabButton {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .courseTabs {
+    margin: 0 -1rem 1rem -1rem;
+    padding: 0 1rem;
+  }
+}

@@ -79,6 +79,20 @@ const mockCourses: Course[] = [
   },
   {
     id: '4',
+    title: 'Healing',
+    author: 'Lee Richter',
+    level: 'Intermediate',
+    image: '/imgs/lee.png',
+    videos: 12,
+    assignments: 4,
+    students: 127,
+    completed: 0,
+    totalDays: 8,
+    currentDay: 1,
+    status: 'not-started'
+  },
+  {
+    id: '5',
     title: 'Web App Design With Figma',
     author: 'Jonathan Due',
     level: 'Master',

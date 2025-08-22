@@ -13,11 +13,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const router = useRouter();
   
   const handleCourseClick = () => {
-    if (course.title === 'Spontaneous Freedom') {
+    if (course.level === 'ADHD' || course.title === 'Spontaneous Freedom') {
       router.push('/dashboard/courses/inventive/1');
     } else {
-      // Handle other courses or show coming soon
-      console.log(`Opening course: ${course.title}`);
+      // Create mentor/course slug from author and title
+      const mentorSlug = course.author.replace(/\s+/g, '');
+      const courseSlug = course.title.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
+      router.push(`/dashboard/courses/${mentorSlug}/${courseSlug}`);
     }
   };
 
