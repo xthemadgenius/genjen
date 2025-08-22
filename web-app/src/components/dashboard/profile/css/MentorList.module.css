@@ -7,6 +7,9 @@
   border: 1px solid #f1f5f9;
   width: 100%;
   max-width: 100%;
+  overflow: visible;
+  position: relative;
+  padding-top: clamp(1.5rem, 4vw, 2rem);
 }
 
 .sectionHeader {
@@ -61,15 +64,35 @@
   background: #ffffff;
   border: 1px solid #f1f5f9;
   border-radius: 10px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   width: 100%;
+  cursor: pointer;
+  position: relative;
+  overflow: visible;
 }
 
-.mentorItem:hover {
+.mentorItem:hover,
+.mentorItem.hovered {
   background: #f8fafc;
   border-color: #e2e8f0;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 79, 242, 0.12);
+  z-index: 5;
+}
+
+.mentorItem.selected {
+  background: rgba(108, 79, 242, 0.05);
+  border-color: #6C4FF2;
+  box-shadow: 0 0 0 2px rgba(108, 79, 242, 0.2);
+  transform: none;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.mentorItem:focus {
+  outline: 2px solid #6C4FF2;
+  outline-offset: 2px;
 }
 
 .mentorAvatar {
@@ -83,8 +106,17 @@
   color: white;
   font-size: clamp(0.875rem, 2vw, 1rem);
   font-weight: 600;
-  overflow: hidden;
+  overflow: visible;
   flex-shrink: 0;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-right: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.mentorItem:hover .mentorAvatar,
+.mentorItem.hovered .mentorAvatar {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(108, 79, 242, 0.3);
 }
 
 .mentorAvatar img {
@@ -96,18 +128,34 @@
 
 .ratingBadge {
   position: absolute;
-  bottom: -5px;
-  right: -5px;
-  background: #fbbf24;
+  bottom: -4.32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
   color: white;
-  border-radius: 20px;
-  padding: 0.25rem 0.5rem;
+  border-radius: 8.64px;
+  padding: 0.135rem 0.315rem;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  gap: 0.18rem;
+  font-size: 0.495rem;
+  font-weight: 700;
+  box-shadow: 0 2.16px 5.76px rgba(251, 191, 36, 0.5);
+  border: 1.44px solid white;
+  min-width: fit-content;
+  white-space: nowrap;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.mentorItem.selected .ratingBadge {
+  z-index: 1;
+}
+
+.mentorItem:hover .ratingBadge,
+.mentorItem.hovered .ratingBadge {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(251, 191, 36, 0.6);
 }
 
 .mentorInfo {
@@ -116,6 +164,11 @@
   flex-direction: column;
   gap: 0.25rem;
   min-width: 0;
+}
+
+.mentorItem.selected .mentorInfo {
+  flex: 1 1 100%;
+  margin-bottom: 1rem;
 }
 
 .mentorName {
@@ -128,6 +181,15 @@
   text-overflow: ellipsis;
 }
 
+.mentorItem.selected .mentorName {
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  font-weight: 700;
+  color: #111827;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
 .mentorRole {
   font-size: clamp(0.75rem, 1.5vw, 0.8125rem);
   color: #6b7280;
@@ -138,11 +200,40 @@
   text-overflow: ellipsis;
 }
 
+.mentorItem.selected .mentorRole {
+  font-size: clamp(0.8125rem, 1.8vw, 0.9375rem);
+  color: #4B5563;
+  font-weight: 600;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  margin-bottom: 0.25rem;
+}
+
 .mentorSpecialization {
   font-size: 0.8125rem;
-  color: #8b5cf6;
-  margin: 0 0 1rem 0;
-  font-weight: 500;
+  color: #5B3FE6;
+  margin: 0.5rem 0 0 0;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(108, 79, 242, 0.1));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 16px;
+  display: inline-block;
+  animation: slideIn 0.3s ease-out;
+  box-shadow: 0 1px 3px rgba(139, 92, 246, 0.1);
+  line-height: 1.4;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .followersInfo {
@@ -150,8 +241,25 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: #6b7280;
+  color: #4B5563;
   font-size: 0.875rem;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #d1d5db;
+  font-weight: 600;
+  animation: slideIn 0.3s ease-out 0.1s both;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 5;
+}
+
+.mentorItem.selected .followersInfo {
+  position: static;
+  margin: 0.75rem 0;
+  width: fit-content;
 }
 
 .followersInfo svg {
@@ -159,27 +267,37 @@
 }
 
 .followBtn {
-  padding: clamp(0.375rem, 1.5vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+  padding: clamp(0.25rem, 1vw, 0.375rem) clamp(0.5rem, 1.5vw, 0.75rem);
   border: 1px solid #6C4FF2;
   background: transparent;
   color: #6C4FF2;
   border-radius: 6px;
   font-weight: 600;
-  font-size: clamp(0.75rem, 1.5vw, 0.8125rem);
+  font-size: clamp(0.6875rem, 1.2vw, 0.75rem);
   cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: 32px;
-  min-width: 70px;
+  transition: all 0.3s ease;
+  min-height: 28px;
+  min-width: 60px;
   white-space: nowrap;
   touch-action: manipulation;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  justify-content: center;
+}
+
+.mentorItem.selected .followBtn {
+  position: static;
+  margin-top: 0.75rem;
+  align-self: flex-start;
 }
 
 .followBtn:hover {
   background: #6C4FF2;
   color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(108, 79, 242, 0.2);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(108, 79, 242, 0.3);
 }
 
 .followBtn.following {
@@ -191,6 +309,16 @@
 .followBtn.following:hover {
   background: #5B3FE6;
   border-color: #5B3FE6;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(91, 63, 230, 0.4);
+}
+
+.followBtn svg {
+  transition: all 0.2s ease;
+}
+
+.followBtn:hover svg {
+  transform: scale(1.1);
 }
 
 /* Remove unused styles and add See All button at bottom */
@@ -204,23 +332,167 @@
   color: white;
   border: none;
   padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
-  border-radius: 20px;
+  border-radius: 24px;
   font-weight: 600;
   font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   min-height: 44px;
   touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(108, 79, 242, 0.2);
 }
 
 .seeAllButton:hover {
   background: linear-gradient(135deg, #5B3FE6, #7C3AED);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(108, 79, 242, 0.3);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(108, 79, 242, 0.4);
+}
+
+.seeAllButton svg {
+  transition: all 0.2s ease;
+}
+
+.seeAllButton:hover svg {
+  transform: scale(1.1);
+}
+
+/* Tooltip Styles */
+.mentorTooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.3s ease-out;
+}
+
+/* Dynamic positioning based on mentor position */
+.mentorItem:first-child .mentorTooltip,
+.mentorItem:nth-child(2) .mentorTooltip {
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mentorItem:first-child .mentorTooltip .tooltipArrow,
+.mentorItem:nth-child(2) .mentorTooltip .tooltipArrow {
+  top: -8px;
+  border-top: none;
+  border-bottom: 8px solid rgba(26, 26, 26, 0.95);
+}
+
+.mentorItem:nth-child(n+3) .mentorTooltip {
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltipContent {
+  background: rgba(26, 26, 26, 0.95);
+  color: white;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  min-width: 200px;
+  text-align: center;
+}
+
+.tooltipTitle {
+  font-weight: 700;
+  margin-bottom: 0.375rem;
+  color: #E5E7EB;
+  font-size: 0.9375rem;
+}
+
+.tooltipSubtitle {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #9CA3AF;
+  font-size: 0.8125rem;
+}
+
+.tooltipStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  color: #D1D5DB;
+}
+
+.tooltipSpecialization {
+  color: #8B5CF6;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  background: rgba(139, 92, 246, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  margin-top: 0.375rem;
+}
+
+.tooltipArrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(26, 26, 26, 0.95);
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Alternative animation for top-positioned tooltips */
+.mentorItem:first-child .mentorTooltip,
+.mentorItem:nth-child(2) .mentorTooltip {
+  animation: tooltipFadeInDown 0.3s ease-out;
+}
+
+@keyframes tooltipFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Enhanced Accessibility */
+.mentorItem:focus-visible {
+  outline: 2px solid #6C4FF2;
+  outline-offset: 2px;
+  background: rgba(108, 79, 242, 0.05);
 }
 
 /* Mobile First Responsive Design */
 @media (max-width: 375px) {
+  .mentorTooltip {
+    display: none; /* Hide tooltips on very small screens */
+  }
+  
+  .tooltipContent {
+    min-width: 160px;
+    padding: 0.75rem 1rem;
+  }
   .mentorItem {
     gap: 0.625rem;
     padding: 0.75rem;
@@ -233,12 +505,16 @@
   }
   
   .followBtn {
-    min-width: 60px;
-    padding: 0.375rem 0.625rem;
+    min-width: 50px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.6875rem;
   }
 }
 
 @media (min-width: 376px) and (max-width: 600px) {
+  .tooltipContent {
+    min-width: 180px;
+  }
   .mentorItem {
     gap: 0.75rem;
     padding: 0.875rem;
@@ -249,9 +525,27 @@
     height: 40px;
     font-size: 0.9375rem;
   }
+  
+  .followBtn {
+    min-width: 55px;
+    padding: 0.3125rem 0.625rem;
+  }
 }
 
 @media (min-width: 601px) {
+  .mentorItem:hover,
+  .mentorItem.hovered {
+    transform: translateY(-3px);
+  }
+  
+  .tooltipContent {
+    min-width: 220px;
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .followBtn:hover {
+    transform: translateY(-2px) scale(1.05);
+  }
   .mentorItem {
     gap: 1rem;
     padding: 1rem;
@@ -264,6 +558,7 @@
   }
   
   .followBtn {
-    min-width: 80px;
+    min-width: 65px;
+    padding: 0.375rem 0.75rem;
   }
 }
