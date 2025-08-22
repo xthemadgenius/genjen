@@ -16,7 +16,7 @@ export const questions: Question[] = [
   {
     id: 1,
     text: "What inspires your most spontaneous creative moments?",
-    subtitle: "Tell us about those magical &lsquo;aha!&rsquo; moments when creativity just flows",
+    subtitle: "Tell us about those magical moments when creativity just flows",
     type: "textarea",
     placeholder: "I feel most creative when...",
     validation: {
@@ -42,8 +42,8 @@ export const questions: Question[] = [
   },
   {
     id: 3,
-    text: "What&rsquo;s your creative superpower?",
-    subtitle: "Everyone has a unique creative strength. What&rsquo;s yours?",
+    text: "What's your creative superpower?",
+    subtitle: "Everyone has a unique creative strength. What's yours?",
     type: "choice",
     choices: [
       "I see connections others miss",
@@ -58,7 +58,7 @@ export const questions: Question[] = [
   {
     id: 4,
     text: "Share a recent creative breakthrough or project",
-    subtitle: "It could be big or small - we&rsquo;d love to hear about it!",
+    subtitle: "It could be big or small - we'd love to hear about it!",
     type: "textarea",
     placeholder: "Recently, I created/discovered/realized...",
     validation: {
@@ -102,7 +102,7 @@ export const questions: Question[] = [
       "When I have too many ideas at once",
       "When perfectionism takes over",
       "When I feel rushed or pressured",
-      "When I&rsquo;m in the wrong environment",
+      "When I'm in the wrong environment",
       "When I doubt my abilities"
     ],
     validation: {
@@ -139,8 +139,8 @@ export const questions: Question[] = [
   },
   {
     id: 10,
-    text: "Let&rsquo;s stay connected on your creative journey!",
-    subtitle: "We&rsquo;d love to send you personalized creative resources and updates",
+    text: "Let's stay connected on your creative journey!",
+    subtitle: "We'd love to send you personalized creative resources and updates",
     type: "contact",
     validation: {
       required: true

@@ -38,14 +38,14 @@ const mockCourses: Course[] = [
   {
     id: '1',
     title: 'Spontaneous Freedom',
-    author: 'Jonathan Due',
-    level: 'Intermediate',
+    author: 'Lee Richter',
+    level: 'ADHD',
     image: '/imgs/gal.png', // Using existing image
-    videos: 24,
-    assignments: 9,
-    students: 30,
-    completed: 45,
-    totalDays: 12,
+    videos: 1,
+    assignments: 1,
+    students: 301,
+    completed: 404,
+    totalDays: 1,
     currentDay: 4,
     status: 'active'
   },
