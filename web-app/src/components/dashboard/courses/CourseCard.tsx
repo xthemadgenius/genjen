@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Course } from './Courses';
 import styles from './css/CourseCard.module.css';
 
@@ -9,6 +10,17 @@ interface CourseCardProps {
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+  const router = useRouter();
+  
+  const handleCourseClick = () => {
+    if (course.title === 'Spontaneous Freedom') {
+      router.push('/dashboard/courses/inventive/1');
+    } else {
+      // Handle other courses or show coming soon
+      console.log(`Opening course: ${course.title}`);
+    }
+  };
+
   const getLevelColor = (level: Course['level']) => {
     switch (level) {
       case 'Beginner':
@@ -25,7 +37,18 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   };
 
   return (
-    <div className={styles.courseCard}>
+    <div 
+      className={styles.courseCard} 
+      onClick={handleCourseClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCourseClick();
+        }
+      }}
+    >
       {/* Course Image */}
       <div className={styles.imageContainer}>
         <img 

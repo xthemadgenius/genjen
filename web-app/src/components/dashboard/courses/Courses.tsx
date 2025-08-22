@@ -37,7 +37,7 @@ export interface CourseTableItem {
 const mockCourses: Course[] = [
   {
     id: '1',
-    title: 'UI Styleguide With Figma',
+    title: 'Spontaneous Freedom',
     author: 'Jonathan Due',
     level: 'Intermediate',
     image: '/imgs/gal.png', // Using existing image
