@@ -12,7 +12,7 @@ export interface Course {
   id: string;
   title: string;
   author: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Master';
+  level: 'ADHD'|'Beginner' | 'Intermediate' | 'Advanced' | 'Master';
   image: string;
   videos: number;
   assignments: number;
