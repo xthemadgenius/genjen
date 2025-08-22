@@ -152,6 +152,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
 }
 
 .sidebarSection {
@@ -160,6 +161,8 @@
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sidebarTitle {
@@ -173,6 +176,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
 }
 
 /* Coming Soon */
@@ -202,27 +206,55 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .container {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
+    width: 100%;
+  }
+  
+  .mainContent {
+    width: 100%;
+    order: 1;
   }
   
   .sidebar {
-    order: -1;
+    width: 100%;
+    order: 2;
+  }
+  
+  .sidebarSection {
+    width: 100%;
+    margin: 0;
   }
 }
 
 @media (max-width: 768px) {
   .courseDetail {
     padding: 1rem 0;
+    width: 100%;
   }
   
   .container {
     padding: 0 0.75rem;
     gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
   }
   
   .mainContent {
     padding: 1.5rem;
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .sidebar {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
   }
   
   .courseTitle {
@@ -231,6 +263,10 @@
   
   .sidebarSection {
     padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
   }
   
   .courseMeta {
@@ -238,18 +274,49 @@
     align-items: flex-start;
     gap: 0.75rem;
   }
+  
+  .alsoBoughtList {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
   .container {
     padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
   }
   
   .mainContent {
     padding: 1rem;
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .sidebar {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .sidebarSection {
+    padding: 0.875rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .courseTitle {
     font-size: 1.25rem;
+  }
+  
+  .alsoBoughtList {
+    width: 100%;
+    max-width: 100%;
   }
 }

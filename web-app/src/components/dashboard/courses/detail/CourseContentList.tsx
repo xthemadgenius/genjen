@@ -18,7 +18,7 @@ const CourseContentList: React.FC<CourseContentListProps> = ({ lessons }) => {
   return (
     <div className={styles.courseContentList}>
       <div className={styles.lessonsList}>
-        {lessons.map((lesson, index) => (
+        {lessons.map((lesson) => (
           <div 
             key={lesson.id} 
             className={`${styles.lessonItem} ${lesson.isCompleted ? styles.completed : ''}`}

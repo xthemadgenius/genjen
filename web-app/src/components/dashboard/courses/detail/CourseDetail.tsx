@@ -6,7 +6,6 @@ import CourseVideoPlayer from './CourseVideoPlayer';
 import CourseTabs from './CourseTabs';
 import CourseContentList from './CourseContentList';
 import AlsoBoughtCard from './AlsoBoughtCard';
-import { Course } from '../Courses';
 import styles from './css/CourseDetail.module.css';
 
 // Mock course data - in a real app this would come from an API
