@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './css/ProgressChart.module.css';
 
 interface ActivityData {
@@ -34,6 +34,9 @@ const ProgressChart: React.FC<ProgressChartProps> = ({
   totalCompleted = 15,
   monthlyGoal = 20
 }) => {
+  const [hoveredDay, setHoveredDay] = useState<number | null>(null);
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  
   const monthlyProgress = Math.min((totalCompleted / monthlyGoal) * 100, 100);
   const today = new Date().getDay() || 7; // Convert Sunday (0) to 7
   const todayIndex = today - 1; // Convert to 0-based index
@@ -54,20 +57,35 @@ const ProgressChart: React.FC<ProgressChartProps> = ({
       <div className={styles.chartContainer}>
         <div className={styles.weeklyChart}>
           {weeklyData.map((day, index) => (
-            <div key={day.day} className={styles.dayColumn}>
+            <div 
+              key={day.day} 
+              className={`${styles.dayColumn} ${hoveredDay === index ? styles.hovered : ''} ${selectedDay === index ? styles.selected : ''}`}
+              onMouseEnter={() => setHoveredDay(index)}
+              onMouseLeave={() => setHoveredDay(null)}
+              onClick={() => setSelectedDay(selectedDay === index ? null : index)}
+              role="button"
+              tabIndex={0}
+              aria-label={`${day.day} ${day.date}: ${day.completed} of ${day.total} tasks completed (${day.percentage}%)`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSelectedDay(selectedDay === index ? null : index);
+                }
+              }}
+            >
               <div className={styles.dayLabel}>{day.day}</div>
               <div className={styles.dateLabel}>{day.date}</div>
               
               <div className={styles.progressBar}>
                 <div className={styles.progressTrack}>
                   <div 
-                    className={`${styles.progressFill} ${index === todayIndex ? styles.today : ''}`}
+                    className={`${styles.progressFill} ${index === todayIndex ? styles.today : ''} ${hoveredDay === index ? styles.fillHover : ''}`}
                     style={{ height: `${day.percentage}%` }}
                   />
                 </div>
                 
                 {/* Progress Indicator */}
-                <div className={styles.progressIndicator}>
+                <div className={`${styles.progressIndicator} ${hoveredDay === index ? styles.indicatorHover : ''}`}>
                   {day.completed > 0 ? (
                     <svg viewBox="0 0 24 24" width="16" height="16">
                       <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
@@ -83,13 +101,31 @@ const ProgressChart: React.FC<ProgressChartProps> = ({
                 <span className={styles.separator}>/</span>
                 <span className={styles.total}>{day.total}</span>
               </div>
+              
+              {/* Tooltip */}
+              {hoveredDay === index && (
+                <div className={styles.tooltip}>
+                  <div className={styles.tooltipContent}>
+                    <div className={styles.tooltipTitle}>{day.day}, {day.date}</div>
+                    <div className={styles.tooltipStats}>
+                      <span>{day.completed} of {day.total} tasks completed</span>
+                      <span className={styles.tooltipPercentage}>{day.percentage}%</span>
+                    </div>
+                  </div>
+                  <div className={styles.tooltipArrow}></div>
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
 
       {/* Monthly Progress */}
-      <div className={styles.monthlyProgress}>
+      <div 
+        className={styles.monthlyProgress}
+        onMouseEnter={() => setHoveredDay(-1)}
+        onMouseLeave={() => setHoveredDay(null)}
+      >
         <div className={styles.monthlyHeader}>
           <h3 className={styles.monthlyTitle}>Monthly Goal</h3>
           <span className={styles.monthlyStats}>
@@ -99,7 +135,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({
         
         <div className={styles.monthlyProgressBar}>
           <div 
-            className={styles.monthlyProgressFill}
+            className={`${styles.monthlyProgressFill} ${hoveredDay === -1 ? styles.monthlyFillHover : ''}`}
             style={{ width: `${monthlyProgress}%` }}
           />
         </div>
@@ -112,6 +148,19 @@ const ProgressChart: React.FC<ProgressChartProps> = ({
             {monthlyGoal - totalCompleted} lessons to go
           </span>
         </div>
+        
+        {hoveredDay === -1 && (
+          <div className={styles.monthlyTooltip}>
+            <div className={styles.tooltipContent}>
+              <div className={styles.tooltipTitle}>Monthly Progress</div>
+              <div className={styles.tooltipStats}>
+                <span>Completed: {totalCompleted} lessons</span>
+                <span>Remaining: {monthlyGoal - totalCompleted} lessons</span>
+                <span className={styles.tooltipPercentage}>{Math.round(monthlyProgress)}% of goal</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Achievement Badges */}
