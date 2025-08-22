@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { getQuestionById, getTotalQuestions, Question } from './questions';
+import { getQuestionById, getTotalQuestions } from './questions';
 import styles from './css/QuestionPage.module.css';
 
 interface FormData {

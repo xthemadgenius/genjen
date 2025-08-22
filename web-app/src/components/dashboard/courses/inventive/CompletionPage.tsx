@@ -64,8 +64,8 @@ const CompletionPage: React.FC = () => {
           <div className={styles.nextSteps}>
             <h3 className={styles.nextStepsTitle}>What happens next?</h3>
             <ul className={styles.nextStepsList}>
-              <li>We'll analyze your creative profile</li>
-              <li>You'll receive personalized resource recommendations</li>
+              <li>We&rsquo;ll analyze your creative profile</li>
+              <li>You&rsquo;ll receive personalized resource recommendations</li>
               <li>Access to our exclusive creative community opens up</li>
               <li>Your customized learning path will be ready in 24 hours</li>
             </ul>
@@ -108,8 +108,8 @@ const CompletionPage: React.FC = () => {
         </h1>
         
         <p className={styles.completionMessage}>
-          You've completed all 10 questions! Your creative journey profile is ready to be processed. 
-          We're excited to help you discover new ways to express your spontaneous creativity.
+          You&rsquo;ve completed all 10 questions! Your creative journey profile is ready to be processed. 
+          We&rsquo;re excited to help you discover new ways to express your spontaneous creativity.
         </p>
         
         <div className={styles.summaryBox}>
