@@ -22,9 +22,11 @@ const Hero = () => {
       <nav className={styles.nav} role="navigation" aria-label="Main navigation">
         <div className={styles.navContainer}>
           <div className={styles.logo}>
-            <div className={styles.logoIcon} aria-hidden="true">
-              <span>J</span>
-            </div>
+            <img 
+              src="/jengenwhite.png" 
+              alt="JenGen AI" 
+              className={styles.logoImage}
+            />
             <span className={styles.logoText}>JenGen AI</span>
           </div>
           

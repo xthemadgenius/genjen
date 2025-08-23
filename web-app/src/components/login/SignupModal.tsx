@@ -106,7 +106,11 @@ const SignupModal: React.FC = () => {
           <div className={styles.gradientOrb}></div>
           <div className={styles.brandingContent}>
             <div className={styles.logo}>
-              <div className={styles.logoIcon}>JG</div>
+              <img 
+                src="/jengenwhite.png" 
+                alt="JenGen.ai" 
+                className={styles.logoImage}
+              />
               <span className={styles.logoText}>JenGen.ai</span>
             </div>
           </div>

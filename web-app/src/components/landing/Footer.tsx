@@ -10,9 +10,11 @@ const Footer = () => {
           <div className={styles.leftSection}>
             {/* Logo */}
             <div className={styles.logo}>
-              <div className={styles.logoIcon}>
-                <span>J</span>
-              </div>
+              <img 
+                src="/jengenwhite.png" 
+                alt="JenGen AI" 
+                className={styles.logoImage}
+              />
               <span className={styles.logoText}>JenGen AI</span>
             </div>
             
