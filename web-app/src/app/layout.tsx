@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   generator: "Next.js",
   category: "Education",
   classification: "Business",
+  icons: {
+    icon: '/jengenfav.ico',
+    shortcut: '/jengenfav.ico',
+    apple: '/jengenfav.ico',
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
