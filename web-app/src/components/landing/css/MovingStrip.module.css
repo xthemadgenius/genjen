@@ -1,8 +1,10 @@
 .movingStrip {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 400% 400%;
   padding: 2rem 0;
   overflow: hidden;
   position: relative;
+  animation: gradientMove 10s ease-in-out infinite;
 }
 
 .movingStrip::before {
@@ -45,6 +47,24 @@
   }
   100% {
     transform: translateX(100%);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
