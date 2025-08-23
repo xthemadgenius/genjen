@@ -66,7 +66,7 @@ const mockCourseDetails = {
 const mockRelatedCourses = [
   {
     id: 'related-1',
-    title: 'Complete web design',
+    title: 'Complete Web Design',
     price: 20.30,
     tag: 'Bestseller',
     thumbnail: '/imgs/ifgf.png'
