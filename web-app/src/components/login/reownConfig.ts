@@ -2,6 +2,7 @@
 
 import { createAppKit } from '@reown/appkit';
 import { mainnet, arbitrum } from '@reown/appkit/networks';
+import type { SocialProvider } from '@reown/appkit';
 
 // Configuration for JenGen Reown integration - Social Auth Only
 const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID;
@@ -18,13 +19,13 @@ const metadata = {
   icons: ['/jengenwhite.png']
 };
 
-// Features configuration - disable wallets, enable only social logins
+// Features configuration - enable email and social logins, disable direct wallet connections
 const features = {
   analytics: true,
-  email: false,
-  socials: ['google', 'facebook', 'apple'],
-  emailShowWallets: false,
-  socialShowWallets: false,
+  email: true, // Enable email login (creates wallets)
+  socials: ['google', 'facebook', 'apple'] as SocialProvider[],
+  emailShowWallets: false, // Don't show wallet options in email flow
+  socialShowWallets: false, // Don't show wallet options in social flow
   swaps: false,
   onramp: false,
   history: false
@@ -64,34 +65,35 @@ export function initializeReown() {
     appKit = createAppKit({
       projectId,
       metadata,
-      networks: [mainnet, arbitrum], // Required even for social-only auth
+      networks: [mainnet, arbitrum],
       features,
       themeMode: themeConfig.themeMode,
-      themeVariables: themeConfig.themeVariables,
-      includeWalletIds: [], // Disable all wallets
-      excludeWalletIds: [], // Not needed since we're not including any
+      themeVariables: themeConfig.themeVariables
+      // Remove includeWalletIds and excludeWalletIds to prevent HTTP 400
+      // AppKit will handle this based on the features configuration
     });
 
     return appKit;
   } catch (error) {
     console.error('Failed to initialize Reown AppKit:', error);
+    // Return null to allow fallback authentication
     return null;
   }
 }
 
-// Social authentication using Reown AppKit (bypassing wallet modal)
+// Proper Reown AppKit social authentication per documentation
 export const socialLogin = {
   async loginWithGoogle(): Promise<{ success: boolean; provider: string; user?: ReownUser }> {
     try {
       const kit = initializeReown();
-      if (!kit) throw new Error('Reown not initialized');
+      if (!kit) throw new Error('Reown AppKit not initialized');
       
       // Store auth context
       sessionStorage.setItem('auth_provider', 'google');
       sessionStorage.setItem('auth_type', 'login');
       
-      // Use AppKit's social login - this should open OAuth flow directly
-      await kit.open({ view: 'ConnectingSocial' });
+      // Use AppKit's built-in social login - this handles OAuth internally
+      await kit.open();
       
       return { success: true, provider: 'google' };
     } catch (error) {
@@ -103,14 +105,14 @@ export const socialLogin = {
   async loginWithFacebook(): Promise<{ success: boolean; provider: string; user?: ReownUser }> {
     try {
       const kit = initializeReown();
-      if (!kit) throw new Error('Reown not initialized');
+      if (!kit) throw new Error('Reown AppKit not initialized');
       
       // Store auth context
       sessionStorage.setItem('auth_provider', 'facebook');
       sessionStorage.setItem('auth_type', 'login');
       
-      // Use AppKit's social login
-      await kit.open({ view: 'ConnectingSocial' });
+      // Use AppKit's built-in social login
+      await kit.open();
       
       return { success: true, provider: 'facebook' };
     } catch (error) {
@@ -122,14 +124,14 @@ export const socialLogin = {
   async loginWithApple(): Promise<{ success: boolean; provider: string; user?: ReownUser }> {
     try {
       const kit = initializeReown();
-      if (!kit) throw new Error('Reown not initialized');
+      if (!kit) throw new Error('Reown AppKit not initialized');
       
       // Store auth context
       sessionStorage.setItem('auth_provider', 'apple');
       sessionStorage.setItem('auth_type', 'login');
       
-      // Use AppKit's social login
-      await kit.open({ view: 'ConnectingSocial' });
+      // Use AppKit's built-in social login
+      await kit.open();
       
       return { success: true, provider: 'apple' };
     } catch (error) {
@@ -141,14 +143,14 @@ export const socialLogin = {
   async signupWithGoogle(): Promise<{ success: boolean; provider: string; user?: ReownUser }> {
     try {
       const kit = initializeReown();
-      if (!kit) throw new Error('Reown not initialized');
+      if (!kit) throw new Error('Reown AppKit not initialized');
       
       // Store auth context
       sessionStorage.setItem('auth_provider', 'google');
       sessionStorage.setItem('auth_type', 'signup');
       
-      // Use AppKit's social login
-      await kit.open({ view: 'ConnectingSocial' });
+      // Use AppKit's built-in social login
+      await kit.open();
       
       return { success: true, provider: 'google' };
     } catch (error) {
@@ -160,14 +162,14 @@ export const socialLogin = {
   async signupWithFacebook(): Promise<{ success: boolean; provider: string; user?: ReownUser }> {
     try {
       const kit = initializeReown();
-      if (!kit) throw new Error('Reown not initialized');
+      if (!kit) throw new Error('Reown AppKit not initialized');
       
       // Store auth context
       sessionStorage.setItem('auth_provider', 'facebook');
       sessionStorage.setItem('auth_type', 'signup');
       
-      // Use AppKit's social login
-      await kit.open({ view: 'ConnectingSocial' });
+      // Use AppKit's built-in social login
+      await kit.open();
       
       return { success: true, provider: 'facebook' };
     } catch (error) {
@@ -179,14 +181,14 @@ export const socialLogin = {
   async signupWithApple(): Promise<{ success: boolean; provider: string; user?: ReownUser }> {
     try {
       const kit = initializeReown();
-      if (!kit) throw new Error('Reown not initialized');
+      if (!kit) throw new Error('Reown AppKit not initialized');
       
       // Store auth context
       sessionStorage.setItem('auth_provider', 'apple');
       sessionStorage.setItem('auth_type', 'signup');
       
-      // Use AppKit's social login
-      await kit.open({ view: 'ConnectingSocial' });
+      // Use AppKit's built-in social login
+      await kit.open();
       
       return { success: true, provider: 'apple' };
     } catch (error) {
@@ -301,7 +303,9 @@ export const auth = {
   isAuthenticated(): boolean {
     // Check AppKit connection state first
     const kit = initializeReown();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (kit && typeof (kit as any).getIsConnected === 'function') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return (kit as any).getIsConnected();
     }
     
@@ -313,7 +317,9 @@ export const auth = {
   getCurrentUser(): ReownUser | null {
     // Try to get user from AppKit first
     const kit = initializeReown();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (kit && typeof (kit as any).getAddress === 'function') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const address = (kit as any).getAddress();
       if (address) {
         // Convert AppKit user data to our ReownUser format
@@ -336,7 +342,9 @@ export const auth = {
   onAuthStateChange(callback: (user: ReownUser | null) => void) {
     // Listen for AppKit connection changes using provider subscription
     const kit = initializeReown();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (kit && typeof (kit as any).subscribeProvider === 'function') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const unsubscribe = (kit as any).subscribeProvider((state: any) => {
         if (state.isConnected && state.address) {
           const provider = sessionStorage.getItem('auth_provider') as 'google' | 'facebook' | 'apple' || 'google';

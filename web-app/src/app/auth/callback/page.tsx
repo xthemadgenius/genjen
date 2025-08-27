@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { handleOAuthCallback } from '../../../components/login/reownConfig';
 
 const AuthCallbackPage: React.FC = () => {
   const router = useRouter();
@@ -13,8 +12,7 @@ const AuthCallbackPage: React.FC = () => {
   useEffect(() => {
     const processCallback = async () => {
       try {
-        // Check if this is a Reown AppKit callback (it handles OAuth internally)
-        // For AppKit, we mainly need to check the authentication state
+        // AppKit handles OAuth internally, so we just need to check auth state
         const provider = sessionStorage.getItem('auth_provider');
         const authType = sessionStorage.getItem('auth_type') as 'login' | 'signup';
         
@@ -24,8 +22,11 @@ const AuthCallbackPage: React.FC = () => {
           return;
         }
 
-        // Import auth utilities
+        // Import auth utilities to check AppKit connection state
         const { auth } = await import('../../../components/login/reownConfig');
+        
+        // Wait a moment for AppKit to complete authentication
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
         // Check if user is authenticated via AppKit
         const isAuthenticated = auth.isAuthenticated();
@@ -50,7 +51,7 @@ const AuthCallbackPage: React.FC = () => {
             router.push('/onboarding');
           }, 1500);
         } else {
-          // OAuth might still be in progress, wait a bit and check again
+          // OAuth might still be in progress, wait a bit longer and check again
           await new Promise(resolve => setTimeout(resolve, 2000));
           
           const recheckAuth = auth.isAuthenticated();

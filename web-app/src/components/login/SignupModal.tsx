@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useAppKit } from '@reown/appkit/react';
+import { useAppKitAccount } from '@reown/appkit/react';
 import styles from './css/SignupModal.module.css';
 
 const SignupModal: React.FC = () => {
@@ -19,6 +21,17 @@ const SignupModal: React.FC = () => {
   const [subscribeNewsletter, setSubscribeNewsletter] = useState(true);
   
   const router = useRouter();
+  const { open } = useAppKit();
+  const { address, isConnected } = useAppKitAccount();
+
+  // Handle successful connection
+  React.useEffect(() => {
+    if (isConnected && address) {
+      console.log('User connected:', address);
+      // Redirect to onboarding after successful authentication
+      router.push('/onboarding');
+    }
+  }, [isConnected, address, router]);
 
   // Handle form data changes
   const handleChange = (field: keyof typeof formData, value: string) => {
@@ -65,59 +78,36 @@ const SignupModal: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle email signup submission
+  // Handle main signup button - opens AppKit modal with email/social options
   const handleSignup = async () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
     try {
-      const { emailAuth } = await import('./reownConfig');
-      const result = await emailAuth.signupWithEmail(formData.email, formData.password);
-      
-      if (result.success) {
-        console.log('Email signup successful');
-        router.push('/onboarding');
-      } else {
-        throw new Error('Signup failed');
-      }
+      // Open AppKit modal - it will show email/social options (no wallets)
+      await open();
     } catch (error) {
-      console.error('Email signup failed:', error);
-      setErrors({ general: 'Signup failed. Please try again.' });
+      console.error('Failed to open signup modal:', error);
+      setErrors({ general: 'Failed to open signup options. Please try again.' });
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Handle social signup - direct OAuth redirect (no modal)
+  // Handle direct social provider connection (bypasses modal)
   const handleSocialSignup = async (provider: 'google' | 'facebook' | 'apple') => {
     setIsLoading(true);
+    setErrors({}); // Clear any previous errors
+    
     try {
-      const { socialLogin } = await import('./reownConfig');
-      let result;
-      
-      switch (provider) {
-        case 'google':
-          result = await socialLogin.signupWithGoogle();
-          break;
-        case 'facebook':
-          result = await socialLogin.signupWithFacebook();
-          break;
-        case 'apple':
-          result = await socialLogin.signupWithApple();
-          break;
-        default:
-          throw new Error(`Unsupported provider: ${provider}`);
-      }
-
-      // Direct OAuth redirect will happen automatically in the socialLogin methods
-      // No need to manually navigate as the OAuth flow will handle the redirect
-      // Loading state will persist until page redirect completes
-      if (result.success) {
-        console.log(`${provider} signup initiated - redirecting to OAuth...`);
-      }
+      // Note: Direct social connection via useAppKitWallet.connect() would go here
+      // For now, we'll open the modal and let user select the provider
+      // This ensures the flow works correctly with AppKit's OAuth handling
+      await open();
     } catch (error) {
       console.error(`${provider} signup failed:`, error);
       setErrors({ general: `${provider} signup failed. Please try again.` });
+    } finally {
       setIsLoading(false);
     }
   };
