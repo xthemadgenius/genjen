@@ -84,8 +84,8 @@ const SignupModal: React.FC = () => {
     
     setIsLoading(true);
     try {
-      // Open AppKit modal - it will show email/social options (no wallets)
-      await open();
+      // Open AppKit modal with Connect view - it will show email/social options (no wallets)
+      open({ view: 'Connect' });
     } catch (error) {
       console.error('Failed to open signup modal:', error);
       setErrors({ general: 'Failed to open signup options. Please try again.' });
@@ -94,16 +94,14 @@ const SignupModal: React.FC = () => {
     }
   };
 
-  // Handle direct social provider connection (bypasses modal)
+  // Handle direct social provider connection
   const handleSocialSignup = async (provider: 'google' | 'facebook' | 'apple') => {
     setIsLoading(true);
     setErrors({}); // Clear any previous errors
     
     try {
-      // Note: Direct social connection via useAppKitWallet.connect() would go here
-      // For now, we'll open the modal and let user select the provider
-      // This ensures the flow works correctly with AppKit's OAuth handling
-      await open();
+      // Open AppKit modal - the configuration will ensure only email/social options are shown
+      open({ view: 'Connect' });
     } catch (error) {
       console.error(`${provider} signup failed:`, error);
       setErrors({ general: `${provider} signup failed. Please try again.` });

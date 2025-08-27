@@ -65,8 +65,8 @@ const LoginModal: React.FC = () => {
     
     setIsLoading(true);
     try {
-      // Open AppKit modal - it will show email/social options (no wallets)
-      await open();
+      // Open AppKit modal with Connect view - it will show email/social options (no wallets)
+      open({ view: 'Connect' });
     } catch (error) {
       console.error('Failed to open login modal:', error);
       setErrors({ general: 'Failed to open login options. Please try again.' });
@@ -75,15 +75,14 @@ const LoginModal: React.FC = () => {
     }
   };
 
-  // Handle direct social provider connection (bypasses modal)
+  // Handle direct social provider connection
   const handleSocialLogin = async (provider: 'google' | 'facebook' | 'apple') => {
     setIsLoading(true);
     setErrors({}); // Clear any previous errors
     
     try {
-      // Open AppKit modal for social login
-      // The modal will show email/social options based on our configuration
-      await open();
+      // Open AppKit modal - the configuration will ensure only email/social options are shown
+      open({ view: 'Connect' });
     } catch (error) {
       console.error(`${provider} login failed:`, error);
       setErrors({ general: `${provider} login failed. Please try again.` });
