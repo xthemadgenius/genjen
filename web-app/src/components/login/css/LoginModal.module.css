@@ -165,14 +165,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
+  min-width: 3rem;
+  min-height: 3rem; /* 48px - meets accessibility requirements */
   border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
   background: white;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  outline: none;
+}
+
+.socialButton:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
 }
 
 .socialButton:hover:not(:disabled) {

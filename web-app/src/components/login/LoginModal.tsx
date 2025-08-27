@@ -46,34 +46,59 @@ const LoginModal: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle login submission
+  // Handle email login submission
   const handleLogin = async () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
     try {
-      // TODO: Replace with actual authentication logic
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Login attempt:', formData);
-      router.push('/onboard');
-    } catch {
-      setErrors({ general: 'Login failed. Please try again.' });
+      const { emailAuth } = await import('./reownConfig');
+      const result = await emailAuth.loginWithEmail(formData.email, formData.password);
+      
+      if (result.success) {
+        console.log('Email login successful');
+        router.push('/onboarding');
+      } else {
+        throw new Error('Login failed');
+      }
+    } catch (error) {
+      console.error('Email login failed:', error);
+      setErrors({ general: 'Login failed. Please check your credentials and try again.' });
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Handle social login
+  // Handle social login - direct OAuth redirect (no modal)
   const handleSocialLogin = async (provider: 'google' | 'facebook' | 'apple') => {
     setIsLoading(true);
     try {
-      // TODO: Replace with actual OAuth logic
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log(`${provider} login attempt`);
-      router.push('/onboard');
-    } catch {
+      const { socialLogin } = await import('./reownConfig');
+      let result;
+      
+      switch (provider) {
+        case 'google':
+          result = await socialLogin.loginWithGoogle();
+          break;
+        case 'facebook':
+          result = await socialLogin.loginWithFacebook();
+          break;
+        case 'apple':
+          result = await socialLogin.loginWithApple();
+          break;
+        default:
+          throw new Error(`Unsupported provider: ${provider}`);
+      }
+
+      // Direct OAuth redirect will happen automatically in the socialLogin methods
+      // No need to manually navigate as the OAuth flow will handle the redirect
+      // Loading state will persist until page redirect completes
+      if (result.success) {
+        console.log(`${provider} login initiated - redirecting to OAuth...`);
+      }
+    } catch (error) {
+      console.error(`${provider} login failed:`, error);
       setErrors({ general: `${provider} login failed. Please try again.` });
-    } finally {
       setIsLoading(false);
     }
   };
