@@ -32,7 +32,7 @@ REOWN_SECRET_KEY=your_secret_key_here
 - [ ] AppKit modal opens with **only** email/social options (no wallets)
 - [ ] Google/Apple/Facebook buttons work without showing wallet list
 - [ ] Email OTP flow completes in-modal
-- [ ] Successful auth redirects to `/onboarding`
+- [ ] Successful auth redirects to `/onboard`
 
 ## Production Deployment Checklist
 
@@ -80,7 +80,7 @@ createAppKit({
 2. **AppKit modal shows** → Email field + social buttons (Google/Apple/Facebook)
 3. **User selects option** → OAuth flow or email OTP handled by AppKit
 4. **Authentication succeeds** → Embedded wallet created + `useAppKitAccount` updates
-5. **App detects connection** → Redirect to `/onboarding`
+5. **App detects connection** → Redirect to `/onboard`
 
 ## Troubleshooting
 

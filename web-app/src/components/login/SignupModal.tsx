@@ -28,8 +28,8 @@ const SignupModal: React.FC = () => {
   React.useEffect(() => {
     if (isConnected && address) {
       console.log('User connected:', address);
-      // Redirect to onboarding after successful authentication
-      router.push('/onboarding');
+      // Redirect to onboard after successful authentication
+      router.push('/onboard');
     }
   }, [isConnected, address, router]);
 

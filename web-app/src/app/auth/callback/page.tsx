@@ -46,9 +46,9 @@ const AuthCallbackPage: React.FC = () => {
           sessionStorage.removeItem('auth_provider');
           sessionStorage.removeItem('auth_type');
           
-          // Redirect to onboarding after successful authentication
+          // Redirect to onboard after successful authentication
           setTimeout(() => {
-            router.push('/onboarding');
+            router.push('/onboard');
           }, 1500);
         } else {
           // OAuth might still be in progress, wait a bit longer and check again
@@ -70,7 +70,7 @@ const AuthCallbackPage: React.FC = () => {
             sessionStorage.removeItem('auth_type');
             
             setTimeout(() => {
-              router.push('/onboarding');
+              router.push('/onboard');
             }, 1500);
           } else {
             throw new Error('Authentication verification failed');
