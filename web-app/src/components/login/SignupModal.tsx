@@ -78,13 +78,13 @@ const SignupModal: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle main signup button - opens AppKit modal with email/social options
+  // Handle main signup button - opens AppKit modal with Connect view (demo-style)
   const handleSignup = async () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
     try {
-      // Open AppKit modal with Connect view - it will show email/social options (no wallets)
+      // Open AppKit modal with Connect view - shows email/social in demo order
       open({ view: 'Connect' });
     } catch (error) {
       console.error('Failed to open signup modal:', error);
@@ -100,7 +100,7 @@ const SignupModal: React.FC = () => {
     setErrors({}); // Clear any previous errors
     
     try {
-      // Open AppKit modal - the configuration will ensure only email/social options are shown
+      // Open AppKit modal with Connect view for consistent demo experience
       open({ view: 'Connect' });
     } catch (error) {
       console.error(`${provider} signup failed:`, error);

@@ -59,13 +59,13 @@ const LoginModal: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle login - opens AppKit modal with email/social options
+  // Handle login - opens AppKit modal with Connect view (demo-style)
   const handleLogin = async () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
     try {
-      // Open AppKit modal with Connect view - it will show email/social options (no wallets)
+      // Open AppKit modal with Connect view - shows email/social in demo order
       open({ view: 'Connect' });
     } catch (error) {
       console.error('Failed to open login modal:', error);
@@ -81,7 +81,7 @@ const LoginModal: React.FC = () => {
     setErrors({}); // Clear any previous errors
     
     try {
-      // Open AppKit modal - the configuration will ensure only email/social options are shown
+      // Open AppKit modal with Connect view for consistent demo experience
       open({ view: 'Connect' });
     } catch (error) {
       console.error(`${provider} login failed:`, error);
