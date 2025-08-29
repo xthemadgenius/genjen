@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAppKitAccount } from '@reown/appkit/react'
+import { supabase } from '../../lib/supabase'
 
 type MeResponse = { onboarded: boolean; isNewUser: boolean }
 
@@ -20,12 +21,34 @@ export default function PostAuthRouter() {
     
     console.log('PostAuthRouter: User connected with address:', address)
     
-    // For now, redirect new connections to onboarding
-    // TODO: Implement proper user status checking once auth system is complete
-    console.log('PostAuthRouter: Redirecting to /onboard')
-    router.replace('/onboard')
-    
-    setChecked(true)
+    // Handle wallet connection - create or find user
+    ;(async () => {
+      try {
+        // Check if user exists with this wallet address
+        const { data: existingUser, error } = await supabase
+          .from('users')
+          .select('*')
+          .eq('wallet_address', address)
+          .single()
+        
+        if (existingUser) {
+          console.log('PostAuthRouter: Existing user found, redirecting to dashboard')
+          router.replace('/dashboard')
+        } else {
+          console.log('PostAuthRouter: New wallet user, redirecting to onboard')
+          // Store wallet address for onboarding
+          sessionStorage.setItem('pending_wallet_address', address)
+          router.replace('/onboard')
+        }
+      } catch (error) {
+        console.error('PostAuthRouter: Error checking user:', error)
+        // Default to onboarding for new users
+        sessionStorage.setItem('pending_wallet_address', address)
+        router.replace('/onboard')
+      } finally {
+        setChecked(true)
+      }
+    })()
   }, [isConnected, status, address, router])
 
   return null // no UI; purely side-effect

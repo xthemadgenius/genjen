@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { UserService } from '../../../../lib/supabase';
-import { UpdateUserRequest } from '../../../../types/user';
+import { supabase } from '../../../../lib/supabase';
+import { CreateUserRequest } from '../../../../types/user';
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,32 +28,97 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // For now, just log the onboarding data and return success
-    // TODO: Implement proper user session management and profile updates
-    console.log('✅ Onboarding data validated and logged:', {
-      user: {
+    // Get wallet address from the request
+    const walletAddress = personalInfo.walletAddress;
+    
+    if (!walletAddress) {
+      return NextResponse.json(
+        { success: false, error: 'Wallet address is required' },
+        { status: 400 }
+      );
+    }
+    
+    try {
+      console.log('Attempting to create user with data:', {
+        email: personalInfo.email,
         username: personalInfo.username,
         name: personalInfo.name,
-        email: personalInfo.email,
         phone: personalInfo.phone,
-        address: personalInfo.address
-      },
-      preferences: {
-        services: selectedServices,
-        plan: selectedPlan
+        address: personalInfo.address,
+        wallet_address: walletAddress
+      });
+      
+      // Create user in Supabase with onboarding data
+      const { data: newUser, error } = await supabase
+        .from('users')
+        .insert({
+          email: personalInfo.email,
+          username: personalInfo.username,
+          name: personalInfo.name,
+          phone: personalInfo.phone || null,
+          address: personalInfo.address || null,
+          wallet_address: walletAddress,
+          is_wallet_verified: true, // Since they connected via wallet
+          wallet_type: 'WalletConnect',
+          membership_tier_id: selectedPlan || '1',
+          last_wallet_connection: new Date().toISOString()
+        })
+        .select()
+        .single()
+      
+      if (error) {
+        console.error('Supabase user creation error:', {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+          hint: error.hint
+        })
+        
+        // Handle specific errors
+        if (error.code === '23505') {
+          if (error.message.includes('username')) {
+            return NextResponse.json(
+              { success: false, error: 'Username already taken. Please choose another.' },
+              { status: 400 }
+            )
+          }
+          if (error.message.includes('email')) {
+            return NextResponse.json(
+              { success: false, error: 'Email already registered. Please use a different email.' },
+              { status: 400 }
+            )
+          }
+        }
+        
+        return NextResponse.json(
+          { success: false, error: `Database error: ${error.message}` },
+          { status: 500 }
+        )
       }
-    });
-
-    // Return success response
-    return NextResponse.json({
-      success: true,
-      message: 'Onboarding completed successfully! (Demo mode)',
-      data: {
-        personalInfo,
-        selectedServices,
-        selectedPlan
-      }
-    });
+      
+      console.log('✅ User created in Supabase:', newUser)
+      
+      // Store selected services and plan as user metadata
+      // TODO: Create separate tables for user preferences if needed
+      
+      return NextResponse.json({
+        success: true,
+        message: 'Account created successfully!',
+        user: newUser,
+        data: {
+          personalInfo,
+          selectedServices,
+          selectedPlan
+        }
+      })
+      
+    } catch (dbError: any) {
+      console.error('Database error during onboarding:', dbError)
+      return NextResponse.json(
+        { success: false, error: 'Database error. Please try again.' },
+        { status: 500 }
+      )
+    }
 
   } catch (error) {
     console.error('Onboarding API error:', error);

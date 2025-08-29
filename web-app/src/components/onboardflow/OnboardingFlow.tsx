@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useAppKitAccount } from '@reown/appkit/react';
 import PersonalInfo from './PersonalInfo';
 import ServiceSelection from './ServiceSelection';
 import PlanSelection from './PlanSelection';
@@ -23,6 +24,7 @@ export interface OnboardingData {
 }
 
 const OnboardingFlow = () => {
+  const { address } = useAppKitAccount();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<OnboardingData>({
     personalInfo: {
@@ -73,7 +75,10 @@ const OnboardingFlow = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          personalInfo: formData.personalInfo,
+          personalInfo: {
+            ...formData.personalInfo,
+            walletAddress: address // Include wallet address from AppKit
+          },
           selectedServices: formData.selectedServices,
           selectedPlan: formData.selectedPlan
         })
