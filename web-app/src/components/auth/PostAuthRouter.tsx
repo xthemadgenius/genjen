@@ -19,14 +19,19 @@ export default function PostAuthRouter() {
     once.current = true // prevent double runs
     ;(async () => {
       try {
-        // Ask the backend who this user is & whether they finished onboarding
-        const res = await fetch('/api/me', { credentials: 'include' })
+        // Pass wallet address to the API to determine user status
+        const apiUrl = `/api/me?address=${encodeURIComponent(address)}`
+        const res = await fetch(apiUrl, { credentials: 'include' })
         if (!res.ok) throw new Error('ME endpoint failed')
         const me: MeResponse = await res.json()
 
+        console.log('PostAuthRouter: User status', { address, me })
+
         if (me.isNewUser || !me.onboarded) {
+          console.log('PostAuthRouter: Redirecting to /onboard')
           router.replace('/onboard')
         } else {
+          console.log('PostAuthRouter: Redirecting to /dashboard')
           router.replace('/dashboard')
         }
       } catch (e) {
