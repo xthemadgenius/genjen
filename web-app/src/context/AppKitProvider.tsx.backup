@@ -13,34 +13,39 @@ const queryClient = new QueryClient()
 
 if (!projectId) throw new Error('NEXT_PUBLIC_PROJECT_ID missing')
 
+// Create AppKit modal ONCE at module scope with custom JenGen AI branding
 createAppKit({
   adapters: [wagmiAdapter],
   projectId,
   networks: [mainnet, arbitrum],
   defaultNetwork: mainnet,
 
-  // Wallet section parity with the demo
-  enableWallets: false,                // disable injected + WC in main flow (demo has this false)
-  allWallets: 'SHOW',                  // still show the "All Wallets" entry if wallets are enabled later
+  // Custom JenGen AI metadata to replace Reown branding
+  metadata: {
+    name: 'JenGen AI',
+    description: 'Sign in to JenGen AI - Bridging Generations Through AI-Powered Learning',
+    url: 'https://jengen.ai',
+    icons: ['/jengenwhite.png', '/jengenfav.ico']
+  },
 
   // Demo-like features and ordering
   features: {
-    analytics: true,                   // dashboard analytics
-    swaps: false,                      // demo had swaps off
-    onramp: false,                     // demo had onramp off
-    email: true,                       // enable email auth
-    socials: ['google', 'x', 'apple', 'facebook'],
-    connectMethodsOrder: ['wallet', 'email', 'social'], // exact order from demo
-    legalCheckbox: false,
-    emailShowWallets: true             // keep parity with demo config
+    email: true,
+    socials: ['google', 'apple', 'facebook'],
+    emailShowWallets: false
   },
 
-  // Theme like the demo (orange accent, Inter font, color mix strength)
+  // Hide wallets completely 
+  allWallets: 'HIDE',
+
+  // Custom theme with JenGen AI branding
+  themeMode: 'light',
   themeVariables: {
     '--w3m-font-family': "Inter, var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
     '--w3m-accent': '#F59E0B',
     '--w3m-color-mix': '#FFFFFF',
-    '--w3m-color-mix-strength': 10
+    '--w3m-color-mix-strength': 10,
+    '--w3m-border-radius-master': '12px'
   }
 })
 
