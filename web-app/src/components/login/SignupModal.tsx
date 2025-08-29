@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAppKit } from '@reown/appkit/react';
 import { useAppKitAccount } from '@reown/appkit/react';
@@ -20,18 +19,16 @@ const SignupModal: React.FC = () => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [subscribeNewsletter, setSubscribeNewsletter] = useState(true);
   
-  const router = useRouter();
+  // Router no longer needed here (handled by PostAuthRouter)
   const { open } = useAppKit();
   const { address, isConnected } = useAppKitAccount();
 
-  // Handle successful connection
+  // Connection status logging (redirect handled by PostAuthRouter)
   React.useEffect(() => {
     if (isConnected && address) {
       console.log('User connected:', address);
-      // Redirect to onboard after successful authentication
-      router.push('/onboard');
     }
-  }, [isConnected, address, router]);
+  }, [isConnected, address]);
 
   // Handle form data changes
   const handleChange = (field: keyof typeof formData, value: string) => {
