@@ -8,10 +8,13 @@ import styles from './css/SuccessStep.module.css';
 interface SuccessStepProps {
   formData: {
     personalInfo: {
-      fullName: string;
+      username: string;
+      name: {
+        first_name: string;
+        last_name: string;
+      };
       email: string;
       phone: string;
-      company: string;
       address: string;
     };
     selectedServices: string[];
@@ -61,7 +64,7 @@ const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
 
           {/* Success Message */}
           <div className={styles.messageContent}>
-            <h1 className={styles.title}>Welcome to JenGen AI, {formData.personalInfo.fullName.split(' ')[0]}!</h1>
+            <h1 className={styles.title}>Welcome to JenGen AI, {formData.personalInfo.name.first_name}!</h1>
             <p className={styles.subtitle}>
               Your account has been successfully created and you&apos;re all set to begin your journey with us.
             </p>

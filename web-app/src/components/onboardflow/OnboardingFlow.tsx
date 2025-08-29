@@ -9,10 +9,13 @@ import styles from './css/OnboardingFlow.module.css';
 
 export interface OnboardingData {
   personalInfo: {
-    fullName: string;
+    username: string;
+    name: {
+      first_name: string;
+      last_name: string;
+    };
     email: string;
     phone: string;
-    company: string;
     address: string;
   };
   selectedServices: string[];
@@ -23,11 +26,14 @@ const OnboardingFlow = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<OnboardingData>({
     personalInfo: {
-      fullName: '',
+      username: '',
+      name: {
+        first_name: '',
+        last_name: ''
+      },
       email: '',
       phone: '',
-      company: '',
-      address: '',
+      address: ''
     },
     selectedServices: [],
     selectedPlan: '',
@@ -55,11 +61,35 @@ const OnboardingFlow = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('Onboarding completed:', formData);
-    // Handle final submission here - submit data to API
-    // Then move to success step
-    setCurrentStep(4);
+    
+    try {
+      // TODO: Submit onboarding data to API to update user profile
+      // This will update the temporary user created during signup
+      const response = await fetch('/api/auth/onboard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          personalInfo: formData.personalInfo,
+          selectedServices: formData.selectedServices,
+          selectedPlan: formData.selectedPlan
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to complete onboarding');
+      }
+      
+      // Move to success step
+      setCurrentStep(4);
+      
+    } catch (error) {
+      console.error('Onboarding submission failed:', error);
+      // TODO: Show error message to user
+    }
   };
 
   // Handle keyboard navigation and focus management

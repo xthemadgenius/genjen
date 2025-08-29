@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAppKit } from '@reown/appkit/react';
 import { useAppKitAccount } from '@reown/appkit/react';
+import { CreateUserRequest } from '../../types/user';
 import styles from './css/SignupModal.module.css';
 
 const SignupModal: React.FC = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -42,10 +42,6 @@ const SignupModal: React.FC = () => {
   // Form validation
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
-    }
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -185,22 +181,6 @@ const SignupModal: React.FC = () => {
           {/* Signup Form */}
           <form className={styles.form} onSubmit={(e) => { e.preventDefault(); handleSignup(); }}>
             <div className={styles.field}>
-              <label htmlFor="fullName" className={styles.label}>
-                Full name
-              </label>
-              <input
-                id="fullName"
-                type="text"
-                value={formData.fullName}
-                onChange={(e) => handleChange('fullName', e.target.value)}
-                placeholder="Enter your full name"
-                className={`${styles.input} ${errors.fullName ? styles.inputError : ''}`}
-                disabled={isLoading}
-              />
-              {errors.fullName && <span className={styles.errorText}>{errors.fullName}</span>}
-            </div>
-
-            <div className={styles.field}>
               <label htmlFor="email" className={styles.label}>
                 Email address
               </label>
@@ -243,6 +223,22 @@ const SignupModal: React.FC = () => {
                 <span className={styles.helpText}>Use 8 or more characters with a mix of letters, numbers & symbols</span>
               )}
               {errors.password && <span className={styles.errorText}>{errors.password}</span>}
+            </div>
+
+            <div className={styles.field}>
+              <label htmlFor="confirmPassword" className={styles.label}>
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={(e) => handleChange('confirmPassword', e.target.value)}
+                placeholder="Confirm your password"
+                className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
+                disabled={isLoading}
+              />
+              {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword}</span>}
             </div>
 
             <div className={styles.checkboxContainer}>

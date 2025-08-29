@@ -17,30 +17,15 @@ export default function PostAuthRouter() {
     if (once.current || !isConnected || status !== 'connected' || !address) return
 
     once.current = true // prevent double runs
-    ;(async () => {
-      try {
-        // Pass wallet address to the API to determine user status
-        const apiUrl = `/api/me?address=${encodeURIComponent(address)}`
-        const res = await fetch(apiUrl, { credentials: 'include' })
-        if (!res.ok) throw new Error('ME endpoint failed')
-        const me: MeResponse = await res.json()
-
-        console.log('PostAuthRouter: User status', { address, me })
-
-        if (me.isNewUser || !me.onboarded) {
-          console.log('PostAuthRouter: Redirecting to /onboard')
-          router.replace('/onboard')
-        } else {
-          console.log('PostAuthRouter: Redirecting to /dashboard')
-          router.replace('/dashboard')
-        }
-      } catch (e) {
-        // If backend not ready, stay put (no redirect). Log for debugging.
-        console.error('post-auth routing error', e)
-      } finally {
-        setChecked(true)
-      }
-    })()
+    
+    console.log('PostAuthRouter: User connected with address:', address)
+    
+    // For now, redirect new connections to onboarding
+    // TODO: Implement proper user status checking once auth system is complete
+    console.log('PostAuthRouter: Redirecting to /onboard')
+    router.replace('/onboard')
+    
+    setChecked(true)
   }, [isConnected, status, address, router])
 
   return null // no UI; purely side-effect

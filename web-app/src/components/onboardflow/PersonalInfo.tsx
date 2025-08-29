@@ -1,14 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
+import { UpdateUserRequest } from '../../types/user';
 import styles from './css/PersonalInfo.module.css';
 
 interface PersonalInfoProps {
   data: {
-    fullName: string;
+    username: string;
+    name: {
+      first_name: string;
+      last_name: string;
+    };
     email: string;
     phone: string;
-    company: string;
     address: string;
   };
   onUpdate: (data: PersonalInfoProps['data']) => void;
@@ -19,8 +23,16 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
   const [formData, setFormData] = useState(data);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleChange = (field: keyof typeof formData, value: string) => {
-    const newData = { ...formData, [field]: value };
+  const handleChange = (field: string, value: string) => {
+    let newData;
+    if (field === 'firstName') {
+      newData = { ...formData, name: { ...formData.name, first_name: value } };
+    } else if (field === 'lastName') {
+      newData = { ...formData, name: { ...formData.name, last_name: value } };
+    } else {
+      newData = { ...formData, [field]: value };
+    }
+    
     setFormData(newData);
     onUpdate(newData);
     
@@ -33,8 +45,18 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    if (!formData.name.first_name.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+    
+    if (!formData.name.last_name.trim()) {
+      newErrors.lastName = 'Last name is required';
+    }
+    
+    if (!formData.username.trim()) {
+      newErrors.username = 'Username is required';
+    } else if (formData.username.length < 3) {
+      newErrors.username = 'Username must be at least 3 characters';
     }
     
     if (!formData.email.trim()) {
@@ -118,18 +140,50 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
           <div className={styles.form}>
             <div className={styles.row}>
               <div className={styles.field}>
-                <label htmlFor="fullName" className={styles.label}>
-                  Full name<span className={styles.required}>*</span>
+                <label htmlFor="firstName" className={styles.label}>
+                  First name<span className={styles.required}>*</span>
                 </label>
                 <input
-                  id="fullName"
+                  id="firstName"
                   type="text"
-                  value={formData.fullName}
-                  onChange={(e) => handleChange('fullName', e.target.value)}
-                  placeholder="Exp. John Carter"
-                  className={`${styles.input} ${errors.fullName ? styles.inputError : ''}`}
+                  value={formData.name.first_name}
+                  onChange={(e) => handleChange('firstName', e.target.value)}
+                  placeholder="First name"
+                  className={`${styles.input} ${errors.firstName ? styles.inputError : ''}`}
                 />
-                {errors.fullName && <span className={styles.errorText}>{errors.fullName}</span>}
+                {errors.firstName && <span className={styles.errorText}>{errors.firstName}</span>}
+              </div>
+              
+              <div className={styles.field}>
+                <label htmlFor="lastName" className={styles.label}>
+                  Last name<span className={styles.required}>*</span>
+                </label>
+                <input
+                  id="lastName"
+                  type="text"
+                  value={formData.name.last_name}
+                  onChange={(e) => handleChange('lastName', e.target.value)}
+                  placeholder="Last name"
+                  className={`${styles.input} ${errors.lastName ? styles.inputError : ''}`}
+                />
+                {errors.lastName && <span className={styles.errorText}>{errors.lastName}</span>}
+              </div>
+            </div>
+            
+            <div className={styles.row}>
+              <div className={styles.field}>
+                <label htmlFor="username" className={styles.label}>
+                  Username<span className={styles.required}>*</span>
+                </label>
+                <input
+                  id="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={(e) => handleChange('username', e.target.value)}
+                  placeholder="Choose a username"
+                  className={`${styles.input} ${errors.username ? styles.inputError : ''}`}
+                />
+                {errors.username && <span className={styles.errorText}>{errors.username}</span>}
               </div>
               
               <div className={styles.field}>
@@ -158,41 +212,28 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
-                  placeholder="(123) 000-0000"
+                  placeholder="(123) 456-7890"
                   className={`${styles.input} ${errors.phone ? styles.inputError : ''}`}
                 />
                 {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
               </div>
               
               <div className={styles.field}>
-                <label htmlFor="company" className={styles.label}>
-                  Company
+                <label htmlFor="address" className={styles.label}>
+                  Address<span className={styles.required}>*</span>
                 </label>
                 <input
-                  id="company"
+                  id="address"
                   type="text"
-                  value={formData.company}
-                  onChange={(e) => handleChange('company', e.target.value)}
-                  placeholder="Exp. Company"
-                  className={styles.input}
+                  value={formData.address}
+                  onChange={(e) => handleChange('address', e.target.value)}
+                  placeholder="123 Main St, City, State"
+                  className={`${styles.input} ${errors.address ? styles.inputError : ''}`}
                 />
+                {errors.address && <span className={styles.errorText}>{errors.address}</span>}
               </div>
             </div>
             
-            <div className={styles.field}>
-              <label htmlFor="address" className={styles.label}>
-                Address<span className={styles.required}>*</span>
-              </label>
-              <input
-                id="address"
-                type="text"
-                value={formData.address}
-                onChange={(e) => handleChange('address', e.target.value)}
-                placeholder="Exp. San Francisco, CA"
-                className={`${styles.input} ${errors.address ? styles.inputError : ''}`}
-              />
-              {errors.address && <span className={styles.errorText}>{errors.address}</span>}
-            </div>
             
             <button onClick={handleContinue} className={styles.continueButton}>
               Continue
