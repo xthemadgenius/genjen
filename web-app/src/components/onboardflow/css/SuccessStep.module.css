@@ -195,8 +195,7 @@
 /* Action Buttons */
 .actionButtons {
   display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
+  margin: 2rem 0 1rem 0;
   width: 100%;
   max-width: 400px;
 }
@@ -211,7 +210,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  flex: 1;
+  width: 100%; /* Full width */
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -227,32 +226,35 @@
   outline-offset: 2px;
 }
 
-.secondaryButton {
-  background: rgba(255, 255, 255, 0.8);
+/* Back to Home Link */
+.backToHomeContainer {
+  margin: 0.5rem 0 1.5rem 0;
+  text-align: center;
+}
+
+.backToHomeLink {
+  background: none;
+  border: none;
   color: #6b7280;
-  border: 1px solid #d1d5db;
-  border-radius: 1.5rem;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  flex: 1;
-  backdrop-filter: blur(10px);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 0.25rem 0.5rem;
 }
 
-.secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: #8b5cf6;
+.backToHomeLink:hover {
   color: #8b5cf6;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-decoration: underline;
 }
 
-.secondaryButton:focus {
+.backToHomeLink:focus {
   outline: 2px solid #8b5cf6;
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Help Section */
@@ -310,12 +312,10 @@
   }
 
   .actionButtons {
-    flex-direction: column;
     max-width: none;
   }
 
-  .primaryButton,
-  .secondaryButton {
+  .primaryButton {
     width: 100%;
   }
 

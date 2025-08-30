@@ -46,6 +46,42 @@ const services = [
     name: 'Community',
     icon: '👥',
     description: 'Engage with like-minded individuals'
+  },
+  {
+    id: 'wisdom-legacy',
+    name: 'Wisdom & Legacy',
+    icon: '📜',
+    description: 'Pass down lessons and stories for future generations.'
+  },
+  {
+    id: 'heart-centered-leadership',
+    name: 'Heart-Centered Leadership',
+    icon: '❤️',
+    description: 'Lead with purpose by listening and uplifting others.'
+  },
+  {
+    id: 'cross-generational-collaboration',
+    name: 'Cross-Generational Collaboration',
+    icon: '🤝',
+    description: 'Create and solve together across all ages.'
+  },
+  {
+    id: 'innovation-simple',
+    name: 'Innovation Made Simple',
+    icon: '🚀',
+    description: 'Use AI and Web3 in clear, human ways.'
+  },
+  {
+    id: 'circles-community',
+    name: 'Circles & Community',
+    icon: '🔗',
+    description: 'Belong, share, and grow in supportive spaces.'
+  },
+  {
+    id: 'give-back-share',
+    name: 'Give Back & Share',
+    icon: '🌱',
+    description: 'Mentor and contribute to impact the next generation.'
   }
 ];
 

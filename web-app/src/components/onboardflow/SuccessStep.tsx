@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './css/SuccessStep.module.css';
@@ -24,6 +24,7 @@ interface SuccessStepProps {
 
 const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
   const router = useRouter();
+  const [foundingTitle, setFoundingTitle] = useState('Founding 100');
 
   const handleGetStarted = () => {
     // Navigate to dashboard or main app
@@ -33,6 +34,24 @@ const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
   const handleBackToHome = () => {
     router.push('/');
   };
+
+  useEffect(() => {
+    const fetchUserCount = async () => {
+      try {
+        const response = await fetch('/api/users/count');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.count > 100) {
+            setFoundingTitle('Founding 1000');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user count:', error);
+      }
+    };
+
+    fetchUserCount();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -64,9 +83,10 @@ const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
 
           {/* Success Message */}
           <div className={styles.messageContent}>
+            <h1 className={styles.title}>{foundingTitle}</h1>
             <h1 className={styles.title}>Welcome to JenGen AI, {formData.personalInfo.name.first_name}!</h1>
             <p className={styles.subtitle}>
-              Your account has been successfully created and you&apos;re all set to begin your journey with us.
+              Your account has been created, and your journey with the WE Generation begins now.
             </p>
             
             {/* Success Details */}
@@ -122,9 +142,12 @@ const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
             >
               Get Started
             </button>
-            
+          </div>
+          
+          {/* Back to Home Link */}
+          <div className={styles.backToHomeContainer}>
             <button 
-              className={styles.secondaryButton}
+              className={styles.backToHomeLink}
               onClick={handleBackToHome}
             >
               Back to Home
@@ -134,10 +157,13 @@ const SuccessStep: React.FC<SuccessStepProps> = ({ formData }) => {
           {/* Additional Help */}
           <div className={styles.helpSection}>
             <p className={styles.helpText}>
-              Need help getting started? 
-              <Link href="/support" className={styles.helpLink}>
+              Need help getting started?{' '}
+              <a 
+                href="mailto:support@jengen.ai?subject=Help Getting Started&body=Hi JenGen Support Team,%0D%0A%0D%0AI need help getting started with my account.%0D%0A%0D%0AThank you!"
+                className={styles.helpLink}
+              >
                 Contact Support
-              </Link>
+              </a>
             </p>
           </div>
         </div>
