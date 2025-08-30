@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
+import { useAppKit, useAppKitAccount, useDisconnect } from '@reown/appkit/react';
+import { useLogout } from '../../context/LogoutContext';
 import NavItem, { NavItemData } from './NavItem';
 import { useDeviceType } from './hooks/useMediaQuery';
 import styles from './css/Sidebar.module.css';
@@ -101,8 +102,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   onToggleCollapse
 }) => {
   const router = useRouter();
-  const { open } = useAppKit();
+  const { open, close } = useAppKit();
   const { isConnected } = useAppKitAccount();
+  const { disconnect } = useDisconnect();
+  const { setIsLoggingOut, setRecentlyLoggedOut } = useLogout();
   const deviceType = useDeviceType();
   const shouldAutoCollapse = deviceType === 'tablet';
 
@@ -115,38 +118,58 @@ const Sidebar: React.FC<SidebarProps> = ({
   const handleLogout = async () => {
     try {
       console.log('Logging out user...');
+      setIsLoggingOut(true);
       
-      // Call logout API
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
+      // 1. Close any open AppKit modals immediately
+      close();
       
-      // Disconnect from WalletConnect/AppKit
+      // 2. Disconnect from wallet programmatically (without opening modal)
       if (isConnected) {
         try {
-          // Open account view for manual disconnect
-          await open({ view: 'Account' });
+          await disconnect();
+          console.log('Wallet disconnected');
         } catch (disconnectError) {
-          console.log('Wallet disconnect handled by user or already disconnected');
+          console.log('Wallet disconnect error (may already be disconnected):', disconnectError);
         }
       }
       
-      // Clear all local and session storage
+      // 3. Call logout API for server-side cleanup
+      try {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+      } catch (apiError) {
+        console.log('Logout API error (continuing anyway):', apiError);
+      }
+      
+      // 4. Clear all storage
       localStorage.clear();
       sessionStorage.clear();
       
-      console.log('✅ Logout successful, redirecting to home...');
+      // 5. Set logout state flags
+      setRecentlyLoggedOut(true);
       
-      // Redirect to home page
-      router.push('/');
+      // 6. Ensure modal stays closed
+      close();
+      
+      console.log('✅ Logout complete, redirecting to home...');
+      
+      // 7. Redirect to home with a small delay
+      setTimeout(() => {
+        setIsLoggingOut(false);
+        router.push('/');
+      }, 300);
       
     } catch (error) {
       console.error('Logout error:', error);
-      // Still clear storage and redirect even if API fails
+      // Emergency cleanup
+      close();
       localStorage.clear();
       sessionStorage.clear();
-      router.push('/');
+      setIsLoggingOut(false);
+      setRecentlyLoggedOut(true);
+      setTimeout(() => router.push('/'), 300);
     }
   };
 

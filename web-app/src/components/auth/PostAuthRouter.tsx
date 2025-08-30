@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAppKitAccount } from '@reown/appkit/react'
+import { useLogout } from '../../context/LogoutContext'
 import { supabase } from '../../lib/supabase'
 
 type MeResponse = { onboarded: boolean; isNewUser: boolean }
@@ -10,12 +11,27 @@ type MeResponse = { onboarded: boolean; isNewUser: boolean }
 export default function PostAuthRouter() {
   const router = useRouter()
   const { isConnected, status, address } = useAppKitAccount()
+  const { isLoggingOut, recentlyLoggedOut } = useLogout()
   const [, setChecked] = useState(false)
   const once = useRef(false)
 
   useEffect(() => {
+    // Don't process connections during logout or immediately after
+    if (isLoggingOut || recentlyLoggedOut) {
+      console.log('PostAuthRouter: Skipping routing due to logout state')
+      return
+    }
+    
     // Wait until AppKit reports a real connection
-    if (once.current || !isConnected || status !== 'connected' || !address) return
+    if (once.current || !isConnected || status !== 'connected' || !address) {
+      // Reset the once flag if user disconnects
+      if (!isConnected && once.current) {
+        console.log('PostAuthRouter: User disconnected, resetting state')
+        once.current = false
+        setChecked(false)
+      }
+      return
+    }
 
     once.current = true // prevent double runs
     
@@ -49,7 +65,7 @@ export default function PostAuthRouter() {
         setChecked(true)
       }
     })()
-  }, [isConnected, status, address, router])
+  }, [isConnected, status, address, router, isLoggingOut, recentlyLoggedOut])
 
   return null // no UI; purely side-effect
 }

@@ -35,6 +35,10 @@ createAppKit({
     emailShowWallets: true             // keep parity with demo config
   },
 
+  // Prevent modal from auto-opening
+  enableEIP6963: false,                // Disable auto-detection of wallet extensions
+  enableCoinbase: false,               // Disable auto-coinbase detection
+  
   // Theme like the demo (orange accent, Inter font, color mix strength)
   themeVariables: {
     '--w3m-font-family': "Inter, var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, sans-serif",

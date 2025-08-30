@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import StructuredData from "@/components/StructuredData";
 import AppKitProvider from "@/context/AppKitProvider";
+import { LogoutProvider } from "@/context/LogoutContext";
 import { headers } from "next/headers";
 import "./globals.css";
 
@@ -82,7 +83,9 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         <AppKitProvider cookies={cookies}>
-          {children}
+          <LogoutProvider>
+            {children}
+          </LogoutProvider>
         </AppKitProvider>
       </body>
     </html>
