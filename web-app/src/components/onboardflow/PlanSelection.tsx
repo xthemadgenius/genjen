@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './css/PlanSelection.module.css';
 
 interface PlanSelectionProps {
@@ -12,41 +12,64 @@ interface PlanSelectionProps {
 
 const plans = [
   {
-    id: 'basic',
-    name: 'Basic Plan',
-    description: 'Limited access to essential features',
-    userLimit: 'Up to 5 users',
-    billing: 'Monthly',
-    price: '$29',
-    features: ['Community Access', 'Basic Learning Paths', 'Limited Mentorship']
+    id: 'circle',
+    name: 'The Circle',
+    description: 'Begin. Belong. Blossom.',
+    monthlyPrice: '$29',
+    yearlyPrice: '$290',
+    features: [
+      'Community platform & circles',
+      'Intro courses & learning journeys',
+      'Wisdom Exchange content library',
+      'Invitations to free events',
+      'Entry tier: self-paced, no live calls'
+    ]
   },
   {
-    id: 'professional',
-    name: 'Professional Plan',
-    description: 'All advanced features included',
-    userLimit: 'Up to 25 users',
-    billing: 'Monthly',
-    price: '$99',
+    id: 'legacy-path',
+    name: 'The Legacy Path',
+    description: 'Grow your leadership. Build your legacy.',
+    monthlyPrice: '$97',
+    yearlyPrice: '$970',
+    features: [
+      'Everything in The Circle',
+      'Full course & learning tracks',
+      'Monthly Book Club',
+      'All session recordings',
+      'Early access to workshops & summits',
+      'Growth tier: complete library, still no live calls'
+    ]
+  },
+  {
+    id: 'sun-collective',
+    name: 'The Sun Collective',
+    description: 'Shine brighter. Share wisdom. Lead with impact.',
+    monthlyPrice: '$197',
+    yearlyPrice: '$1,970',
     popular: true,
-    features: ['Smart Matching', 'Custom Learning Journeys', 'Priority Support', 'Analytics Dashboard']
+    features: [
+      'Everything in The Legacy Path',
+      'Quarterly live group calls with Lee',
+      'Exclusive virtual masterminds',
+      'AI Storytelling & Legacy toolkit',
+      'Community spotlight recognition',
+      'Leadership tier: live access, masterminds, storytelling tools'
+    ]
   },
   {
-    id: 'premium',
-    name: 'Premium Plan',
-    description: 'Complete access and priority support',
-    userLimit: 'Up to 100 users',
-    billing: 'Annual',
-    price: '$199',
-    features: ['AI-Powered Storytelling', 'Private Network', 'White-label Options', '24/7 Support']
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise Plan',
-    description: 'Custom solutions for large teams',
-    userLimit: 'Unlimited users',
-    billing: 'Annual',
-    price: 'Custom',
-    features: ['Custom Integrations', 'Dedicated Account Manager', 'SLA Guarantee', 'Advanced Security']
+    id: 'visionary-circle',
+    name: 'The Visionary Circle',
+    description: 'Co-create the future. Lead with vision.',
+    monthlyPrice: '$497',
+    yearlyPrice: '$4,970',
+    features: [
+      'Everything in The Sun Collective',
+      'Small-group strategy calls with Lee',
+      'VIP retreats & legacy labs',
+      'Partner collaborations',
+      'Visionary Partner recognition',
+      'Visionary tier: high-touch mentorship & exclusive experiences'
+    ]
   }
 ];
 
@@ -56,6 +79,8 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
   onBack,
   onSubmit
 }) => {
+  const [isYearly, setIsYearly] = useState(false);
+
   const handlePlanSelect = (planId: string) => {
     onUpdate(planId);
   };
@@ -98,6 +123,23 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
           <div className={styles.header}>
             <h1 id="plan-selection-title" className={styles.title}>Available plans</h1>
             <p className={styles.subtitle}>Select the plan that best fits your needs and budget.</p>
+            
+            {/* Billing Toggle */}
+            <div className={styles.billingToggle}>
+              <span className={!isYearly ? styles.activeToggle : ''}>Monthly</span>
+              <label className={styles.toggleSwitch}>
+                <input
+                  type="checkbox"
+                  checked={isYearly}
+                  onChange={(e) => setIsYearly(e.target.checked)}
+                />
+                <span className={styles.slider}></span>
+              </label>
+              <span className={isYearly ? styles.activeToggle : ''}>
+                Yearly
+                <span className={styles.saveBadge}>Save 16%</span>
+              </span>
+            </div>
           </div>
 
           <div className={styles.plansGrid}>
@@ -118,7 +160,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
                 }}
                 aria-pressed={selectedPlan === plan.id}
               >
-                {plan.popular && <div className={styles.popularBadge}>Most Popular</div>}
+                {plan.popular && <div className={styles.popularBadge}>Most Loved</div>}
                 
                 <div className={styles.planHeader}>
                   <h3 className={styles.planName}>{plan.name}</h3>
@@ -126,13 +168,11 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
                 </div>
 
                 <div className={styles.planDetails}>
-                  <div className={styles.planMeta}>
-                    <span className={styles.userLimit}>👥 {plan.userLimit}</span>
-                    <span className={styles.billing}>📅 {plan.billing}</span>
-                  </div>
-                  
                   <div className={styles.price}>
-                    {plan.price === 'Custom' ? 'Custom Pricing' : `${plan.price}/month`}
+                    {isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                    <span className={styles.billingPeriod}>
+                      /{isYearly ? 'year' : 'month'}
+                    </span>
                   </div>
                 </div>
 

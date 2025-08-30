@@ -123,11 +123,89 @@
 .subtitle {
   font-size: clamp(0.9rem, 3vw, 1.125rem);
   color: #6b7280;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
   max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.4;
+}
+
+/* Billing Toggle */
+.billingToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #d1d5db;
+  border-radius: 1.5rem;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.125rem;
+  width: 1.125rem;
+  left: 0.1875rem;
+  bottom: 0.1875rem;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggleSwitch input:checked + .slider {
+  background: #8b5cf6;
+}
+
+.toggleSwitch input:checked + .slider:before {
+  transform: translateX(1.5rem);
+}
+
+.activeToggle {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.saveBadge {
+  background: #10b981;
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.billingPeriod {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #6b7280;
 }
 
 /* Plans Grid */
