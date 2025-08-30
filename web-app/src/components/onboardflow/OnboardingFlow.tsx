@@ -5,6 +5,7 @@ import { useAppKitAccount } from '@reown/appkit/react';
 import PersonalInfo from './PersonalInfo';
 import ServiceSelection from './ServiceSelection';
 import PlanSelection from './PlanSelection';
+import PaymentStep from './payment/PaymentStep';
 import SuccessStep from './SuccessStep';
 import styles from './css/OnboardingFlow.module.css';
 
@@ -21,6 +22,7 @@ export interface OnboardingData {
   };
   selectedServices: string[];
   selectedPlan: string;
+  isYearly: boolean;
 }
 
 const OnboardingFlow = () => {
@@ -39,6 +41,7 @@ const OnboardingFlow = () => {
     },
     selectedServices: [],
     selectedPlan: '',
+    isYearly: false,
   });
   
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,8 +58,12 @@ const OnboardingFlow = () => {
     setFormData(prev => ({ ...prev, selectedPlan: plan }));
   };
 
+  const updateBilling = (isYearly: boolean) => {
+    setFormData(prev => ({ ...prev, isYearly }));
+  };
+
   const nextStep = () => {
-    setCurrentStep(prev => Math.min(prev + 1, 4));
+    setCurrentStep(prev => Math.min(prev + 1, 5));
   };
 
   const prevStep = () => {
@@ -188,11 +195,22 @@ const OnboardingFlow = () => {
             selectedPlan={formData.selectedPlan}
             onUpdate={updatePlan}
             onBack={prevStep}
-            onSubmit={handleSubmit}
+            onSubmit={nextStep}
+            isYearly={formData.isYearly}
+            onBillingUpdate={updateBilling}
           />
         )}
         
         {currentStep === 4 && (
+          <PaymentStep
+            selectedPlan={formData.selectedPlan}
+            isYearly={formData.isYearly}
+            onBack={prevStep}
+            onPaymentSuccess={handleSubmit}
+          />
+        )}
+        
+        {currentStep === 5 && (
           <SuccessStep
             formData={formData}
           />

@@ -8,6 +8,8 @@ interface PlanSelectionProps {
   onUpdate: (plan: string) => void;
   onBack: () => void;
   onSubmit: () => void;
+  isYearly?: boolean;
+  onBillingUpdate?: (isYearly: boolean) => void;
 }
 
 const plans = [
@@ -77,9 +79,12 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
   selectedPlan,
   onUpdate,
   onBack,
-  onSubmit
+  onSubmit,
+  isYearly = false,
+  onBillingUpdate
 }) => {
-  const [isYearly, setIsYearly] = useState(false);
+  const [localIsYearly, setLocalIsYearly] = useState(isYearly);
+  const currentIsYearly = onBillingUpdate ? isYearly : localIsYearly;
 
   const handlePlanSelect = (planId: string) => {
     onUpdate(planId);
@@ -126,16 +131,23 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
             
             {/* Billing Toggle */}
             <div className={styles.billingToggle}>
-              <span className={!isYearly ? styles.activeToggle : ''}>Monthly</span>
+              <span className={!currentIsYearly ? styles.activeToggle : ''}>Monthly</span>
               <label className={styles.toggleSwitch}>
                 <input
                   type="checkbox"
-                  checked={isYearly}
-                  onChange={(e) => setIsYearly(e.target.checked)}
+                  checked={currentIsYearly}
+                  onChange={(e) => {
+                    const newValue = e.target.checked;
+                    if (onBillingUpdate) {
+                      onBillingUpdate(newValue);
+                    } else {
+                      setLocalIsYearly(newValue);
+                    }
+                  }}
                 />
                 <span className={styles.slider}></span>
               </label>
-              <span className={isYearly ? styles.activeToggle : ''}>
+              <span className={currentIsYearly ? styles.activeToggle : ''}>
                 Yearly
                 <span className={styles.saveBadge}>Save 16%</span>
               </span>
@@ -169,9 +181,9 @@ const PlanSelection: React.FC<PlanSelectionProps> = ({
 
                 <div className={styles.planDetails}>
                   <div className={styles.price}>
-                    {isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                    {currentIsYearly ? plan.yearlyPrice : plan.monthlyPrice}
                     <span className={styles.billingPeriod}>
-                      /{isYearly ? 'year' : 'month'}
+                      /{currentIsYearly ? 'year' : 'month'}
                     </span>
                   </div>
                 </div>

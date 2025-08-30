@@ -1,0 +1,595 @@
+/* Payment Step Container - PWA Responsive Design */
+.container {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  background: linear-gradient(135deg, #faf5ff 0%, #f3f4f6 25%, #ecfccb 50%, #fef3c7 75%, #fae8ff 100%);
+  padding: clamp(1rem, 4vw, 2rem);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.content {
+  width: 100%;
+  max-width: min(600px, 100vw - 2rem);
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: clamp(1rem, 3vw, 2rem);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Progress Steps - Mobile First Design */
+.progressSteps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  min-width: fit-content;
+  flex-shrink: 0;
+}
+
+.progressStep:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: clamp(-0.5rem, -1vw, -0.75rem);
+  top: 1rem;
+  width: clamp(0.25rem, 1vw, 0.5rem);
+  height: 2px;
+  background: #d1d5db;
+}
+
+.progressStep.completed::after,
+.progressStep.active::after {
+  background: #8b5cf6;
+}
+
+.stepCircle {
+  width: clamp(1.75rem, 4vw, 2rem);
+  height: clamp(1.75rem, 4vw, 2rem);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  background: #e5e7eb;
+  color: #6b7280;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progressStep.completed .stepCircle {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.progressStep.active .stepCircle {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.stepLabel {
+  font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.progressStep.completed .stepLabel,
+.progressStep.active .stepLabel {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Main Content */
+.mainContent {
+  text-align: center;
+}
+
+.header {
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.title {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Plan Summary */
+.planSummary {
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: clamp(0.75rem, 2vw, 1rem);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  text-align: left;
+}
+
+.summaryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.summaryHeader h3 {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  flex: 1;
+}
+
+.planPrice {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 700;
+  color: #8b5cf6;
+  text-align: right;
+}
+
+.period {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.billingInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+  gap: 1rem;
+}
+
+.billingType {
+  color: #6b7280;
+}
+
+.savings {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Payment Form */
+.paymentForm {
+  text-align: left;
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.paymentMethods h4 {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.methodCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: clamp(0.875rem, 3vw, 1rem);
+  border: 2px solid #e5e7eb;
+  border-radius: clamp(0.5rem, 2vw, 0.75rem);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation; /* Better touch response */
+}
+
+.methodCard:hover,
+.methodCard:focus {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.02);
+  outline: none;
+}
+
+.cardIcon {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+}
+
+.securityNote {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: clamp(0.625rem, 2vw, 0.75rem);
+  background: rgba(34, 197, 94, 0.05);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 0.5rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+  color: #166534;
+}
+
+.securityIcon {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+}
+
+.errorMessage {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #dc2626;
+  padding: clamp(0.625rem, 2vw, 0.75rem);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: clamp(0.8rem, 2vw, 0.875rem);
+}
+
+/* Actions - PWA Optimized */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1rem);
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+}
+
+.backButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: clamp(1rem, 3vw, 1.5rem);
+  padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  touch-action: manipulation;
+  min-height: 44px; /* Touch target size */
+}
+
+.backButton:hover,
+.backButton:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.payButton {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border: none;
+  border-radius: clamp(1rem, 3vw, 1.5rem);
+  padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+  min-width: clamp(100px, 25vw, 120px);
+  min-height: 44px; /* Touch target size */
+  touch-action: manipulation;
+}
+
+.payButton:hover:not(:disabled),
+.payButton:focus:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+  outline: none;
+}
+
+.payButton:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Tablet Landscape (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .content {
+    max-width: 700px;
+    padding: 2.5rem;
+  }
+  
+  .plansGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Tablet Portrait (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .content {
+    max-width: 100%;
+    padding: 2rem;
+  }
+  
+  .progressSteps {
+    gap: 1rem;
+  }
+  
+  .summaryHeader {
+    flex-direction: row;
+  }
+  
+  .actions {
+    flex-direction: row;
+  }
+}
+
+/* Mobile Landscape (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .content {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+  
+  .progressSteps {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summaryHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .billingInfo {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .backButton,
+  .payButton {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+
+/* Mobile Portrait (320px - 479px) */
+@media (max-width: 479px) {
+  .container {
+    padding: 0.75rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  .content {
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    max-width: 100%;
+  }
+  
+  .progressSteps {
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    justify-content: space-around;
+  }
+  
+  .progressStep {
+    min-width: auto;
+  }
+  
+  .stepLabel {
+    font-size: 0.65rem;
+  }
+  
+  .stepCircle {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .progressStep:not(:last-child)::after {
+    width: 0.25rem;
+    right: -0.375rem;
+  }
+  
+  .title {
+    font-size: 1.375rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .planSummary {
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .summaryHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .summaryHeader h3 {
+    font-size: 1rem;
+  }
+  
+  .planPrice {
+    font-size: 1.25rem;
+  }
+  
+  .billingInfo {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .methodCard {
+    padding: 0.875rem;
+  }
+  
+  .securityNote {
+    padding: 0.625rem;
+    font-size: 0.8rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+  
+  .backButton,
+  .payButton {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+    min-height: 48px;
+  }
+}
+
+/* Extra Small Mobile (320px and below) */
+@media (max-width: 320px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .content {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .stepLabel {
+    font-size: 0.6rem;
+  }
+  
+  .backButton,
+  .payButton {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation optimization */
+@media (orientation: landscape) and (max-height: 600px) {
+  .container {
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  
+  .content {
+    padding: 1.5rem;
+  }
+  
+  .progressSteps {
+    margin-bottom: 1rem;
+  }
+  
+  .header {
+    margin-bottom: 1rem;
+  }
+  
+  .planSummary {
+    margin-bottom: 1rem;
+  }
+  
+  .actions {
+    margin-top: 1rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .stepCircle {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content {
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Accessibility and Focus States */
+.backButton:focus-visible,
+.payButton:focus-visible,
+.methodCard:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .backButton,
+  .payButton,
+  .methodCard {
+    transition: none;
+  }
+  
+  .backButton:hover,
+  .payButton:hover:not(:disabled) {
+    transform: none;
+  }
+}
