@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../../lib/supabase';
-import { CreateUserRequest } from '../../../../types/user';
 
 export async function POST(request: NextRequest) {
   try {
@@ -69,7 +68,7 @@ export async function POST(request: NextRequest) {
           wallet_address: walletAddress,
           is_wallet_verified: true, // Since they connected via wallet
           wallet_type: 'WalletConnect',
-          membership_tier_id: selectedPlan || '1',
+          membership_tier_id: selectedPlan || 'circle',
           last_wallet_connection: new Date().toISOString()
         })
         .select()
@@ -80,7 +79,13 @@ export async function POST(request: NextRequest) {
           code: error.code,
           message: error.message,
           details: error.details,
-          hint: error.hint
+          hint: error.hint,
+          userData: {
+            email: personalInfo.email,
+            username: personalInfo.username,
+            membership_tier_id: selectedPlan || 'circle',
+            wallet_address: walletAddress
+          }
         })
         
         // Handle specific errors
@@ -120,7 +125,7 @@ export async function POST(request: NextRequest) {
           selectedPlan
         }
       })
-      
+      // 
     } catch (dbError: any) {
       console.error('Database error during onboarding:', dbError)
       return NextResponse.json(

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_wallet_connection TIMESTAMPTZ,
   
   -- Membership information
-  membership_tier_id VARCHAR(10) DEFAULT '1', -- References membership tier
+  membership_tier_id VARCHAR(50) DEFAULT 'circle', -- References membership tier
   membership_assigned_at TIMESTAMPTZ DEFAULT now(),
   
   -- Timestamps
@@ -50,6 +50,7 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+DROP TRIGGER IF EXISTS update_users_updated_at ON users;
 CREATE TRIGGER update_users_updated_at 
 BEFORE UPDATE ON users 
 FOR EACH ROW 
@@ -57,6 +58,11 @@ EXECUTE FUNCTION update_updated_at_column();
 
 -- Row Level Security (RLS) policies
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist, then recreate
+DROP POLICY IF EXISTS "Users can view own data" ON users;
+DROP POLICY IF EXISTS "Users can update own data" ON users;
+DROP POLICY IF EXISTS "Authenticated users can insert" ON users;
 
 -- Users can only see and update their own data
 CREATE POLICY "Users can view own data" ON users
@@ -70,25 +76,59 @@ CREATE POLICY "Authenticated users can insert" ON users
   FOR INSERT WITH CHECK (auth.role() = 'authenticated');
 
 -- Sample membership tiers table (referenced by membership_tier_id)
+-- First, alter existing table to add new columns if they don't exist
+DO $$ 
+BEGIN
+  -- Add monthly_price column if it doesn't exist
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'membership_tiers' AND column_name = 'monthly_price') THEN
+    ALTER TABLE membership_tiers ADD COLUMN monthly_price DECIMAL(10,2);
+  END IF;
+  
+  -- Add yearly_price column if it doesn't exist
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'membership_tiers' AND column_name = 'yearly_price') THEN
+    ALTER TABLE membership_tiers ADD COLUMN yearly_price DECIMAL(10,2);
+  END IF;
+  
+  -- Add description column if it doesn't exist
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'membership_tiers' AND column_name = 'description') THEN
+    ALTER TABLE membership_tiers ADD COLUMN description TEXT;
+  END IF;
+  
+  -- Extend id column length if needed
+  ALTER TABLE membership_tiers ALTER COLUMN id TYPE VARCHAR(50);
+  ALTER TABLE membership_tiers ALTER COLUMN name TYPE VARCHAR(100);
+  
+  -- Drop NOT NULL constraint on price column if it exists
+  ALTER TABLE membership_tiers ALTER COLUMN price DROP NOT NULL;
+END $$;
+
 CREATE TABLE IF NOT EXISTS membership_tiers (
-  id VARCHAR(10) PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  price DECIMAL(10,2) NOT NULL,
+  id VARCHAR(50) PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  monthly_price DECIMAL(10,2) NOT NULL,
+  yearly_price DECIMAL(10,2) NOT NULL,
+  description TEXT,
   features JSONB NOT NULL, -- Array of feature strings
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Insert default membership tiers
-INSERT INTO membership_tiers (id, name, price, features) VALUES
-  ('1', 'Basic', 0.00, '["Basic Support", "Limited API Calls"]'),
-  ('2', 'Pro', 29.99, '["Priority Support", "Unlimited API Calls", "Advanced Features"]'),
-  ('3', 'Enterprise', 99.99, '["24/7 Support", "Custom Integration", "Advanced Analytics", "Priority Features"]')
+-- Insert membership tiers matching the new plan structure
+INSERT INTO membership_tiers (id, name, monthly_price, yearly_price, description, features) VALUES
+  ('circle', 'The Circle', 29.00, 290.00, 'Begin. Belong. Blossom.', '["Community platform & circles", "Intro courses & learning journeys", "Wisdom Exchange content library", "Invitations to free events", "Entry tier: self-paced, no live calls"]'),
+  ('legacy-path', 'The Legacy Path', 97.00, 970.00, 'Grow your leadership. Build your legacy.', '["Everything in The Circle", "Full course & learning tracks", "Monthly Book Club", "All session recordings", "Early access to workshops & summits", "Growth tier: complete library, still no live calls"]'),
+  ('sun-collective', 'The Sun Collective', 197.00, 1970.00, 'Shine brighter. Share wisdom. Lead with impact.', '["Everything in The Legacy Path", "Quarterly live group calls with Lee", "Exclusive virtual masterminds", "AI Storytelling & Legacy toolkit", "Community spotlight recognition", "Leadership tier: live access, masterminds, storytelling tools"]'),
+  ('visionary-circle', 'The Visionary Circle', 497.00, 4970.00, 'Co-create the future. Lead with vision.', '["Everything in The Sun Collective", "Small-group strategy calls with Lee", "VIP retreats & legacy labs", "Partner collaborations", "Visionary Partner recognition", "Visionary tier: high-touch mentorship & exclusive experiences"]')
 ON CONFLICT (id) DO NOTHING;
 
 -- Foreign key constraint for membership tier
-ALTER TABLE users 
-ADD CONSTRAINT fk_users_membership_tier 
-FOREIGN KEY (membership_tier_id) REFERENCES membership_tiers(id);
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.table_constraints WHERE constraint_name = 'fk_users_membership_tier') THEN
+    ALTER TABLE users 
+    ADD CONSTRAINT fk_users_membership_tier 
+    FOREIGN KEY (membership_tier_id) REFERENCES membership_tiers(id);
+  END IF;
+END $$;
 
 -- Comments for documentation
 COMMENT ON TABLE users IS 'User accounts with wallet integration and membership tiers';
