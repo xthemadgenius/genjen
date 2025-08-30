@@ -27,6 +27,15 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    
+    // Validate phone number format (should be exactly 10 digits)
+    const phoneDigits = personalInfo.phone.replace(/\D/g, '');
+    if (phoneDigits.length !== 10) {
+      return NextResponse.json(
+        { success: false, error: 'Phone number must be exactly 10 digits' },
+        { status: 400 }
+      );
+    }
 
     // Get wallet address from the request
     const walletAddress = personalInfo.walletAddress;

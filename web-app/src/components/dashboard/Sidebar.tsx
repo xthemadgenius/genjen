@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
 import NavItem, { NavItemData } from './NavItem';
 import { useDeviceType } from './hooks/useMediaQuery';
 import styles from './css/Sidebar.module.css';
@@ -98,6 +100,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   onClose, 
   onToggleCollapse
 }) => {
+  const router = useRouter();
+  const { open } = useAppKit();
+  const { isConnected } = useAppKitAccount();
   const deviceType = useDeviceType();
   const shouldAutoCollapse = deviceType === 'tablet';
 
@@ -107,9 +112,42 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
-  const handleLogout = () => {
-    // Handle logout logic
-    window.location.href = '/';
+  const handleLogout = async () => {
+    try {
+      console.log('Logging out user...');
+      
+      // Call logout API
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      
+      // Disconnect from WalletConnect/AppKit
+      if (isConnected) {
+        try {
+          // Open account view for manual disconnect
+          await open({ view: 'Account' });
+        } catch (disconnectError) {
+          console.log('Wallet disconnect handled by user or already disconnected');
+        }
+      }
+      
+      // Clear all local and session storage
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      console.log('✅ Logout successful, redirecting to home...');
+      
+      // Redirect to home page
+      router.push('/');
+      
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Still clear storage and redirect even if API fails
+      localStorage.clear();
+      sessionStorage.clear();
+      router.push('/');
+    }
   };
 
   const effectiveCollapsed = isCollapsed || shouldAutoCollapse;

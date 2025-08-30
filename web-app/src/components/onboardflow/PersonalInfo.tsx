@@ -23,14 +23,40 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
   const [formData, setFormData] = useState(data);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Phone number formatting function
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-digits
+    const cleaned = value.replace(/\D/g, '');
+    
+    // Limit to 10 digits
+    const limited = cleaned.substring(0, 10);
+    
+    // Format as (XXX) XXX-XXXX
+    if (limited.length >= 6) {
+      return `(${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(6)}`;
+    } else if (limited.length >= 3) {
+      return `(${limited.slice(0, 3)}) ${limited.slice(3)}`;
+    } else if (limited.length > 0) {
+      return `(${limited}`;
+    }
+    return limited;
+  };
+
   const handleChange = (field: string, value: string) => {
+    let processedValue = value;
+    
+    // Special handling for phone number
+    if (field === 'phone') {
+      processedValue = formatPhoneNumber(value);
+    }
+    
     let newData;
     if (field === 'firstName') {
-      newData = { ...formData, name: { ...formData.name, first_name: value } };
+      newData = { ...formData, name: { ...formData.name, first_name: processedValue } };
     } else if (field === 'lastName') {
-      newData = { ...formData, name: { ...formData.name, last_name: value } };
+      newData = { ...formData, name: { ...formData.name, last_name: processedValue } };
     } else {
-      newData = { ...formData, [field]: value };
+      newData = { ...formData, [field]: processedValue };
     }
     
     setFormData(newData);
@@ -67,6 +93,12 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
     
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
+    } else {
+      // Validate phone number format (should be exactly 10 digits)
+      const phoneDigits = formData.phone.replace(/\D/g, '');
+      if (phoneDigits.length !== 10) {
+        newErrors.phone = 'Phone number must be exactly 10 digits';
+      }
     }
     
     if (!formData.address.trim()) {
@@ -213,6 +245,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, onUpdate, onNext }) =
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
                   placeholder="(123) 456-7890"
+                  maxLength={14}
                   className={`${styles.input} ${errors.phone ? styles.inputError : ''}`}
                 />
                 {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
